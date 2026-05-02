@@ -1,0 +1,520 @@
+from __future__ import annotations
+
+import asyncio
+from collections.abc import Callable, Mapping, Sequence
+from datetime import datetime
+from pathlib import Path
+from typing import Any
+
+import pandas as pd
+from nautilus_trader.backtest.config import BacktestEngineConfig
+from nautilus_trader.backtest.engine import BacktestEngine
+from nautilus_trader.common.component import is_backtest_force_stop
+from nautilus_trader.config import LoggingConfig
+from nautilus_trader.config import StrategyFactory as NautilusStrategyFactory
+from nautilus_trader.model.data import QuoteTick
+from nautilus_trader.model.identifiers import InstrumentId, TraderId
+from nautilus_trader.model.objects import Money
+from nautilus_trader.risk.config import RiskEngineConfig
+from nautilus_trader.trading.strategy import Strategy
+
+from prediction_market_extensions.adapters.prediction_market import (
+    LoadedReplay,
+    ReplayCoverageStats,
+    ReplayLoadRequest,
+    ReplayWindow,
+)
+from prediction_market_extensions.adapters.prediction_market.fill_model import (
+    PredictionMarketTakerFillModel,
+)
+from prediction_market_extensions.analysis.legacy_plot_adapter import DEFAULT_DETAIL_PLOT_PANELS
+from prediction_market_extensions.backtesting._backtest_runtime import build_backtest_run_state
+from prediction_market_extensions.backtesting._execution_config import ExecutionModelConfig
+from prediction_market_extensions.backtesting._market_data_config import MarketDataConfig
+from prediction_market_extensions.backtesting._replay_specs import (
+    MarketSimConfig,
+    ReplaySpec,
+    coerce_legacy_market_sim_config,
+)
+from prediction_market_extensions.backtesting._strategy_configs import (
+    StrategyConfigSpec,
+    build_importable_strategy_configs,
+)
+from prediction_market_extensions.backtesting.data_sources.kalshi_native import (
+    RunnerKalshiDataLoader,
+)
+from prediction_market_extensions.backtesting.data_sources.pmxt import (
+    RunnerPolymarketPMXTDataLoader,
+)
+from prediction_market_extensions.backtesting.data_sources.polymarket_native import (
+    RunnerPolymarketDataLoader,
+)
+from prediction_market_extensions.backtesting.data_sources.registry import resolve_replay_adapter
+from prediction_market_extensions.backtesting.prediction_market import (
+    MarketReportConfig,
+    PredictionMarketArtifactBuilder,
+    finalize_market_results,
+    run_reported_backtest,
+)
+
+KalshiDataLoader = RunnerKalshiDataLoader
+PolymarketDataLoader = RunnerPolymarketDataLoader
+PolymarketPMXTDataLoader = RunnerPolymarketPMXTDataLoader
+
+
+type StrategyFactory = Callable[[InstrumentId], Strategy]
+
+
+class PredictionMarketBacktest:
+    def __init__(
+        self,
+        *,
+        name: str,
+        data: MarketDataConfig,
+        replays: Sequence[ReplaySpec] | None = None,
+        sims: Sequence[ReplaySpec | MarketSimConfig] | None = None,
+        strategy_configs: Sequence[StrategyConfigSpec] = (),
+        strategy_factory: StrategyFactory | None = None,
+        initial_cash: float,
+        probability_window: int,
+        min_trades: int = 0,
+        min_quotes: int = 0,
+        min_price_range: float = 0.0,
+        default_lookback_days: int | None = None,
+        default_lookback_hours: float | None = None,
+        default_start_time: pd.Timestamp | datetime | str | None = None,
+        default_end_time: pd.Timestamp | datetime | str | None = None,
+        nautilus_log_level: str = "INFO",
+        execution: ExecutionModelConfig | None = None,
+        chart_resample_rule: str | None = None,
+        emit_html: bool = True,
+        chart_output_path: str | Path | None = None,
+        return_chart_layout: bool = False,
+        return_summary_series: bool = False,
+        detail_plot_panels: Sequence[str] | None = None,
+    ) -> None:
+        if strategy_factory is not None and strategy_configs:
+            raise ValueError("Use strategy_factory or strategy_configs, not both.")
+        if strategy_factory is None and not strategy_configs:
+            raise ValueError("strategy_configs is required when strategy_factory is not provided.")
+        if replays is not None and sims is not None:
+            raise ValueError("Use replays or sims, not both.")
+        raw_replays = replays if replays is not None else sims
+        if raw_replays is None:
+            raise ValueError("replays is required.")
+
+        self.name = name
+        self.data = data
+        self._sims = tuple(raw_replays)
+        self.replays = self._normalize_replays(self._sims)
+        self.strategy_configs = tuple(strategy_configs)
+        self.strategy_factory = strategy_factory
+        self.initial_cash = float(initial_cash)
+        self.probability_window = int(probability_window)
+        self.min_trades = int(min_trades)
+        self.min_quotes = int(min_quotes)
+        self.min_price_range = float(min_price_range)
+        self.default_lookback_days = default_lookback_days
+        self.default_lookback_hours = default_lookback_hours
+        self.default_start_time = default_start_time
+        self.default_end_time = default_end_time
+        self.nautilus_log_level = nautilus_log_level
+        self.execution = execution if execution is not None else ExecutionModelConfig()
+        self.chart_resample_rule = chart_resample_rule
+        self.emit_html = emit_html
+        self.chart_output_path = chart_output_path
+        self.return_chart_layout = return_chart_layout
+        self.return_summary_series = return_summary_series
+        self.detail_plot_panels = tuple(
+            DEFAULT_DETAIL_PLOT_PANELS if detail_plot_panels is None else detail_plot_panels
+        )
+
+    @property
+    def sims(self) -> tuple[ReplaySpec | MarketSimConfig, ...]:
+        return self._sims
+
+    def _strategy_summary_label(self) -> str:
+        if self.strategy_configs:
+            return f"{len(self.strategy_configs)} strategy config(s)"
+        if self.strategy_factory is not None:
+            return "a strategy factory"
+        return "0 strategy config(s)"
+
+    def run(self) -> list[dict[str, Any]]:
+        try:
+            asyncio.get_running_loop()
+        except RuntimeError:
+            return asyncio.run(self.run_async())
+
+        raise RuntimeError(
+            "run() cannot be called inside an active event loop; use await run_async() instead."
+        )
+
+    def run_backtest(self) -> list[dict[str, Any]]:
+        return self.run()
+
+    async def run_async(self) -> list[dict[str, Any]]:
+        loaded_sims = await self._load_sims_async()
+        if not loaded_sims:
+            return []
+
+        engine = self._build_engine()
+        try:
+            for loaded_sim in loaded_sims:
+                engine.add_instrument(loaded_sim.instrument)
+                engine.add_data(list(loaded_sim.records))
+
+            if self.strategy_factory is not None:
+                for loaded_sim in loaded_sims:
+                    engine.add_strategy(self.strategy_factory(loaded_sim.instrument.id))
+            else:
+                for importable_config in self._build_importable_strategy_configs(loaded_sims):
+                    engine.add_strategy(NautilusStrategyFactory.create(importable_config))
+
+            print(
+                f"Starting {self.name} with {len(loaded_sims)} sims and {self._strategy_summary_label()}..."
+            )
+            engine.run()
+            engine_result = engine.get_result()
+            forced_stop = bool(is_backtest_force_stop())
+
+            fills_report = engine.trader.generate_order_fills_report()
+            positions_report = engine.trader.generate_positions_report()
+            market_artifacts_by_market_id = self._build_market_artifacts(
+                engine=engine, loaded_sims=loaded_sims, fills_report=fills_report
+            )
+            joint_portfolio_artifacts = self._build_joint_portfolio_artifacts(
+                engine=engine, loaded_sims=loaded_sims
+            )
+            return [
+                self._build_result(
+                    loaded_sim=loaded_sim,
+                    fills_report=fills_report,
+                    positions_report=positions_report,
+                    market_artifacts=market_artifacts_by_market_id.get(loaded_sim.market_id),
+                    joint_portfolio_artifacts=joint_portfolio_artifacts
+                    if result_index == 0
+                    else None,
+                    run_state=build_backtest_run_state(
+                        data=loaded_sim.records,
+                        backtest_end_ns=engine_result.backtest_end,
+                        forced_stop=forced_stop,
+                        requested_start_ns=loaded_sim.requested_window.start_ns,
+                        requested_end_ns=loaded_sim.requested_window.end_ns,
+                    ),
+                )
+                for result_index, loaded_sim in enumerate(loaded_sims)
+            ]
+        finally:
+            engine.reset()
+            engine.dispose()
+
+    async def run_backtest_async(self) -> list[dict[str, Any]]:
+        return await self.run_async()
+
+    def _create_artifact_builder(self) -> PredictionMarketArtifactBuilder:
+        return PredictionMarketArtifactBuilder(
+            name=self.name,
+            platform=self.data.platform,
+            data_type=self.data.data_type,
+            initial_cash=self.initial_cash,
+            probability_window=self.probability_window,
+            chart_resample_rule=self.chart_resample_rule,
+            emit_html=self.emit_html,
+            chart_output_path=self.chart_output_path,
+            return_chart_layout=self.return_chart_layout,
+            return_summary_series=self.return_summary_series,
+            detail_plot_panels=self.detail_plot_panels,
+            sim_count=len(self.sims),
+        )
+
+    def _build_result(
+        self,
+        *,
+        loaded_sim: LoadedReplay,
+        fills_report: pd.DataFrame,
+        positions_report: pd.DataFrame,
+        market_artifacts: Mapping[str, Any] | None = None,
+        joint_portfolio_artifacts: Mapping[str, Any] | None = None,
+        run_state: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        return self._create_artifact_builder().build_result(
+            loaded_sim=loaded_sim,
+            fills_report=fills_report,
+            positions_report=positions_report,
+            market_artifacts=market_artifacts,
+            joint_portfolio_artifacts=joint_portfolio_artifacts,
+            run_state=run_state,
+        )
+
+    def _build_market_artifacts(
+        self,
+        *,
+        engine: BacktestEngine,
+        loaded_sims: Sequence[LoadedReplay],
+        fills_report: pd.DataFrame,
+    ) -> dict[str, dict[str, Any]]:
+        return self._create_artifact_builder().build_market_artifacts(
+            engine=engine, loaded_sims=loaded_sims, fills_report=fills_report
+        )
+
+    def _build_joint_portfolio_artifacts(
+        self, *, engine: BacktestEngine, loaded_sims: Sequence[LoadedReplay]
+    ) -> dict[str, Any]:
+        return self._create_artifact_builder().build_joint_portfolio_artifacts(
+            engine=engine, loaded_sims=loaded_sims
+        )
+
+    def _resolve_chart_output_path(self, *, market_id: str) -> Path:
+        return self._create_artifact_builder().resolve_chart_output_path(market_id=market_id)
+
+    def _normalize_replays(
+        self, replays: Sequence[ReplaySpec | MarketSimConfig]
+    ) -> tuple[ReplaySpec, ...]:
+        normalized: list[ReplaySpec] = []
+        adapter = resolve_replay_adapter(
+            platform=self.data.platform, data_type=self.data.data_type, vendor=self.data.vendor
+        )
+        for replay in replays:
+            if isinstance(replay, MarketSimConfig):
+                replay = coerce_legacy_market_sim_config(
+                    platform=self.data.platform,
+                    data_type=self.data.data_type,
+                    vendor=self.data.vendor,
+                    sim=replay,
+                )
+            if not isinstance(replay, adapter.replay_spec_type):
+                raise TypeError(
+                    "Replay spec does not match selected adapter. "
+                    f"Expected {adapter.replay_spec_type.__name__}, "
+                    f"received {type(replay).__name__}."
+                )
+            normalized.append(replay)
+        return tuple(normalized)
+
+    def _load_request(self) -> ReplayLoadRequest:
+        min_record_count = (
+            self.min_quotes if self.data.data_type == "quote_tick" else self.min_trades
+        )
+        return ReplayLoadRequest(
+            min_record_count=min_record_count,
+            min_price_range=self.min_price_range,
+            default_lookback_days=self.default_lookback_days,
+            default_lookback_hours=self.default_lookback_hours,
+            default_start_time=self.default_start_time,
+            default_end_time=self.default_end_time,
+        )
+
+    async def _load_sims_async(self) -> list[LoadedReplay]:
+        adapter = resolve_replay_adapter(
+            platform=self.data.platform, data_type=self.data.data_type, vendor=self.data.vendor
+        )
+        with adapter.configure_sources(sources=self.data.sources) as data_source:
+            print(data_source.summary)
+            loaded_sims: list[LoadedReplay] = []
+            request = self._load_request()
+            for replay in self.replays:
+                loaded_sim = await adapter.load_replay(replay, request=request)
+                if loaded_sim is not None:
+                    loaded_sims.append(loaded_sim)
+            return loaded_sims
+
+    def _build_engine(self) -> BacktestEngine:
+        engine = BacktestEngine(
+            config=BacktestEngineConfig(
+                trader_id=TraderId("BACKTESTER-001"),
+                logging=LoggingConfig(log_level=self.nautilus_log_level),
+                risk_engine=RiskEngineConfig(),
+            )
+        )
+        latency_model = self.execution.build_latency_model()
+        adapter = resolve_replay_adapter(
+            platform=self.data.platform, data_type=self.data.data_type, vendor=self.data.vendor
+        )
+        engine_profile = adapter.engine_profile
+        fill_model = None
+        if engine_profile.fill_model_mode == "taker":
+            fill_model = PredictionMarketTakerFillModel()
+        elif engine_profile.fill_model_mode != "passive_book":
+            raise AssertionError(f"Unsupported fill model mode {engine_profile.fill_model_mode!r}")
+        engine.add_venue(
+            venue=engine_profile.venue,
+            oms_type=engine_profile.oms_type,
+            account_type=engine_profile.account_type,
+            base_currency=engine_profile.base_currency,
+            starting_balances=[Money(self.initial_cash, engine_profile.base_currency)],
+            fill_model=fill_model,
+            fee_model=engine_profile.fee_model_factory(),
+            book_type=engine_profile.book_type,
+            latency_model=latency_model,
+            liquidity_consumption=engine_profile.liquidity_consumption,
+            queue_position=self.execution.queue_position,
+        )
+        return engine
+
+    def _build_importable_strategy_configs(self, loaded_sims: Sequence[LoadedReplay]) -> list[Any]:
+        if not loaded_sims:
+            return []
+
+        importable_configs: list[Any] = []
+        all_instrument_ids = [loaded_sim.instrument.id for loaded_sim in loaded_sims]
+        for strategy_spec in self.strategy_configs:
+            batch_level = self._is_batch_strategy_config(strategy_spec)
+            target_sims = loaded_sims[:1] if batch_level else loaded_sims
+            for loaded_sim in target_sims:
+                bound_spec = self._bind_strategy_spec(
+                    strategy_spec=strategy_spec,
+                    loaded_sim=loaded_sim,
+                    all_instrument_ids=all_instrument_ids,
+                )
+                importable_configs.extend(
+                    build_importable_strategy_configs(
+                        strategy_configs=[bound_spec], instrument_id=loaded_sim.instrument.id
+                    )
+                )
+        return importable_configs
+
+    def _is_batch_strategy_config(self, strategy_spec: StrategyConfigSpec) -> bool:
+        raw_config = strategy_spec.get("config", {})
+        if self._contains_value(raw_config, "__ALL_SIM_INSTRUMENT_IDS__"):
+            return True
+        if not isinstance(raw_config, Mapping):
+            return False
+        instrument_ids = raw_config.get("instrument_ids")
+        return instrument_ids not in (None, "__PRIMARY_INSTRUMENTS__")
+
+    def _contains_value(self, value: Any, target: str) -> bool:
+        if value == target:
+            return True
+        if isinstance(value, Mapping):
+            return any(self._contains_value(inner, target) for inner in value.values())
+        if isinstance(value, list | tuple):
+            return any(self._contains_value(inner, target) for inner in value)
+        return False
+
+    def _bind_strategy_spec(
+        self,
+        *,
+        strategy_spec: StrategyConfigSpec,
+        loaded_sim: LoadedReplay,
+        all_instrument_ids: Sequence[InstrumentId],
+    ) -> StrategyConfigSpec:
+        raw_config = strategy_spec.get("config", {})
+        if not isinstance(raw_config, Mapping):
+            raise TypeError("strategy config payload must be a mapping")
+
+        metadata = dict(loaded_sim.metadata)
+        metadata.setdefault("market_slug", getattr(loaded_sim.spec, "market_slug", None))
+        metadata.setdefault("market_ticker", getattr(loaded_sim.spec, "market_ticker", None))
+        metadata.setdefault("token_index", getattr(loaded_sim.spec, "token_index", 0))
+        metadata.setdefault("outcome", loaded_sim.outcome)
+
+        return {
+            "strategy_path": strategy_spec["strategy_path"],
+            "config_path": strategy_spec["config_path"],
+            "config": self._bind_value(
+                raw_config,
+                instrument_id=loaded_sim.instrument.id,
+                all_instrument_ids=all_instrument_ids,
+                metadata=metadata,
+            ),
+        }
+
+    def _bind_value(
+        self,
+        value: Any,
+        *,
+        instrument_id: InstrumentId,
+        all_instrument_ids: Sequence[InstrumentId],
+        metadata: Mapping[str, Any],
+    ) -> Any:
+        if isinstance(value, Mapping):
+            return {
+                key: self._bind_value(
+                    inner,
+                    instrument_id=instrument_id,
+                    all_instrument_ids=all_instrument_ids,
+                    metadata=metadata,
+                )
+                for key, inner in value.items()
+            }
+        if isinstance(value, list):
+            return [
+                self._bind_value(
+                    inner,
+                    instrument_id=instrument_id,
+                    all_instrument_ids=all_instrument_ids,
+                    metadata=metadata,
+                )
+                for inner in value
+            ]
+        if isinstance(value, tuple):
+            return tuple(
+                self._bind_value(
+                    inner,
+                    instrument_id=instrument_id,
+                    all_instrument_ids=all_instrument_ids,
+                    metadata=metadata,
+                )
+                for inner in value
+            )
+        if value == "__SIM_INSTRUMENT_ID__":
+            return instrument_id
+        if value == "__ALL_SIM_INSTRUMENT_IDS__":
+            return list(all_instrument_ids)
+        if isinstance(value, str) and value.startswith("__SIM_METADATA__:"):
+            key = value.removeprefix("__SIM_METADATA__:")
+            return metadata[key]
+        return value
+
+
+def _LoadedMarketSim(
+    *,
+    spec: ReplaySpec | MarketSimConfig,
+    instrument: Any,
+    records: Sequence[Any],
+    count: int,
+    count_key: str,
+    market_key: str,
+    market_id: str,
+    outcome: str,
+    realized_outcome: float | None,
+    prices: Sequence[float],
+    metadata: Mapping[str, Any] | None,
+    requested_start_ns: int | None,
+    requested_end_ns: int | None,
+) -> LoadedReplay:
+    instrument_id = getattr(instrument, "id", None)
+    return LoadedReplay(
+        replay=spec,
+        instrument=instrument,
+        records=tuple(records),
+        outcome=outcome,
+        realized_outcome=realized_outcome,
+        metadata=dict(metadata or {}),
+        requested_window=ReplayWindow(start_ns=requested_start_ns, end_ns=requested_end_ns),
+        loaded_window=None,
+        coverage_stats=ReplayCoverageStats(
+            count=count,
+            count_key=count_key,
+            market_key=market_key,
+            market_id=market_id,
+            prices=tuple(prices),
+        ),
+        instrument_ids=(instrument_id,) if instrument_id is not None else (),
+    )
+
+
+__all__ = [
+    "KalshiDataLoader",
+    "LoadedReplay",
+    "MarketReportConfig",
+    "MarketSimConfig",
+    "PolymarketDataLoader",
+    "PolymarketPMXTDataLoader",
+    "PredictionMarketBacktest",
+    "QuoteTick",
+    "_LoadedMarketSim",
+    "finalize_market_results",
+    "run_reported_backtest",
+]

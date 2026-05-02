@@ -1,0 +1,24 @@
+[data-sidebar="group"] > [data-sidebar="group-content"] > [data-sidebar="menu"] > [data-sidebar="menu-item"] > [data-sidebar="menu-button"] {
+  padding-top: 0.65rem !important;
+  padding-bottom: 0.65rem !important;
+}
+
+article pre {
+  max-height: none !important;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+article .codehilite {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-code);
+}
+
+article .codehilite pre {
+  max-height: none !important;
+  margin: 0;
+  padding: 1rem 1.25rem;
+  background: transparent;
+}

@@ -1,0 +1,23 @@
+{
+  "initial_equity": 10000.0,
+  "final_equity": 9996.039603960397,
+  "total_pnl": -3.960396039603438,
+  "realized_pnl": -2.9603960396039715,
+  "unrealized_pnl": 0.0,
+  "max_drawdown": 0.0003960396039603438,
+  "fees_paid": 1.9801980198019797,
+  "slippage_paid": 1.9801980198019915,
+  "cash": 9996.039603960397,
+  "gross_exposure": 0.0,
+  "order_count": 2,
+  "fill_count": 2,
+  "trade_count": 2,
+  "source_quality": {
+    "rows": 33,
+    "partial_rows": 33,
+    "stale_rows": 0,
+    "sources": [
+      "clob_price_history"
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+timestamp_s,fair_prob,reason
+1775203800.0,0.54,demo_signal_start_omega_slight_favorite
+1775203891.703125,0.555,m1_ancient_r1_Omega_round_score_1-0_map_score_0-0
+1775203995.734375,0.57,m1_ancient_r2_Omega_round_score_2-0_map_score_0-0
+1775204075.671875,0.585,m1_ancient_r3_Omega_round_score_3-0_map_score_0-0
+1775204179.65625,0.6,m1_ancient_r4_Omega_round_score_4-0_map_score_0-0
+1775204276.3125,0.615,m1_ancient_r5_Omega_round_score_5-0_map_score_0-0
+1775204407.921875,0.6,m1_ancient_r6_Rune Eaters_round_score_5-1_map_score_0-0
+1775204515.171875,0.615,m1_ancient_r7_Omega_round_score_6-1_map_score_0-0
+1775204628.609375,0.63,m1_ancient_r8_Omega_round_score_7-1_map_score_0-0
+1775204774.703125,0.645,m1_ancient_r9_Omega_round_score_8-1_map_score_0-0
+1775204928.0,0.63,m1_ancient_r10_Rune Eaters_round_score_8-2_map_score_0-0
+1775205019.203125,0.615,m1_ancient_r11_Rune Eaters_round_score_8-3_map_score_0-0
+1775205104.109375,0.6,m1_ancient_r12_Rune Eaters_round_score_8-4_map_score_0-0
+1775205204.796875,0.585,m1_ancient_r13_Rune Eaters_round_score_8-5_map_score_0-0
+1775205295.09375,0.57,m1_ancient_r14_Rune Eaters_round_score_8-6_map_score_0-0
+1775205430.28125,0.585,m1_ancient_r15_Omega_round_score_9-6_map_score_0-0
+1775205557.1875,0.57,m1_ancient_r16_Rune Eaters_round_score_9-7_map_score_0-0
+1775205650.578125,0.555,m1_ancient_r17_Rune Eaters_round_score_9-8_map_score_0-0
+1775205758.6875,0.57,m1_ancient_r18_Omega_round_score_10-8_map_score_0-0
+1775205885.84375,0.585,m1_ancient_r19_Omega_round_score_11-8_map_score_0-0
+1775205952.25,0.6,m1_ancient_r20_Omega_round_score_12-8_map_score_0-0
+1775206084.34375,0.68,m1_ancient_r21_Omega_round_score_13-8_map_score_1-0
+1775207543.984375,0.665,m2_dust2_r1_Rune Eaters_round_score_0-1_map_score_1-0
+1775207665.890625,0.65,m2_dust2_r2_Rune Eaters_round_score_0-2_map_score_1-0
+1775207743.96875,0.635,m2_dust2_r3_Rune Eaters_round_score_0-3_map_score_1-0
+1775207883.96875,0.62,m2_dust2_r4_Rune Eaters_round_score_0-4_map_score_1-0
+1775208055.4375,0.635,m2_dust2_r5_Omega_round_score_1-4_map_score_1-0
+1775208214.671875,0.62,m2_dust2_r6_Rune Eaters_round_score_1-5_map_score_1-0
+1775208429.0625,0.605,m2_dust2_r7_Rune Eaters_round_score_1-6_map_score_1-0
+1775208597.03125,0.62,m2_dust2_r8_Omega_round_score_2-6_map_score_1-0
+1775208658.25,0.635,m2_dust2_r9_Omega_round_score_3-6_map_score_1-0
+1775208756.28125,0.62,m2_dust2_r10_Rune Eaters_round_score_3-7_map_score_1-0
+1775208873.46875,0.605,m2_dust2_r11_Rune Eaters_round_score_3-8_map_score_1-0
+1775208943.53125,0.62,m2_dust2_r12_Omega_round_score_4-8_map_score_1-0
+1775209063.109375,0.605,m2_dust2_r13_Rune Eaters_round_score_4-9_map_score_1-0
+1775209214.71875,0.59,m2_dust2_r14_Rune Eaters_round_score_4-10_map_score_1-0
+1775209378.9375,0.575,m2_dust2_r15_Rune Eaters_round_score_4-11_map_score_1-0
+1775209502.53125,0.56,m2_dust2_r16_Rune Eaters_round_score_4-12_map_score_1-0
+1775209598.265625,0.575,m2_dust2_r17_Omega_round_score_5-12_map_score_1-0
+1775209718.5625,0.54,m2_dust2_r18_Rune Eaters_round_score_5-13_map_score_1-1
+1775210007.546875,0.555,m3_mirage_r1_Omega_round_score_1-0_map_score_1-1
+1775210150.234375,0.54,m3_mirage_r2_Rune Eaters_round_score_1-1_map_score_1-1
+1775210262.75,0.525,m3_mirage_r3_Rune Eaters_round_score_1-2_map_score_1-1
+1775210377.5625,0.54,m3_mirage_r4_Omega_round_score_2-2_map_score_1-1
+1775210468.03125,0.555,m3_mirage_r5_Omega_round_score_3-2_map_score_1-1
+1775210536.734375,0.57,m3_mirage_r6_Omega_round_score_4-2_map_score_1-1
+1775210667.375,0.585,m3_mirage_r7_Omega_round_score_5-2_map_score_1-1
+1775210727.609375,0.6,m3_mirage_r8_Omega_round_score_6-2_map_score_1-1
+1775210841.953125,0.615,m3_mirage_r9_Omega_round_score_7-2_map_score_1-1
+1775210934.640625,0.6,m3_mirage_r10_Rune Eaters_round_score_7-3_map_score_1-1
+1775211124.046875,0.585,m3_mirage_r11_Rune Eaters_round_score_7-4_map_score_1-1
+1775211272.671875,0.57,m3_mirage_r12_Rune Eaters_round_score_7-5_map_score_1-1
+1775211384.390625,0.555,m3_mirage_r13_Rune Eaters_round_score_7-6_map_score_1-1
+1775211470.125,0.57,m3_mirage_r14_Omega_round_score_8-6_map_score_1-1
+1775211666.421875,0.585,m3_mirage_r15_Omega_round_score_9-6_map_score_1-1
+1775211738.078125,0.6,m3_mirage_r16_Omega_round_score_10-6_map_score_1-1
+1775211861.5,0.615,m3_mirage_r17_Omega_round_score_11-6_map_score_1-1
+1775211953.09375,0.63,m3_mirage_r18_Omega_round_score_12-6_map_score_1-1
+1775212081.84375,0.68,m3_mirage_r19_Omega_round_score_13-6_map_score_2-1
+1775212148.84375,0.77,m3_mirage_r20_Rune Eaters_round_score_13-7_map_score_2-1
+1775212301.859375,0.785,m3_mirage_r21_Omega_round_score_14-7_map_score_2-1

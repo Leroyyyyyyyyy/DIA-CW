@@ -1,0 +1,88 @@
+Repository Notice
+=================
+
+This repository runs against upstream NautilusTrader from PyPI and keeps local
+Nautilus-derived runtime extensions under `prediction_market_extensions/`.
+
+Licensing scope
+---------------
+
+- `prediction_market_extensions/` and other files that carry a Nautilus-derived
+  notice are also distributed under LGPL-3.0-or-later.
+- Root files without that notice remain under the MIT License unless they say
+  otherwise.
+- Flat notebook runners under `backtests/` are not LGPL-covered just because
+  they import repo code; only files listed below or carrying Nautilus-derived
+  provenance notices fall under the LGPL scope here.
+
+LGPL-covered root files
+-----------------------
+
+The following root files were copied or adapted from NautilusTrader
+prediction-market example, adapter, or plotting code and carry file-level LGPL
+provenance notices with file-specific change dates:
+
+- `prediction_market_extensions/adapters/kalshi/data.py`
+- `prediction_market_extensions/adapters/kalshi/fee_model.py`
+- `prediction_market_extensions/adapters/kalshi/loaders.py`
+- `prediction_market_extensions/adapters/kalshi/market_selection.py`
+- `prediction_market_extensions/adapters/kalshi/providers.py`
+- `prediction_market_extensions/adapters/kalshi/research.py`
+- `prediction_market_extensions/adapters/polymarket/execution.py`
+- `prediction_market_extensions/adapters/polymarket/fee_model.py`
+- `prediction_market_extensions/adapters/polymarket/gamma_markets.py`
+- `prediction_market_extensions/adapters/polymarket/loaders.py`
+- `prediction_market_extensions/adapters/polymarket/market_selection.py`
+- `prediction_market_extensions/adapters/polymarket/parsing.py`
+- `prediction_market_extensions/adapters/polymarket/pmxt.py`
+- `prediction_market_extensions/adapters/polymarket/research.py`
+- `prediction_market_extensions/adapters/prediction_market/__init__.py`
+- `prediction_market_extensions/adapters/prediction_market/backtest_utils.py`
+- `prediction_market_extensions/adapters/prediction_market/fill_model.py`
+- `prediction_market_extensions/adapters/prediction_market/research.py`
+- `prediction_market_extensions/analysis/config.py`
+- `prediction_market_extensions/analysis/legacy_backtesting/__init__.py`
+- `prediction_market_extensions/analysis/legacy_backtesting/models.py`
+- `prediction_market_extensions/analysis/legacy_backtesting/plotting.py`
+- `prediction_market_extensions/analysis/legacy_backtesting/progress.py`
+- `prediction_market_extensions/analysis/legacy_plot_adapter.py`
+- `prediction_market_extensions/analysis/tearsheet.py`
+- `backtests/kalshi_trade_tick_breakout.py`
+- `backtests/kalshi_trade_tick_independent_multi_replay_runner.py`
+- `backtests/kalshi_trade_tick_joint_portfolio_runner.py`
+- `backtests/polymarket_quote_tick_independent_25_replay_runner.py`
+- `backtests/polymarket_quote_tick_ema_crossover.py`
+- `backtests/polymarket_quote_tick_ema_optimizer.py`
+- `backtests/polymarket_quote_tick_independent_multi_replay_runner.py`
+- `backtests/polymarket_quote_tick_joint_portfolio_runner.py`
+- `backtests/polymarket_trade_tick_independent_multi_replay_runner.py`
+- `backtests/polymarket_trade_tick_joint_portfolio_runner.py`
+- `backtests/polymarket_trade_tick_vwap_reversion.py`
+- `scripts/_script_helpers.py`
+- `strategies/__init__.py`
+- `strategies/breakout.py`
+- `strategies/core.py`
+- `strategies/deep_value.py`
+- `strategies/ema_crossover.py`
+- `strategies/final_period_momentum.py`
+- `strategies/late_favorite_limit_hold.py`
+- `strategies/mean_reversion.py`
+- `strategies/panic_fade.py`
+- `strategies/rsi_reversion.py`
+- `strategies/threshold_momentum.py`
+- `strategies/vwap_reversion.py`
+- `tests/test_backtest_utils.py`
+- `tests/test_downsample_html_size.py`
+- `tests/test_legacy_plot_fill_markers.py`
+- `tests/test_quote_tick_strategy_configs.py`
+
+Upstream lineage
+----------------
+
+- NautilusTrader upstream project: `https://github.com/nautechsystems/nautilus_trader`
+- This repository uses upstream `nautilus_trader` as the active runtime
+  dependency.
+- Local extensions live under `prediction_market_extensions/` in their own
+  namespace, importing from and subclassing upstream base classes.
+- The earlier vendored NautilusTrader tree was removed from the worktree on this
+  branch; provenance for that prior import remains available in git history.

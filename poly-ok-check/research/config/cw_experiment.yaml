@@ -1,0 +1,27 @@
+{
+  "operating_threshold": 0.5,
+  "threshold_grid": [0.25, 0.5, 0.75, 1.0],
+  "inputs": {
+    "acy_news": {
+      "enabled": true,
+      "signals_csv": "../acy_news(1)/dia/outputs_btc_window/signals.csv",
+      "evidence_jsonl": "../acy_news(1)/dia/outputs_btc_window/evidence.jsonl",
+      "domains": ["btc"],
+      "market_prob_default": 0.5
+    },
+    "weather": {
+      "enabled": true,
+      "trades_csv": "../Weather/Weather/data/processed/backtest_trades.csv",
+      "signal_table_csv": "../Weather/Weather/data/processed/backtest_signal_table.csv"
+    },
+    "cs2": {
+      "enabled": true,
+      "signal_csv": "research/data/cs2_first_match/omega_demo_round_signal.csv",
+      "timeline_csv": "research/runs/cs2_first_match_demo_signal/20260421T153303Z/timeline.csv",
+      "market_id": "cs2-run2-omega1-2026-04-03",
+      "target": "Rune Eaters vs Omega",
+      "yes_outcome": 1.0
+    }
+  }
+}
+

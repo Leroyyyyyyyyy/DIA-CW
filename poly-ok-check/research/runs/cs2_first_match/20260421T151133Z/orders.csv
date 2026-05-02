@@ -1,0 +1,2 @@
+order_id,decision_ts_s,execution_ts_s,market_id,token_id,side,action,requested_notional_usd,requested_qty,status,reason,latency_ms,unfilled_notional_usd
+gen-1-1,1775203843.0,1775203843.5278854,cs2-run2-omega1-2026-04-03,75287410072070313482138182655077017926296883899317007126163412308302485037905,YES,BUY,100.0,0.0,filled,omega_hold_smoke_entry,527.8853596915767,0.0

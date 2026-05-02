@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "polyquant-research"
+version = "0.1.0"
+description = "CS2 research and backtest subsystem for Polyquant"
+requires-python = ">=3.10"
+dependencies = [
+    "demoparser2",
+    "kaggle",
+    "numpy",
+    "pandas",
+    "pyarrow",
+    "pytest",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]

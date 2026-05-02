@@ -1,0 +1,11 @@
+{
+  "typeCheckingMode": "off",
+  "extraPaths": [],
+  "reportMissingImports": false,
+  "reportMissingModuleSource": false,
+  "reportMissingTypeStubs": false,
+  "reportGeneralTypeIssues": false,
+  "reportOptionalMemberAccess": false,
+  "reportArgumentType": false,
+  "reportCallIssue": false
+}

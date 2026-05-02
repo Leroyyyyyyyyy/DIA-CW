@@ -1,0 +1,10 @@
+{
+  "source_quality": {
+    "rows": 287,
+    "partial_rows": 287,
+    "stale_rows": 0,
+    "sources": [
+      "clob_price_history"
+    ]
+  }
+}

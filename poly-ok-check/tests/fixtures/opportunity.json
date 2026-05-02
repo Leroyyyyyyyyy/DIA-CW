@@ -1,0 +1,13 @@
+{
+  "agent_id": "poly-agent",
+  "market_id": "51939490109676186832507970701169130490548061087912630009168726706475001411420",
+  "direction": "LongYes",
+  "confidence": 0.72,
+  "expected_edge": 0.013,
+  "time_horizon_secs": 1800,
+  "risk_hints": {
+    "max_notional_usd": 100.0,
+    "stop_loss_pct": 0.03
+  },
+  "trace_id": "trace-123"
+}

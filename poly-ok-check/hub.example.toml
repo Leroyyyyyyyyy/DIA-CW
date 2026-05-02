@@ -1,0 +1,56 @@
+markets = [
+  "51939490109676186832507970701169130490548061087912630009168726706475001411420",
+]
+
+[freshness]
+soft_slo_ms = 500
+stale_after_ms = 2000
+
+[fx]
+base_ccy = "USD"
+quote_ccys = ["CNY", "EUR", "JPY"]
+endpoint = "https://api.exchangerate.host/latest"
+
+[quote]
+rest_fallback_interval_ms = 1000
+
+[slice]
+interval_ms = 1000
+in_memory_retention = 3600
+
+[archive]
+dir = "data/hub_archive"
+prefix = "slices"
+retention_days = 30
+
+[storage.redis]
+enabled = false
+url = "redis://127.0.0.1:6379/"
+key_prefix = "dh"
+ttl_hours = 24
+
+[storage.postgres]
+enabled = false
+url = "postgres://postgres:postgres@127.0.0.1:5432/polyquant"
+retry_backoff_secs = [1, 2, 5, 10, 30]
+
+[session]
+timezone = "UTC"
+note = "Polymarket 24x7"
+
+[news]
+lookback_hours = 8
+fetch_limit = 32
+
+[[news.feeds]]
+source = "reuters-world"
+url = "https://www.reutersagency.com/feed/?best-topics=world&post_type=best"
+
+[[news.feeds]]
+source = "coindesk"
+url = "https://www.coindesk.com/arc/outboundfeeds/rss/"
+
+[[news.market_rules]]
+market_id = "51939490109676186832507970701169130490548061087912630009168726706475001411420"
+feed_sources = ["reuters-world", "coindesk"]
+keywords = ["fed", "rates", "macro", "usd", "inflation"]

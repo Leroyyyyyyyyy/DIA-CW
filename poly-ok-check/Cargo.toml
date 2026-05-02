@@ -1,0 +1,24 @@
+[package]
+name = "poly-ok-check"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+alloy = { version = "1.7.3", default-features = false, features = ["signer-local"] }
+anyhow = "1.0.102"
+async-stream = "0.3.6"
+async-trait = "0.1.89"
+axum = "0.8.6"
+chrono = { version = "0.4.42", features = ["clock", "serde"] }
+feed-rs = "2.3.1"
+futures = "0.3.31"
+polymarket-client-sdk = { version = "0.4.3", features = ["clob", "ws"] }
+redis = { version = "0.32.7", features = ["tokio-comp"] }
+reqwest = { version = "0.12.24", default-features = false, features = ["json", "rustls-tls"] }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.145"
+thiserror = "2.0.17"
+tokio-stream = { version = "0.1.17", features = ["sync"] }
+tokio = { version = "1.50.0", features = ["rt-multi-thread", "macros", "signal", "sync", "time"] }
+toml = "0.9.7"
+tokio-postgres = { version = "0.7.15", features = ["with-chrono-0_4", "with-serde_json-1"] }

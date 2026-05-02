@@ -1,0 +1,28 @@
+Repository Licensing
+
+This repository is not MIT-only.
+
+1. GNU LGPL v3.0 or later applies to:
+   - all files under `prediction_market_extensions/`
+   - root files that carry a `Derived from NautilusTrader` or
+     `Modified by Evan Kolberg in this repository` notice
+
+   See:
+   - `COPYING.LESSER`
+   - `COPYING`
+   - `NOTICE`
+
+2. MIT applies to:
+   - root files that do not carry a Nautilus-derived notice
+   - repository metadata and documentation authored for this repo, including
+     `README.md`, `Makefile`, `pyrightconfig.json`, `LICENSE`, `LICENSE-MIT`,
+     and `NOTICE`
+   - unless a file states otherwise
+
+   See `LICENSE-MIT`.
+
+3. When in doubt:
+   - treat `prediction_market_extensions/` as the active LGPL-3.0-or-later extension package
+   - treat any root file with a Nautilus-derived notice as LGPL-3.0-or-later
+   - treat git history as the provenance source for the removed vendored tree
+   - consult `NOTICE` for provenance and change dates

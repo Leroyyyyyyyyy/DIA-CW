@@ -1,0 +1,123 @@
+# Derived from NautilusTrader prediction-market example code.
+# Distributed under the GNU Lesser General Public License Version 3.0 or later.
+# Modified in this repository on 2026-03-11 and 2026-03-16.
+# See the repository NOTICE file for provenance and licensing scope.
+
+from __future__ import annotations
+
+from decimal import Decimal
+
+from nautilus_trader.model.data import QuoteTick, TradeTick
+from nautilus_trader.model.enums import OrderSide, TimeInForce
+from nautilus_trader.model.identifiers import InstrumentId
+from nautilus_trader.trading.strategy import StrategyConfig
+
+from strategies.core import LongOnlyPredictionMarketStrategy
+
+
+class TradeTickLateFavoriteLimitHoldConfig(StrategyConfig, frozen=True):  # type: ignore[call-arg]
+    instrument_id: InstrumentId
+    trade_size: Decimal = Decimal(25)
+    activation_start_time_ns: int = 0
+    market_close_time_ns: int = 0
+    entry_price: float = 0.90
+
+
+class QuoteTickLateFavoriteLimitHoldConfig(StrategyConfig, frozen=True):  # type: ignore[call-arg]
+    instrument_id: InstrumentId
+    trade_size: Decimal = Decimal(25)
+    activation_start_time_ns: int = 0
+    market_close_time_ns: int = 0
+    entry_price: float = 0.90
+
+
+class _LateFavoriteLimitHoldBase(LongOnlyPredictionMarketStrategy):
+    """
+    Submit one limit buy once a late-game favorite reaches the entry threshold.
+
+    This strategy is intended for resolved-market backtests which mark any
+    remaining position to settlement after the backtest completes.
+    """
+
+    def __init__(
+        self, config: TradeTickLateFavoriteLimitHoldConfig | QuoteTickLateFavoriteLimitHoldConfig
+    ) -> None:
+        super().__init__(config)
+        self._entered_once = False
+
+    def _on_price(
+        self,
+        *,
+        signal_price: float,
+        order_price: float,
+        ts_event_ns: int,
+        visible_size: float | None = None,
+    ) -> None:
+        if self._pending or self._in_position() or self._entered_once:
+            return
+
+        if int(self.config.activation_start_time_ns) > 0 and ts_event_ns < int(
+            self.config.activation_start_time_ns
+        ):
+            return
+        if int(self.config.market_close_time_ns) > 0 and ts_event_ns > int(
+            self.config.market_close_time_ns
+        ):
+            return
+
+        if signal_price < float(self.config.entry_price):
+            return
+
+        assert self._instrument is not None
+        quantity = self._entry_quantity(reference_price=order_price, visible_size=visible_size)
+        if quantity is None:
+            return
+        order = self.order_factory.limit(
+            instrument_id=self.config.instrument_id,
+            order_side=OrderSide.BUY,
+            quantity=quantity,
+            price=self._instrument.make_price(order_price),
+            time_in_force=TimeInForce.GTC,
+        )
+        self.submit_order(order)
+        self._pending = True
+
+    def on_order_filled(self, event) -> None:  # type: ignore[no-untyped-def]
+        super().on_order_filled(event)
+        if event.order_side == OrderSide.BUY:
+            self._entered_once = True
+
+    def on_stop(self) -> None:
+        # Leave filled positions open so the runner can mark them to settlement.
+        self.cancel_all_orders(self.config.instrument_id)
+
+    def on_reset(self) -> None:
+        super().on_reset()
+        self._entered_once = False
+
+
+class TradeTickLateFavoriteLimitHoldStrategy(_LateFavoriteLimitHoldBase):
+    def _subscribe(self) -> None:
+        self.subscribe_trade_ticks(self.config.instrument_id)
+
+    def on_trade_tick(self, tick: TradeTick) -> None:
+        price = float(tick.price)
+        self._on_price(
+            signal_price=price,
+            order_price=price,
+            ts_event_ns=int(tick.ts_event),
+        )
+
+
+class QuoteTickLateFavoriteLimitHoldStrategy(_LateFavoriteLimitHoldBase):
+    def _subscribe(self) -> None:
+        self.subscribe_quote_ticks(self.config.instrument_id)
+
+    def on_quote_tick(self, tick: QuoteTick) -> None:
+        signal_price = (float(tick.bid_price) + float(tick.ask_price)) / 2.0
+        self._on_price(
+            signal_price=signal_price,
+            order_price=float(tick.ask_price),
+            ts_event_ns=int(tick.ts_event),
+            visible_size=float(tick.ask_size),
+        )

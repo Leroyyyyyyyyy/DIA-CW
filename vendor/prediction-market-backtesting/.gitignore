@@ -1,0 +1,47 @@
+# macOS
+.DS_Store
+
+# Environment
+.env
+.uv-cache/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environment
+.venv
+
+# MkDocs build output
+site/
+
+# Data (contents come from submodule; symlink is tracked)
+data/
+
+# Output
+output/
+kalshi_catalog/
+
+# Local relay runtime
+.pmxt-relay/
+
+# Temp
+.tmp/
+
+# Rust
+crates/*/target/
+crates/*/uv.lock
+*.so
+*.dylib
+*.dll
+
+# Tool caches
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.benchmarks/

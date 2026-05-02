@@ -1,0 +1,38 @@
+site_name: prediction-market-backtesting
+site_url: https://evan-kolberg.github.io/prediction-market-backtesting/
+repo_url: https://github.com/evan-kolberg/prediction-market-backtesting
+repo_name: evan-kolberg/prediction-market-backtesting
+
+theme:
+  name: shadcn
+  custom_dir: docs_overrides
+  show_title: true
+  show_stargazers: true
+  topbar_sections: false
+  pygments_style:
+    light: shadcn-light
+    dark: github-dark
+  icon: heroicons:chart-bar-square
+
+nav:
+  - Home: index.md
+  - Setup: setup.md
+  - Backtests And Runners: backtests.md
+  - Research: research.md
+  - Execution Modeling: execution-modeling.md
+  - Data Vendors, Local Mirrors, And Raw PMXT: pmxt-byod.md
+  - Mirror And Relay Ops: pmxt-relay.md
+  - Vendor Fetch Sources And Timing: pmxt-fetch-sources.md
+  - Plotting: plotting.md
+  - Testing: testing.md
+  - Project Status: project-status.md
+  - License Notes: license.md
+
+markdown_extensions:
+  - tables
+  - fenced_code
+  - codehilite
+  - toc
+
+extra_css:
+  - stylesheets/overrides.css
