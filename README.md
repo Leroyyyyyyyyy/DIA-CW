@@ -49,6 +49,61 @@ D:\Polyquant\vendor\prediction-market-backtesting\output\
 
 `Weather` 的回测结果有天气 domain 价值，但最终仍应通过 adapter 转成统一格式，再进入总 evaluation。
 
+### 组员策略如何接入回测
+
+另外两个组员现在不需要各自写一套 backtest，也不需要改 PMXT data loader、execution、fill、PnL 模拟。
+
+他们需要接入的是统一的 policy / strategy 层。当前代码里对应位置是：
+
+```text
+D:\Polyquant\vendor\prediction-market-backtesting\backtests\private\weather_backtest.py
+```
+
+具体入口是 `STRATEGY_CONFIGS`：
+
+```python
+STRATEGY_CONFIGS = [
+    {
+        "strategy_path": "strategies:QuoteTickEMACrossoverStrategy",
+        "config_path": "strategies:QuoteTickEMACrossoverConfig",
+        "config": {
+            "trade_size": Decimal(5),
+            "fast_period": 8,
+            "slow_period": 21,
+            "entry_buffer": 0.0,
+            "take_profit": 0.01,
+            "stop_loss": 0.01,
+        },
+    }
+]
+```
+
+也就是说，真正要替换或扩展的是 `strategy_path` / `config_path` 指向的策略，而不是回测框架本身。
+
+推荐做法：
+
+```text
+strategies/
+├─ signal_policy.py        # 统一读取 signal CSV 的策略
+├─ news_signal_policy.py   # acy_news(1) 的 news/BTC 策略封装
+└─ weather_signal_policy.py# Weather 的天气策略封装
+```
+
+更省事的做法是先只做一个统一 `SignalPolicyStrategy`，让两个组员都输出同一种 signal CSV：
+
+```text
+timestamp,market_slug,token_index,market_prob,model_prob,
+edge,score,action,evidence_ref
+```
+
+分工口径：
+
+- `acy_news(1)` 负责人：把 BTC/news 逻辑封装成 news policy，或者稳定输出统一 `signals.csv`。
+- `Weather` 负责人：把 weather forecast 逻辑封装成 weather policy，或者稳定输出统一 `backtest_signal_table.csv`。
+- Dld：负责把这些 policy / signal 接入 PMXT runner，统一跑 replay、fills、PnL、HTML report。
+
+一句话：组员负责“决策信号/策略”，Dld 负责“统一回测执行和论文表格”。最终不要出现三套 backtest 分别算 PnL 的情况。
+
 ## 3. 已经做了什么
 
 ### 文档
