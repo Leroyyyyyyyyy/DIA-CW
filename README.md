@@ -9,7 +9,123 @@
 - `D:\Polyquant\acy_news(1)` 和 `D:\Polyquant\Weather` 不作为最终主回测系统，而是作为 domain module 接入。
 - 最终论文 Table I-IV 和正文 `[P]` 数值，应该从统一 evaluation 输出生成，不要手工从三套系统拼。
 
-## 2. 当前回测以 `backtestreadme.md` 为准
+## 2. 与论文框架的对应关系
+
+当前仓库按 `main.pdf` 的论文结构组织，核心不是三套独立预测脚本，而是一个 reactive cross-domain Polymarket agent。
+
+### III. System Design
+
+论文模块和代码对应：
+
+```text
+Environment / Polymarket market state
+-> vendor\prediction-market-backtesting
+-> scripts\polymarket_find_markets.py
+-> backtests\private\replays.json
+
+Three sub-environments
+-> Counter-Strike: poly-ok-check\research\domains\cs2
+-> Bitcoin 5-minute / news: acy_news(1) 输出，经 acy_news_adapter.py 接入
+-> Weather: Weather 输出，经 weather_adapter.py 接入
+
+Report interface
+-> poly-ok-check\research\schemas\domain_report.py
+
+Agent loop / selector / table aggregation
+-> poly-ok-check\research\evaluation\cw_tables.py
+-> poly-ok-check\research\run\run_cw_experiment.py
+```
+
+论文里的统一 report 字段是：
+
+```text
+domain,timestamp,market_id,target,market_prob,model_prob,
+data_score,news_score,edge,action,outcome,evidence_ref
+```
+
+代码里的 `DomainReport` 可以额外带 `method`、`pnl`、`metadata`，但进入论文 Table I-IV 时必须能回到上面这些核心字段。
+
+### IV. Implementation And Reproducibility
+
+论文要求每个结果可从配置和日志复现，所以仓库分两层：
+
+```text
+PMXT / Nautilus replay layer
+-> 负责 market_slug、token_index、PMXT 历史盘口、成交、fills、PnL、HTML report
+
+poly-ok-check evaluation layer
+-> 负责读取三域 signal/report，计算 baselines、coverage、Brier、hit rate、switch/exit、Table I-IV
+```
+
+复现不能靠手工拼数字。每个 `[P]` 应来自：
+
+```text
+poly-ok-check\research\runs\cw_final\
+```
+
+### V. Experimental Methodology
+
+论文的五个实验条件必须在 evaluation 里保持一致：
+
+```text
+market-only
+data-only
+news-only
+data + news
+proposed agent = data score + news score + market edge + reactive selector
+```
+
+统一 scoring 口径：
+
+```text
+edge = abs(model_prob - market_prob)
+opportunity_score = data_score + news_score + edge
+```
+
+统一 action 口径：
+
+```text
+hold, enter, maintain, switch, exit
+```
+
+阈值实验必须对应论文 Table III：
+
+```text
+tau grid -> hit rate, Brier, P/L, coverage
+```
+
+### VI-VII. Results And Discussion
+
+论文 `[P]` 的结果表和代码输出一一对应：
+
+```text
+Table I  -> table1_overall.csv
+Table II -> table2_by_domain.csv
+Table III -> table3_threshold.csv
+Table IV -> table4_examples.csv
+正文分析 -> paper_placeholders.md
+```
+
+PDF 占位符地图：
+
+```text
+poly-ok-check\docs\paper_placeholder_map.md
+```
+
+### VIII. Author Contributions
+
+论文最终的 author contributions 应按实际提交责任填写，但口径必须保持论文模块化：
+
+```text
+overall system / Bitcoin 5-minute component
+Counter-Strike component
+news hub / LLM news scoring component
+backtesting system / weather component
+```
+
+如果最终成员分工与 PDF 当前草稿不一致，应改论文 VIII，不要让 README、代码分工和论文贡献声明互相矛盾。
+
+## 3. 当前回测以 `backtestreadme.md` 为准
 
 当前真正要跑论文 PnL 的回测，不是先 merge 三套代码，也不是优先用 `poly-ok-check\research\backtest`，而是按照：
 
@@ -104,7 +220,7 @@ edge,score,action,evidence_ref
 
 一句话：组员负责“决策信号/策略”，Dld 负责“统一回测执行和论文表格”。最终不要出现三套 backtest 分别算 PnL 的情况。
 
-## 3. 已经做了什么
+## 4. 已经做了什么
 
 ### 文档
 
@@ -199,7 +315,7 @@ D:\Polyquant\poly-ok-check\research\runs\cw_final\
 
 注意：这些是根据当前已有输出跑出的初版聚合结果，不等于最终论文定稿数值。
 
-## 4. 当前推荐最终仓库结构
+## 5. 当前推荐最终仓库结构
 
 ```text
 poly-ok-check/
@@ -222,7 +338,7 @@ poly-ok-check/
    └─ paper_fill_plan.md
 ```
 
-## 5. `main.pdf` 需要填什么
+## 6. `main.pdf` 需要填什么
 
 我已经按 `D:\Polyquant\main.pdf` 抽取过 `[P]`，当前共有 123 个，占位符只集中在第 6、7、8 页。
 
@@ -244,7 +360,7 @@ poly-ok-check/
 - Table IV: representative signals。
 - Discussion: highest-profit domain、lowest-profit domain、strongest observed result。
 
-## 6. 代码负责部分分配
+## 7. 代码负责部分分配
 
 ### Dld
 
@@ -339,7 +455,7 @@ backtest_summary.csv
 - 根据 Dld 输出的 `paper_placeholders.md` 和 Table I-IV CSV 填论文。
 - 确认每个 domain owner 在 VIII. AUTHOR CONTRIBUTIONS 中认领自己的贡献。
 
-## 7. 论文结果填写分配
+## 8. 论文结果填写分配
 
 ### Table I: Overall Baseline Comparison
 
@@ -423,11 +539,11 @@ Dld 建议写：
 
 ```text
 Dld was responsible for the final repository integration, the Counter-Strike
-market component, the primary backtesting system, and aggregation of the
-experimental results used in the paper tables.
+market component, the PMXT/Nautilus backtesting workflow, and aggregation of
+the experimental results used in the paper tables.
 ```
 
-## 8. 接下来要做什么
+## 9. 接下来要做什么
 
 ### 必须做
 
@@ -452,7 +568,7 @@ experimental results used in the paper tables.
 4. 明确哪些数据文件太大，不进 git。
 5. 在最终 README 里只保留一条主复现路径。
 
-## 9. 当前注意点
+## 10. 当前注意点
 
 - 当前没有直接搬动 `acy_news(1)` 和 `Weather` 的代码，只做了 adapter 和 integration layer。
 - 当前 `cw_final` 输出是初版聚合，不是最终论文数值。

@@ -116,8 +116,8 @@ Dld 建议写：
 
 ```text
 Dld was responsible for the final repository integration, the Counter-Strike
-market component, the primary backtesting system, and aggregation of the
-experimental results used in the paper tables.
+market component, the PMXT/Nautilus backtesting workflow, and aggregation of
+the experimental results used in the paper tables.
 ```
 
 ## 规则
