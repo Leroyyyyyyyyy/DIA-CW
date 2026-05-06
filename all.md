@@ -1,41 +1,36 @@
 # DIA-CW / Polyquant 当前交接状态
 
-> 每次切换对话或恢复工作，先读这个文件。每次路径、数据、结果、GitHub 状态变化后，都要更新本文件。
+> 切换对话或恢复工作时先读本文件。每次路径、数据、结果、GitHub 状态变化后都要更新。
 
-## 1. 当前总判断
+## 1. 总判断
 
-- 最终代码仓库：`D:\Polyquant\poly-ok-check`
+- 最终集成仓库：`D:\Polyquant\poly-ok-check`
 - GitHub 上传目录：`D:\Polyquant\github_upload`
-- GitHub 远程：`https://github.com/Leroyyyyyyyyy/DIA-CW.git`
-- GitHub 当前已推送到：`main`
-- 最近已推送提交：
-  - `f4c9cb7 Align repository docs with paper framework`
-  - `11b4ee2 Document strategy policy integration flow`
-  - `ce251cc Initial coursework backtest and evaluation repo`
+- GitHub remote：`https://github.com/Leroyyyyyyyyy/DIA-CW.git`
 - 论文 PDF：`D:\Polyquant\main.pdf`
-- 论文 `[P]`：共 123 个，集中在 Page 6-8，主要是 Table I-IV 和 Discussion。
+- 论文 `[P]`：共 123 个，集中在 page 6-8，主要是 Table I-IV 和 Discussion。
 
 核心原则：
-- 不做三套独立 backtest。
-- PMXT / Nautilus 负责盘口 replay、fills、PnL、HTML report。
-- `poly-ok-check` 负责统一 schema、adapter、evaluation、论文 Table I-IV。
+- 不把 `dia` / `Weather(2)` 整包 merge 进主仓库。
 - `dia` 和 `Weather(2)` 只作为 domain signal/evidence module。
-- 所有论文最终数字必须从统一 evaluation 输出，不手工拼。
+- `poly-ok-check` 负责统一 schema、adapter、evaluation、Table I-IV。
+- PMXT / Nautilus 负责真正盘口 replay、fills、PnL；当前 `cw_final` 是统一 evaluation 层结果。
+- 最终论文数值必须由统一 evaluation 生成，不能手工拼三套系统。
 
 ## 2. 论文框架对齐
 
-论文是 reactive cross-domain Polymarket agent：
+论文主线：
 
 ```text
-三域输入 -> DomainReport -> opportunity score -> reactive selector -> unified evaluation -> Table I-IV
+CS2 / BTC-news / Weather
+-> DomainReport
+-> opportunity score
+-> reactive selector
+-> unified evaluation
+-> Table I-IV + paper placeholders
 ```
 
-三域：
-- Counter-Strike：Dld / `poly-ok-check`
-- Bitcoin 5-minute / news：`D:\Polyquant\dia`
-- Weather：`D:\Polyquant\Weather(2)`
-
-统一核心字段：
+统一字段：
 
 ```text
 method,domain,timestamp,market_id,target,market_prob,model_prob,
@@ -49,12 +44,22 @@ Table I   -> research\runs\cw_final\table1_overall.csv
 Table II  -> research\runs\cw_final\table2_by_domain.csv
 Table III -> research\runs\cw_final\table3_threshold.csv
 Table IV  -> research\runs\cw_final\table4_examples.csv
-正文[P]   -> research\runs\cw_final\paper_placeholders.md
+[P]       -> research\runs\cw_final\paper_placeholders.md
 ```
 
 ## 3. 当前关键路径
 
-PMXT / Nautilus 回测执行：
+主 evaluation：
+
+```text
+D:\Polyquant\poly-ok-check\research\config\cw_experiment.yaml
+D:\Polyquant\poly-ok-check\research\run\run_cw_experiment.py
+D:\Polyquant\poly-ok-check\research\adapters\
+D:\Polyquant\poly-ok-check\research\evaluation\cw_tables.py
+D:\Polyquant\poly-ok-check\research\schemas\domain_report.py
+```
+
+PMXT / Nautilus 回测参考：
 
 ```text
 D:\Polyquant\backtestreadme.md
@@ -65,29 +70,17 @@ D:\Polyquant\vendor\prediction-market-backtesting\backtests\private\weather_back
 D:\Polyquant\vendor\prediction-market-backtesting\strategies\ema_crossover.py
 ```
 
-统一 evaluation：
-
-```text
-D:\Polyquant\poly-ok-check\research\config\cw_experiment.yaml
-D:\Polyquant\poly-ok-check\research\run\run_cw_experiment.py
-D:\Polyquant\poly-ok-check\research\adapters\
-D:\Polyquant\poly-ok-check\research\evaluation\cw_tables.py
-D:\Polyquant\poly-ok-check\research\schemas\domain_report.py
-```
-
 运行统一 evaluation：
 
 ```powershell
 cd D:\Polyquant\poly-ok-check
 $env:PYTHONPATH="D:\Polyquant\poly-ok-check"
 python -m research.run.run_cw_experiment `
-  --config research\config\cw_experiment.yaml `
-  --out-dir research\runs\cw_final
+  --config D:\Polyquant\poly-ok-check\research\config\cw_experiment.yaml `
+  --out-dir D:\Polyquant\poly-ok-check\research\runs\cw_final
 ```
 
-## 4. 新版组员代码状态
-
-### `dia`
+## 4. dia / BTC-news 状态
 
 路径：
 
@@ -95,7 +88,7 @@ python -m research.run.run_cw_experiment `
 D:\Polyquant\dia\dia
 ```
 
-有用输出：
+当前已接入文件：
 
 ```text
 D:\Polyquant\dia\dia\outputs_btc_window\signals.csv
@@ -103,22 +96,28 @@ D:\Polyquant\dia\dia\outputs_btc_window\signals.jsonl
 D:\Polyquant\dia\dia\outputs_btc_window\evidence.jsonl
 ```
 
-当前检查结果：
-- `outputs_btc_window\signals.csv` 只有 1 条 BTC signal。
-- 当前内容是 sample 风格，evidence URL 是 `example.com`。
-- 不能直接作为最终论文结果，除非组员明确这是 demo。
+当前状态：
+- 已运行非 sample live pipeline：`python -m dia.run_news_pipeline --domain btc`
+- 输出：1 个 BTC signal，15 条 evidence。
+- evidence 来源已变成真实 RSS，例如 `coindesk` / `cointelegraph`，不再是 `SampleCoinDesk` / `example.com`。
+- unified evaluation 已能读入 BTC，并生成 `domain=btc` 的 `DomainReport`。
+- 当前 BTC 仍缺 resolved outcome，所以 BTC 的 hit rate / Brier / PnL 还不能最终定稿。
 
-需要让组员跑正式 BTC/news 输出，不能加 `--sample`：
+最近 BTC 接入检查：
 
-```powershell
-cd D:\Polyquant\dia\dia
-python -m dia.run_news_pipeline --domain btc `
-  --start-date 2026-04-29T00:00:00+08:00 `
-  --end-date 2026-04-30T23:59:59+08:00 `
-  --as-of 2026-04-30T09:00:00+08:00
+```text
+btc_reports = 1
+action = NO
+model_prob = 0.4975
+market_prob = 0.5
+evidence_ref = Eric Trump takes shot at JPMorgan rethinking bitcoin after 'crapping' on asset
 ```
 
-### `Weather(2)`
+注意：
+- 如果论文需要固定历史窗口，不能只依赖 live RSS；需要 dia 负责人提供可复现的历史 BTC/news 输出，或把 RSS 快照一起保存。
+- 之前 sample 已备份在 `outputs_btc_window_sample_backup`。
+
+## 5. Weather(2) 状态
 
 路径：
 
@@ -126,13 +125,7 @@ python -m dia.run_news_pipeline --domain btc `
 D:\Polyquant\Weather(2)\Weather
 ```
 
-对齐说明：
-
-```text
-D:\Polyquant\Weather(2)\Weather\WEATHER_GIT_ALIGNMENT.md
-```
-
-有用输出：
+当前已接入文件：
 
 ```text
 D:\Polyquant\Weather(2)\Weather\data\processed\signals.csv
@@ -142,26 +135,30 @@ D:\Polyquant\Weather(2)\Weather\data\processed\backtest_trades.csv
 D:\Polyquant\Weather(2)\Weather\data\processed\backtest_summary.csv
 ```
 
-当前检查结果：
-- `signals.csv`：562 rows，字段已经是统一 `DomainReport` 格式。
-- `backtest_signal_table.csv`：562 decision windows。
-- `backtest_trades.csv`：3 trades。
-- `backtest_summary.csv`：win_rate 0.3333，total_pnl -1.607242339832869。
+当前状态：
+- `signals.csv`：562 rows，作为 Weather 主 decision windows。
+- `backtest_trades.csv`：3 trades，只作为成交 / PnL 补充，不能单独算 coverage。
+- `weather_adapter.py` 已优先读取 `signals_csv`，再 fallback 到 `signal_table_csv` / `trades_csv`。
+- Weather action 已规范化：`enter -> YES/NO`，`hold -> HOLD`。
 
-重要注意：
-- Table I / III 需要 coverage 和 threshold sensitivity，所以不能只用 `backtest_trades.csv`。
-- Weather 主 decision window 应来自 `signals.csv` 或 `backtest_signal_table.csv`。
-- `backtest_trades.csv` 只作为成交/PnL/evidence 补充。
+最近 Weather 接入检查：
 
-## 5. 当前实现状态
+```text
+weather_reports = 562
+weather_actions = NO: 92, HOLD: 456, YES: 14
+weather_known_outcomes = 3
+weather_methods = proposed_agent
+```
+
+## 6. 当前已完成改动
 
 已完成：
-- `cw_experiment.yaml` 已切到新版 `dia` 和 `Weather(2)` 路径。
-- `weather_adapter.py` 已支持优先读取 Weather 统一 `signals.csv`。
-- Weather 现在走 562 条 decision windows，不再被 3 条 `backtest_trades.csv` 覆盖。
-- Weather `enter/hold` 已在 adapter 中规范化成 evaluation 使用的 `YES/NO/HOLD`。
-- `run_cw_experiment.py` 已支持传入 weather `signals_csv`。
-- 已重跑真实输出目录 `D:\Polyquant\poly-ok-check\research\runs\cw_final`。
+- `cw_experiment.yaml` 已指向新版 `dia` 和 `Weather(2)` 路径。
+- `weather_adapter.py` 已支持并优先读取 Weather 统一 `signals.csv`。
+- `run_cw_experiment.py` 已向 Weather adapter 传入 `signals_csv`。
+- `research/tests/test_domain_adapters.py` 已覆盖 Weather 优先读取 signals 的逻辑。
+- 已重新运行 `compileall`，无语法错误。
+- 已重新运行统一 evaluation，输出目录：`D:\Polyquant\poly-ok-check\research\runs\cw_final`
 
 当前 `cw_experiment.yaml` 指向：
 
@@ -172,100 +169,82 @@ D:/Polyquant/Weather(2)/Weather/data/processed/signals.csv
 D:/Polyquant/Weather(2)/Weather/data/processed/evidence.jsonl
 D:/Polyquant/Weather(2)/Weather/data/processed/backtest_signal_table.csv
 D:/Polyquant/Weather(2)/Weather/data/processed/backtest_trades.csv
+D:/Polyquant/Weather(2)/Weather/data/processed/backtest_summary.csv
 ```
 
-最新 evaluation 检查：
+当前 evaluation 输出：
 
 ```text
 loaded_reports = 582
-methods = proposed_agent: 582
 domains = weather: 562, cs2: 19, btc: 1
-weather actions = HOLD: 456, NO: 92, YES: 14
-weather acted = 106
+proposed_selected = 117
+available_decision_windows = 582
+proposed_coverage_pct = 20.10
+proposed_hit_rate_pct = 46.15
+proposed_brier = 0.178711
+proposed_p_l = -2.391522
+domain_switches = 2
+exits = 9
 ```
 
-当前 `cw_final` 结果：
+重要：这些仍不是最终论文数值，因为 BTC outcome 和完整 baseline 还没补齐。
 
-```text
-proposed_selected: 117
-available_decision_windows: 582
-proposed_coverage_pct: 20.10
-proposed_hit_rate_pct: 46.15
-proposed_brier: 0.178711
-proposed_p_l: -2.391522
-domain_switches: 2
-exits: 9
-```
+## 7. 仍未完成
 
-注意：这仍不能作为最终论文定稿数值，因为 BTC/news 仍是 sample。
+必须继续做：
 
-仍有问题：
-- BTC/news 当前没有 resolved outcome，P/L / Brier 可能无法最终定稿。
-- BTC/news 当前仍是 sample 输出：1 条 signal，evidence 使用 `SampleCoinDesk` / `example.com`。
-- 已尝试本地跑 `python -m dia.run_news_pipeline --domain btc ...` 非 sample，但 120 秒超时，没有改写输出。
-- baseline rows 当前还不是完整真实 baseline，Table I 定稿前必须补齐：
-  - market-only
-  - data-only
-  - news-only
-  - data + news
-  - proposed agent
+1. 补 resolved outcomes：
+   - BTC selected signal outcome。
+   - CS2 selected signals outcome。
+   - Weather selected signals outcome 已有 3 个，但覆盖还不足。
 
-## 6. 下一步执行顺序
+2. 补完整 baseline：
+   - `market_only`
+   - `data_only`
+   - `news_only`
+   - `data_news`
+   - `proposed_agent`
 
-1. 让 dia 负责人交正式 BTC/news 输出，不要 sample；确认输出不是 `example.com`。
-2. 加 resolved outcomes 配置，至少覆盖最终进入论文的 BTC、CS2、Weather selected signals。
-3. 补完整 baseline 生成逻辑。
-4. 在正式 BTC 输出到位后重跑：
-
-```powershell
-cd D:\Polyquant\poly-ok-check
-$env:PYTHONPATH="D:\Polyquant\poly-ok-check"
-python -m research.run.run_cw_experiment `
-  --config research\config\cw_experiment.yaml `
-  --out-dir research\runs\cw_final
-```
-
-5. 检查新 `cw_final`：
+3. 重新跑 evaluation，检查：
    - Table I 五个 method 都有真实值。
-   - Table II 三个 domain 都有值。
-   - Table III threshold grid 有 coverage/PnL tradeoff。
-   - Table IV 有 CS2、BTC、Weather、switch/exit example。
-6. 用 `paper_placeholders.md` 和 Table I-IV 填 `main.pdf` 里的 `[P]`。
-7. 更新 `github_upload` 的 README / docs 后 push。
+   - Table II 三个 domain 都有可解释结果。
+   - Table III 有 threshold / coverage / PnL tradeoff。
+   - Table IV 有 CS2、BTC、Weather、switch/exit examples。
 
-## 7. GitHub 状态
+4. 再用 `paper_placeholders.md` 和 Table I-IV 填论文 `[P]`。
 
-本地上传仓库：
+5. 同步到 `github_upload` 并 push。
+
+## 8. GitHub 状态
+
+上传目录：
 
 ```text
 D:\Polyquant\github_upload
 ```
 
-远程：
+远端：
 
 ```text
 https://github.com/Leroyyyyyyyyy/DIA-CW.git
 ```
 
-当前已连接并可 push。之前 GitHub 推送成功。  
-如遇到 Git 连接超时，可用：
+已确认可 push。最新提交以 `git log -1 --oneline` 为准。上一次已确认推送提交：
+
+```text
+abaa595 Wire latest dia and Weather outputs into evaluation
+```
+
+如果 Git push 连接超时，用：
 
 ```powershell
 git -C D:\Polyquant\github_upload -c http.version=HTTP/1.1 -c http.lowSpeedLimit=0 push
 ```
 
-## 8. 不能做的事
+## 9. 禁止事项
 
-- 不要把 `dia` 和 `Weather(2)` 整包直接 merge 进主仓库。
-- 不要从 Weather 自己的 3 条 trades 手工抄最终论文 PnL。
-- 不要用 `dia --sample` 的 1 条 BTC 结果定稿论文。
+- 不要把 `dia` / `Weather(2)` 整包直接 merge 到主仓库。
+- 不要用 `dia --sample` 的 BTC 输出填论文。
+- 不要只用 Weather 的 3 条 trades 算 coverage / threshold。
 - 不要让三套 backtest 分别生成 Table I-III。
-- 不要把 `.venv`、`__pycache__`、`target`、`output`、zip、大型 raw data 上传 GitHub。
-
-## 9. 当前未定风险
-
-- BTC/news 正式历史输出还没确认，这是当前最大阻塞。
-- BTC resolved outcome 还没接入。
-- PMXT/Nautilus execution-level PnL 与当前 fixed-stake evaluation PnL 的最终口径需要统一。
-- `cw_final` 当前仍是旧数据初版，不是最终论文数值。
-- 根目录 `codex_pytest_tmp_polyquant` 是 pytest 临时权限异常目录，不影响逻辑，但不用提交。
+- 不要上传 `.venv`、`__pycache__`、`target`、`output`、zip、大型 raw data。
