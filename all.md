@@ -153,31 +153,56 @@ D:\Polyquant\Weather(2)\Weather\data\processed\backtest_summary.csv
 - Weather 主 decision window 应来自 `signals.csv` 或 `backtest_signal_table.csv`。
 - `backtest_trades.csv` 只作为成交/PnL/evidence 补充。
 
-## 5. 当前代码问题
+## 5. 当前实现状态
 
-`cw_experiment.yaml` 仍指向旧路径：
+已完成：
+- `cw_experiment.yaml` 已切到新版 `dia` 和 `Weather(2)` 路径。
+- `weather_adapter.py` 已支持优先读取 Weather 统一 `signals.csv`。
+- Weather 现在走 562 条 decision windows，不再被 3 条 `backtest_trades.csv` 覆盖。
+- Weather `enter/hold` 已在 adapter 中规范化成 evaluation 使用的 `YES/NO/HOLD`。
+- `run_cw_experiment.py` 已支持传入 weather `signals_csv`。
+- 已重跑真实输出目录 `D:\Polyquant\poly-ok-check\research\runs\cw_final`。
+
+当前 `cw_experiment.yaml` 指向：
 
 ```text
-../acy_news(1)/dia/outputs_btc_window/...
-../Weather/Weather/data/processed/...
+D:/Polyquant/dia/dia/outputs_btc_window/signals.csv
+D:/Polyquant/dia/dia/outputs_btc_window/evidence.jsonl
+D:/Polyquant/Weather(2)/Weather/data/processed/signals.csv
+D:/Polyquant/Weather(2)/Weather/data/processed/evidence.jsonl
+D:/Polyquant/Weather(2)/Weather/data/processed/backtest_signal_table.csv
+D:/Polyquant/Weather(2)/Weather/data/processed/backtest_trades.csv
 ```
 
-需要改到：
+最新 evaluation 检查：
 
 ```text
-../dia/dia/outputs_btc_window/signals.csv
-../dia/dia/outputs_btc_window/evidence.jsonl
-../Weather(2)/Weather/data/processed/signals.csv
-../Weather(2)/Weather/data/processed/evidence.jsonl
-../Weather(2)/Weather/data/processed/backtest_signal_table.csv
-../Weather(2)/Weather/data/processed/backtest_trades.csv
+loaded_reports = 582
+methods = proposed_agent: 582
+domains = weather: 562, cs2: 19, btc: 1
+weather actions = HOLD: 456, NO: 92, YES: 14
+weather acted = 106
 ```
 
-adapter / evaluation 仍有几个口径问题：
-- `weather_adapter.py` 现在如果 `trades_csv` 存在，会优先只读 3 条 trades，导致 coverage 错。
-- `Weather(2)\signals.csv` 里的 `action` 是 `enter/hold`，但 `cw_tables.py` 当前只把 `YES/NO` 当 acted signal。
-- 需要把 Weather `enter + target side` 转成 `YES/NO`，`hold` 转成 `HOLD`。
+当前 `cw_final` 结果：
+
+```text
+proposed_selected: 117
+available_decision_windows: 582
+proposed_coverage_pct: 20.10
+proposed_hit_rate_pct: 46.15
+proposed_brier: 0.178711
+proposed_p_l: -2.391522
+domain_switches: 2
+exits: 9
+```
+
+注意：这仍不能作为最终论文定稿数值，因为 BTC/news 仍是 sample。
+
+仍有问题：
 - BTC/news 当前没有 resolved outcome，P/L / Brier 可能无法最终定稿。
+- BTC/news 当前仍是 sample 输出：1 条 signal，evidence 使用 `SampleCoinDesk` / `example.com`。
+- 已尝试本地跑 `python -m dia.run_news_pipeline --domain btc ...` 非 sample，但 120 秒超时，没有改写输出。
 - baseline rows 当前还不是完整真实 baseline，Table I 定稿前必须补齐：
   - market-only
   - data-only
@@ -187,15 +212,10 @@ adapter / evaluation 仍有几个口径问题：
 
 ## 6. 下一步执行顺序
 
-1. 更新 `cw_experiment.yaml`，切到 `dia` 和 `Weather(2)` 新路径。
-2. 修改 Weather adapter：
-   - 优先读取 `Weather(2)\data\processed\signals.csv` 或 signal table 的 562 rows。
-   - 不让 `backtest_trades.csv` 覆盖 decision windows。
-   - 用 trades/summary 补 PnL、outcome、evidence。
-3. 让 dia 负责人跑正式 BTC/news，不要 sample；确认输出不是 `example.com`。
-4. 加 resolved outcomes 配置，至少覆盖最终进入论文的 BTC、CS2、Weather selected signals。
-5. 补完整 baseline 生成逻辑。
-6. 重跑：
+1. 让 dia 负责人交正式 BTC/news 输出，不要 sample；确认输出不是 `example.com`。
+2. 加 resolved outcomes 配置，至少覆盖最终进入论文的 BTC、CS2、Weather selected signals。
+3. 补完整 baseline 生成逻辑。
+4. 在正式 BTC 输出到位后重跑：
 
 ```powershell
 cd D:\Polyquant\poly-ok-check
@@ -205,13 +225,13 @@ python -m research.run.run_cw_experiment `
   --out-dir research\runs\cw_final
 ```
 
-7. 检查新 `cw_final`：
+5. 检查新 `cw_final`：
    - Table I 五个 method 都有真实值。
    - Table II 三个 domain 都有值。
    - Table III threshold grid 有 coverage/PnL tradeoff。
    - Table IV 有 CS2、BTC、Weather、switch/exit example。
-8. 用 `paper_placeholders.md` 和 Table I-IV 填 `main.pdf` 里的 `[P]`。
-9. 更新 `github_upload` 的 README / docs 后 push。
+6. 用 `paper_placeholders.md` 和 Table I-IV 填 `main.pdf` 里的 `[P]`。
+7. 更新 `github_upload` 的 README / docs 后 push。
 
 ## 7. GitHub 状态
 
@@ -244,7 +264,7 @@ git -C D:\Polyquant\github_upload -c http.version=HTTP/1.1 -c http.lowSpeedLimit
 
 ## 9. 当前未定风险
 
-- BTC/news 正式历史输出还没确认。
+- BTC/news 正式历史输出还没确认，这是当前最大阻塞。
 - BTC resolved outcome 还没接入。
 - PMXT/Nautilus execution-level PnL 与当前 fixed-stake evaluation PnL 的最终口径需要统一。
 - `cw_final` 当前仍是旧数据初版，不是最终论文数值。

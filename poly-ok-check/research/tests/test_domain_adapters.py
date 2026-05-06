@@ -36,8 +36,30 @@ def test_acy_news_adapter_converts_signal_csv(tmp_path) -> None:
     assert reports[0].evidence_ref == "BTC evidence"
 
 
-def test_weather_adapter_prefers_trade_rows(tmp_path) -> None:
-    path = tmp_path / "backtest_trades.csv"
+def test_weather_adapter_prefers_unified_signal_rows(tmp_path) -> None:
+    signals = tmp_path / "signals.csv"
+    trades = tmp_path / "backtest_trades.csv"
+    pd.DataFrame(
+        [
+            {
+                "method": "weather_forecast_market_edge",
+                "domain": "weather",
+                "timestamp": "2026-04-30 00:00:00+0000",
+                "market_id": "weather-market",
+                "target": "18C NO",
+                "market_prob": 0.6,
+                "model_prob": 0.75,
+                "data_score": 0.15,
+                "news_score": 0.0,
+                "edge": 0.15,
+                "action": "enter",
+                "outcome": "WIN",
+                "evidence_ref": "weather_ev_1",
+                "pnl": 0.5,
+                "metadata": json.dumps({"side": "NO"}),
+            }
+        ]
+    ).to_csv(signals, index=False)
     pd.DataFrame(
         [
             {
@@ -53,9 +75,9 @@ def test_weather_adapter_prefers_trade_rows(tmp_path) -> None:
                 "market_slug": "weather-market",
             }
         ]
-    ).to_csv(path, index=False)
+    ).to_csv(trades, index=False)
 
-    reports = load_weather_reports(trades_csv=path)
+    reports = load_weather_reports(signals_csv=signals, trades_csv=trades)
 
     assert len(reports) == 1
     assert reports[0].action == "NO"
@@ -83,4 +105,3 @@ def test_cs2_adapter_uses_timeline_decisions(tmp_path) -> None:
     assert len(reports) == 1
     assert reports[0].market_id == "cs2-market"
     assert reports[0].outcome == "WIN"
-

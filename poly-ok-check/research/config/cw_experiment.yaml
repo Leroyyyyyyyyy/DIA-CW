@@ -4,15 +4,18 @@
   "inputs": {
     "acy_news": {
       "enabled": true,
-      "signals_csv": "../acy_news(1)/dia/outputs_btc_window/signals.csv",
-      "evidence_jsonl": "../acy_news(1)/dia/outputs_btc_window/evidence.jsonl",
+      "signals_csv": "D:/Polyquant/dia/dia/outputs_btc_window/signals.csv",
+      "evidence_jsonl": "D:/Polyquant/dia/dia/outputs_btc_window/evidence.jsonl",
       "domains": ["btc"],
       "market_prob_default": 0.5
     },
     "weather": {
       "enabled": true,
-      "trades_csv": "../Weather/Weather/data/processed/backtest_trades.csv",
-      "signal_table_csv": "../Weather/Weather/data/processed/backtest_signal_table.csv"
+      "signals_csv": "D:/Polyquant/Weather(2)/Weather/data/processed/signals.csv",
+      "evidence_jsonl": "D:/Polyquant/Weather(2)/Weather/data/processed/evidence.jsonl",
+      "signal_table_csv": "D:/Polyquant/Weather(2)/Weather/data/processed/backtest_signal_table.csv",
+      "trades_csv": "D:/Polyquant/Weather(2)/Weather/data/processed/backtest_trades.csv",
+      "summary_csv": "D:/Polyquant/Weather(2)/Weather/data/processed/backtest_summary.csv"
     },
     "cs2": {
       "enabled": true,
@@ -24,4 +27,3 @@
     }
   }
 }
-

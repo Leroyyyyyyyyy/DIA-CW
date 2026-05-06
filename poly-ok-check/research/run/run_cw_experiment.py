@@ -51,6 +51,7 @@ def load_reports(config: dict[str, Any], base_dir: Path, config_dir: Path) -> li
     if weather.get("enabled", False):
         reports.extend(
             load_weather_reports(
+                signals_csv=_resolve_optional(weather.get("signals_csv"), base_dir, config_dir),
                 trades_csv=_resolve_optional(weather.get("trades_csv"), base_dir, config_dir),
                 signal_table_csv=_resolve_optional(weather.get("signal_table_csv"), base_dir, config_dir),
             )
@@ -107,4 +108,3 @@ def parse_args() -> argparse.Namespace:
 
 if __name__ == "__main__":
     main()
-
