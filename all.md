@@ -189,33 +189,81 @@ exits = 9
 
 重要：这些仍不是最终论文数值，因为 BTC outcome 和完整 baseline 还没补齐。
 
-## 7. 仍未完成
+## 7. 仓库可复现运行状态
+
+当前 GitHub 仓库已经包含：
+- adapter / config / evaluation 代码。
+- 最新 `research\runs\cw_final` 输出。
+- 当前交接文档 `all.md`。
+
+但当前仓库还不是完全自包含可复现版本。原因：
+- `cw_experiment.yaml` 仍指向本机绝对路径：
+  - `D:/Polyquant/dia/dia/outputs_btc_window/...`
+  - `D:/Polyquant/Weather(2)/Weather/data/processed/...`
+- GitHub 仓库没有整包上传 `dia` 和 `Weather(2)`，也没有把必要输入快照放进主仓库。
+
+因此：
+- 在 Dld 本机：可以直接跑当前 evaluation。
+- 别人只 clone GitHub 仓库：不能完整重跑，会缺 BTC / Weather 输入文件。
+
+要让 clone 后可直接跑，下一步应把必要输入快照纳入主仓库，例如：
+
+```text
+poly-ok-check/research/data/external/dia_btc/
+  signals.csv
+  evidence.jsonl
+
+poly-ok-check/research/data/external/weather/
+  signals.csv
+  evidence.jsonl
+  backtest_signal_table.csv
+  backtest_trades.csv
+  backtest_summary.csv
+```
+
+然后把 `cw_experiment.yaml` 改为相对路径。完成后，别人应能直接运行：
+
+```powershell
+cd poly-ok-check
+$env:PYTHONPATH="."
+python -m research.run.run_cw_experiment `
+  --config research\config\cw_experiment.yaml `
+  --out-dir research\runs\cw_final
+```
+
+## 8. 仍未完成
 
 必须继续做：
 
-1. 补 resolved outcomes：
+1. 先做自包含可复现仓库：
+   - 复制 dia BTC 必要快照到 `research/data/external/dia_btc/`。
+   - 复制 Weather 必要快照到 `research/data/external/weather/`。
+   - 把 `cw_experiment.yaml` 从本机绝对路径改成仓库相对路径。
+   - clone/干净目录下重跑 evaluation 验证。
+
+2. 补 resolved outcomes：
    - BTC selected signal outcome。
    - CS2 selected signals outcome。
    - Weather selected signals outcome 已有 3 个，但覆盖还不足。
 
-2. 补完整 baseline：
+3. 补完整 baseline：
    - `market_only`
    - `data_only`
    - `news_only`
    - `data_news`
    - `proposed_agent`
 
-3. 重新跑 evaluation，检查：
+4. 重新跑 evaluation，检查：
    - Table I 五个 method 都有真实值。
    - Table II 三个 domain 都有可解释结果。
    - Table III 有 threshold / coverage / PnL tradeoff。
    - Table IV 有 CS2、BTC、Weather、switch/exit examples。
 
-4. 再用 `paper_placeholders.md` 和 Table I-IV 填论文 `[P]`。
+5. 再用 `paper_placeholders.md` 和 Table I-IV 填论文 `[P]`。
 
-5. 同步到 `github_upload` 并 push。
+6. 同步到 `github_upload` 并 push。
 
-## 8. GitHub 状态
+## 9. GitHub 状态
 
 上传目录：
 
@@ -229,10 +277,10 @@ D:\Polyquant\github_upload
 https://github.com/Leroyyyyyyyyy/DIA-CW.git
 ```
 
-已确认可 push。最新提交以 `git log -1 --oneline` 为准。上一次已确认推送提交：
+已确认可 push。最新提交以 `git log -1 --oneline` 为准。当前已确认推送提交：
 
 ```text
-abaa595 Wire latest dia and Weather outputs into evaluation
+fc491c7 Update live BTC evaluation status
 ```
 
 如果 Git push 连接超时，用：
@@ -241,7 +289,7 @@ abaa595 Wire latest dia and Weather outputs into evaluation
 git -C D:\Polyquant\github_upload -c http.version=HTTP/1.1 -c http.lowSpeedLimit=0 push
 ```
 
-## 9. 禁止事项
+## 10. 禁止事项
 
 - 不要把 `dia` / `Weather(2)` 整包直接 merge 到主仓库。
 - 不要用 `dia --sample` 的 BTC 输出填论文。
