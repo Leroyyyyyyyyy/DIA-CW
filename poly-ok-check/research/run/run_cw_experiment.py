@@ -8,6 +8,7 @@ from typing import Any
 from research.adapters.acy_news_adapter import load_acy_news_reports
 from research.adapters.cs2_adapter import load_cs2_reports
 from research.adapters.weather_adapter import load_weather_reports
+from research.evaluation.baselines import expand_with_baselines
 from research.evaluation.cw_tables import write_cw_tables, write_unified_reports
 from research.schemas.domain_report import DomainReport
 
@@ -16,7 +17,8 @@ def main() -> None:
     args = parse_args()
     config_path = Path(args.config)
     config = _load_config(config_path)
-    reports = load_reports(config, base_dir=Path.cwd(), config_dir=config_path.parent)
+    proposed_reports = load_reports(config, base_dir=Path.cwd(), config_dir=config_path.parent)
+    reports = expand_with_baselines(proposed_reports)
     out_dir = Path(args.out_dir)
     unified_path = write_unified_reports(reports, out_dir / "unified_domain_reports.csv")
     table_paths = write_cw_tables(
@@ -44,6 +46,7 @@ def load_reports(config: dict[str, Any], base_dir: Path, config_dir: Path) -> li
                 evidence_jsonl=_resolve_optional(acy.get("evidence_jsonl"), base_dir, config_dir),
                 domains=list(acy.get("domains", [])) or None,
                 market_prob_default=float(acy.get("market_prob_default", 0.5)),
+                outcome_csv=_resolve_optional(acy.get("outcome_csv"), base_dir, config_dir),
             )
         )
 
@@ -54,6 +57,7 @@ def load_reports(config: dict[str, Any], base_dir: Path, config_dir: Path) -> li
                 signals_csv=_resolve_optional(weather.get("signals_csv"), base_dir, config_dir),
                 trades_csv=_resolve_optional(weather.get("trades_csv"), base_dir, config_dir),
                 signal_table_csv=_resolve_optional(weather.get("signal_table_csv"), base_dir, config_dir),
+                actual_outcomes=dict(weather.get("actual_outcomes", {})),
             )
         )
 

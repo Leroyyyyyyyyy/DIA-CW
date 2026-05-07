@@ -1,0 +1,2 @@
+market_id,as_of,end_at,start_price,end_price,yes_outcome,winning_side,source,source_symbol,rule,fetched_at
+btc_5m_up_down,2026-05-06T18:23:27.168676Z,2026-05-06T18:28:27.168676Z,81494.43000000,81469.33000000,0.0,NO,binance,BTCUSDT,YES=end_price>start_price over 5m; otherwise NO,2026-05-07T08:57:15.359492Z

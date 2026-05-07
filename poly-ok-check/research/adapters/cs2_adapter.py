@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from research.evaluation.outcomes import selected_side_outcome
 from research.schemas.domain_report import DomainReport, clamp01, infer_action, normalize_action, safe_float
 
 
@@ -54,6 +55,7 @@ def _reports_from_timeline(
         signal = _latest_signal(signals, ts_s)
         fair_prob_yes = clamp01(safe_float(signal.get("fair_prob"), 0.5)) if signal is not None else 0.5
         action = normalize_action(row.get("target_side"))
+        candidate_side = action if action in {"YES", "NO"} else "YES"
         mid_yes = clamp01(safe_float(row.get("orderbook_mid"), 0.5))
         market_prob = 1.0 - mid_yes if action == "NO" else mid_yes
         model_prob = 1.0 - fair_prob_yes if action == "NO" else fair_prob_yes
@@ -70,11 +72,13 @@ def _reports_from_timeline(
                 news_score=0.0,
                 edge=abs(model_prob - market_prob),
                 action=action,
-                outcome=_selected_outcome(action, yes_outcome),
+                outcome=selected_side_outcome(action, yes_outcome),
                 evidence_ref=str(timeline_path),
                 metadata={
                     "source": "poly-ok-check",
                     "timeline_csv": str(timeline_path),
+                    "candidate_side": candidate_side,
+                    "yes_outcome": yes_outcome,
                     "reason": str(signal.get("reason", "")) if signal is not None else "",
                     "fair_prob_yes": fair_prob_yes,
                     "orderbook_mid_yes": mid_yes,
@@ -98,6 +102,7 @@ def _reports_from_signals(
         fair_prob = clamp01(safe_float(row.get("fair_prob"), 0.5))
         market_prob = clamp01(market_prob_default)
         action = infer_action(fair_prob, market_prob)
+        candidate_side = action if action in {"YES", "NO"} else "YES"
         model_prob = 1.0 - fair_prob if action == "NO" else fair_prob
         selected_market_prob = 1.0 - market_prob if action == "NO" else market_prob
         reports.append(
@@ -113,9 +118,14 @@ def _reports_from_signals(
                 news_score=0.0,
                 edge=abs(model_prob - selected_market_prob),
                 action=action,
-                outcome=_selected_outcome(action, yes_outcome),
+                outcome=selected_side_outcome(action, yes_outcome),
                 evidence_ref=str(signal_path),
-                metadata={"source": "poly-ok-check", "reason": str(row.get("reason", ""))},
+                metadata={
+                    "source": "poly-ok-check",
+                    "candidate_side": candidate_side,
+                    "yes_outcome": yes_outcome,
+                    "reason": str(row.get("reason", "")),
+                },
             )
         )
     return reports
@@ -128,14 +138,5 @@ def _latest_signal(signals: pd.DataFrame, ts_s: float) -> pd.Series | None:
     return eligible.iloc[-1]
 
 
-def _selected_outcome(action: str, yes_outcome: float | None) -> str:
-    if yes_outcome is None or action not in {"YES", "NO"}:
-        return ""
-    yes_won = float(yes_outcome) >= 0.5
-    selected_won = yes_won if action == "YES" else not yes_won
-    return "WIN" if selected_won else "LOSE"
-
-
 def _ts_to_iso(ts_s: float) -> str:
     return datetime.fromtimestamp(ts_s, timezone.utc).isoformat().replace("+00:00", "Z")
-

@@ -6,10 +6,11 @@ from typing import Iterable
 
 import pandas as pd
 
+from research.evaluation.baselines import EVALUATION_METHODS
 from research.schemas.domain_report import COMMON_REPORT_FIELDS, DomainReport, reports_to_rows, safe_float
 
 
-DEFAULT_METHODS = ["market_only", "data_only", "news_only", "data_news", "proposed_agent"]
+DEFAULT_METHODS = EVALUATION_METHODS
 
 
 def write_unified_reports(reports: list[DomainReport], path: Path | str) -> Path:
@@ -144,9 +145,6 @@ def _brier(row: pd.Series) -> float | None:
 
 
 def _pnl(row: pd.Series) -> float:
-    explicit = row.get("pnl")
-    if str(explicit).strip():
-        return safe_float(explicit)
     result = _selected_result(row)
     if result is None:
         return 0.0
@@ -189,24 +187,45 @@ def _placeholder_markdown(frame: pd.DataFrame, operating_threshold: float) -> st
     overall = _metrics(proposed)
     switches = _count_switches(proposed)
     exits = _count_exits(proposed)
-    return "\n".join(
-        [
-            "# Paper placeholders",
-            "",
-            "Use the CSV tables in this directory as the source of truth.",
-            "",
-            f"- proposed_selected: {overall['signals']}",
-            f"- available_decision_windows: {len(proposed)}",
-            f"- proposed_coverage_pct: {overall['coverage'] * 100:.2f}",
-            f"- proposed_hit_rate_pct: {'' if overall['hit_rate'] is None else overall['hit_rate'] * 100:.2f}",
-            f"- proposed_brier: {overall['brier']}",
-            f"- proposed_p_l: {overall['p_l']}",
-            f"- domain_switches: {switches}",
-            f"- exits: {exits}",
-            f"- operating_threshold: {operating_threshold}",
-            "",
-        ]
-    )
+    table1 = _table1(frame)
+    table2 = _table2(frame)
+    table3 = _table3(frame, [0.25, 0.50, 0.75, 1.00])
+    table4 = _table4(frame)
+    lines = [
+        "# Paper placeholders",
+        "",
+        "Use the CSV tables in this directory as the source of truth.",
+        "",
+        "## Overall proposed values",
+        "",
+        f"- proposed_selected: {overall['signals']}",
+        f"- available_decision_windows: {len(proposed)}",
+        f"- proposed_coverage_pct: {overall['coverage'] * 100:.2f}",
+        f"- proposed_hit_rate_pct: {_pct(overall['hit_rate'])}",
+        f"- proposed_brier: {_value(overall['brier'])}",
+        f"- proposed_p_l: {_value(overall['p_l'])}",
+        f"- domain_switches: {switches}",
+        f"- exits: {exits}",
+        f"- operating_threshold: {operating_threshold}",
+        "",
+        "## Table I overall by method",
+        "",
+    ]
+    lines.extend(_metric_bullets(table1, "method"))
+    lines.extend(["", "## Table II proposed by domain", ""])
+    lines.extend(_metric_bullets(table2, "domain", include_share=True))
+    lines.extend(["", "## Table III threshold sensitivity", ""])
+    lines.extend(_metric_bullets(table3, "threshold"))
+    lines.extend(["", "## Table IV example rows", ""])
+    for _, row in table4.iterrows():
+        lines.append(
+            "- "
+            f"{row.get('case')}: domain={row.get('domain')}, action={row.get('action')}, "
+            f"market_prob={_value(row.get('market_prob'))}, model_prob={_value(row.get('model_prob'))}, "
+            f"edge={_value(row.get('edge'))}, outcome={row.get('outcome')}"
+        )
+    lines.append("")
+    return "\n".join(lines)
 
 
 def _count_switches(frame: pd.DataFrame) -> int:
@@ -227,3 +246,41 @@ def _count_exits(frame: pd.DataFrame) -> int:
         return 0
     return int((frame.get("action", pd.Series(dtype=str)).astype(str).str.upper() == "FLAT").sum())
 
+
+def _metric_bullets(frame: pd.DataFrame, label_col: str, include_share: bool = False) -> list[str]:
+    lines: list[str] = []
+    for _, row in frame.iterrows():
+        parts = [
+            f"{label_col}={row.get(label_col)}",
+            f"signals={int(safe_float(row.get('signals'), 0.0))}",
+            f"coverage_pct={_pct(row.get('coverage'))}",
+            f"hit_rate_pct={_pct(row.get('hit_rate'))}",
+            f"brier={_value(row.get('brier'))}",
+            f"p_l={_value(row.get('p_l'))}",
+        ]
+        if include_share:
+            parts.append(f"share_pct={_pct(row.get('share'))}")
+        lines.append("- " + ", ".join(parts))
+    return lines
+
+
+def _pct(value: object) -> str:
+    numeric = _optional_float(value)
+    return "" if numeric is None else f"{numeric * 100:.2f}"
+
+
+def _value(value: object) -> str:
+    numeric = _optional_float(value)
+    if numeric is None:
+        return ""
+    return f"{numeric:.6f}".rstrip("0").rstrip(".")
+
+
+def _optional_float(value: object) -> float | None:
+    text = str(value).strip()
+    if not text or text.lower() in {"nan", "none"}:
+        return None
+    try:
+        return float(text)
+    except ValueError:
+        return None

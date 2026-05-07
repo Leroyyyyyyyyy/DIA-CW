@@ -289,6 +289,55 @@ fc491c7 Update live BTC evaluation status
 git -C D:\Polyquant\github_upload -c http.version=HTTP/1.1 -c http.lowSpeedLimit=0 push
 ```
 
+## 9.1 2026-05-07 cw_final paper-ready update
+
+The previous "pipeline only" gaps are now closed in `D:\Polyquant\poly-ok-check`:
+
+- `research/config/cw_experiment.yaml` now uses repo-relative snapshots under `research/data/external/`.
+- BTC inputs are snapshotted in `research/data/external/dia_btc/`.
+- Weather inputs are snapshotted in `research/data/external/weather/`.
+- BTC 5-minute outcome snapshot is saved at `research/data/external/outcomes/btc_5m_outcome.csv`.
+- BTC outcome rule: `YES=end_price>start_price over 5m; otherwise NO`.
+- Current BTC snapshot: `81494.43000000 -> 81469.33000000`, winning side `NO`, source `binance/BTCUSDT`.
+- Weather actual outcome is explicitly configured as `highest-temperature-in-shanghai-on-april-25-2026 -> 21°C`.
+- `cw_final` now expands 582 candidate windows into 2910 rows across:
+  `market_only`, `data_only`, `news_only`, `data_news`, `proposed_agent`.
+
+Latest generated paper tables:
+
+```text
+Table I   research\runs\cw_final\table1_overall.csv
+Table II  research\runs\cw_final\table2_by_domain.csv
+Table III research\runs\cw_final\table3_threshold.csv
+Table IV  research\runs\cw_final\table4_examples.csv
+[P]       research\runs\cw_final\paper_placeholders.md
+```
+
+Current key values:
+
+```text
+Table I proposed_agent: hit_rate=0.3932, brier=0.328836, p_l=-46.759052, signals=117, coverage=0.201
+Table II btc proposed: hit_rate=1.0, brier=0.247506, p_l=1.0, signals=1, coverage=1.0
+Table IV includes non-empty CS2, BTC, Weather, and switch_or_exit_case outcomes.
+```
+
+Verified commands:
+
+```powershell
+cd D:\Polyquant\poly-ok-check
+$env:PYTHONPATH="."
+python -m research.run.run_cw_experiment --config research\config\cw_experiment.yaml --out-dir research\runs\cw_final
+python -m pytest research\tests -q
+```
+
+Verification result:
+
+```text
+loaded_reports=2910
+53 passed
+validation_ok
+```
+
 ## 10. 禁止事项
 
 - 不要把 `dia` / `Weather(2)` 整包直接 merge 到主仓库。

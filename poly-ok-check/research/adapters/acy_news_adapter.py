@@ -13,6 +13,7 @@ from research.schemas.domain_report import (
     parse_json_cell,
     safe_float,
 )
+from research.evaluation.outcomes import load_yes_outcomes_csv, selected_side_outcome
 
 
 def load_acy_news_reports(
@@ -22,11 +23,13 @@ def load_acy_news_reports(
     market_prob_default: float = 0.5,
     method: str = "proposed_agent",
     outcome_by_domain: dict[str, Any] | None = None,
+    outcome_csv: Path | str | None = None,
 ) -> list[DomainReport]:
     path = Path(signals_csv)
     frame = pd.read_csv(path)
     requested = {domain.lower() for domain in domains} if domains else None
     outcomes = outcome_by_domain or {}
+    yes_outcomes = load_yes_outcomes_csv(outcome_csv)
     reports: list[DomainReport] = []
 
     for _, row in frame.iterrows():
@@ -41,13 +44,20 @@ def load_acy_news_reports(
         relevance = clamp01(safe_float(row.get("relevance")))
         confidence = clamp01(safe_float(row.get("confidence")))
 
-        model_prob = _model_probability(domain, direction_score, probability_delta, outcome_scores)
-        market_prob = clamp01(safe_float(metadata.get("market_prob"), market_prob_default))
+        yes_model_prob = _model_probability(domain, direction_score, probability_delta, outcome_scores)
+        yes_market_prob = clamp01(safe_float(metadata.get("market_prob"), market_prob_default))
         data_score = clamp01(safe_float(metadata.get("data_score"), 0.0))
         news_score = clamp01(safe_float(metadata.get("news_score"), relevance * confidence))
-        action = infer_action(model_prob, market_prob)
+        action = infer_action(yes_model_prob, yes_market_prob)
+        candidate_side = action if action in {"YES", "NO"} else ("YES" if yes_model_prob >= yes_market_prob else "NO")
+        model_prob = 1.0 - yes_model_prob if candidate_side == "NO" else yes_model_prob
+        market_prob = 1.0 - yes_market_prob if candidate_side == "NO" else yes_market_prob
         market_id = str(metadata.get("market_id") or _stable_id(domain, str(row.get("target", ""))))
         timestamp = _timestamp_from_metadata(metadata, str(row.get("generated_at", "")))
+        yes_outcome = yes_outcomes.get(market_id, yes_outcomes.get(domain))
+        outcome = selected_side_outcome(action, yes_outcome)
+        if not outcome:
+            outcome = str(outcomes.get(market_id, outcomes.get(domain, "")))
 
         reports.append(
             DomainReport(
@@ -62,11 +72,15 @@ def load_acy_news_reports(
                 news_score=news_score,
                 edge=abs(model_prob - market_prob),
                 action=action,
-                outcome=str(outcomes.get(market_id, outcomes.get(domain, ""))),
+                outcome=outcome,
                 evidence_ref=_evidence_ref(row.get("top_evidence"), evidence_jsonl),
                 metadata={
                     "source": "acy_news",
                     "signals_csv": str(path),
+                    "candidate_side": candidate_side,
+                    "yes_model_prob": yes_model_prob,
+                    "yes_market_prob": yes_market_prob,
+                    "yes_outcome": yes_outcome,
                     "direction_score": direction_score,
                     "probability_delta": probability_delta,
                     "confidence": confidence,
@@ -110,4 +124,3 @@ def _evidence_ref(top_evidence: Any, evidence_jsonl: Path | str | None) -> str:
             if title:
                 return str(title)
     return "" if evidence_jsonl is None else str(evidence_jsonl)
-
