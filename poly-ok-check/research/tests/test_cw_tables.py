@@ -103,3 +103,30 @@ def test_baseline_expansion_fills_table1_methods(tmp_path) -> None:
     assert set(table1["method"]) == {"market_only", "data_only", "news_only", "data_news", "proposed_agent"}
     baseline_metrics = table1[table1["method"].isin({"market_only", "data_only", "news_only", "data_news"})]
     assert not baseline_metrics[["hit_rate", "brier"]].isna().any().any()
+
+
+def test_news_only_baseline_accepts_acy_news_for_all_domains(tmp_path) -> None:
+    reports = [
+        DomainReport(
+            domain=domain,
+            timestamp="2026-05-01T00:00:00Z",
+            market_id=f"{domain}-market",
+            target=f"{domain} news",
+            market_prob=0.5,
+            model_prob=0.6,
+            data_score=0.0,
+            news_score=0.25,
+            edge=0.1,
+            action="YES",
+            outcome="WIN",
+            metadata={"source": "acy_news", "candidate_side": "YES", "yes_outcome": 1.0},
+        )
+        for domain in ["btc", "cs2", "weather"]
+    ]
+
+    expanded = expand_with_baselines(reports)
+    paths = write_cw_tables(expanded, tmp_path)
+    table1 = pd.read_csv(paths["table1"])
+
+    news_only = table1[table1["method"] == "news_only"].iloc[0]
+    assert news_only["signals"] == 3

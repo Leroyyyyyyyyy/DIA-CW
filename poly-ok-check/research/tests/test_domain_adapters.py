@@ -67,6 +67,46 @@ def test_acy_news_adapter_uses_selected_side_probability_for_no(tmp_path) -> Non
     assert reports[0].outcome == "WIN"
 
 
+def test_acy_news_adapter_loads_multi_domain_output_dirs(tmp_path) -> None:
+    for folder, domain in [
+        ("outputs_btc_window", "btc"),
+        ("outputs_cs2_window", "cs2"),
+        ("outputs_weather_window", "weather"),
+    ]:
+        output_dir = tmp_path / folder
+        output_dir.mkdir()
+        pd.DataFrame(
+            [
+                {
+                    "domain": "" if domain == "cs2" else domain,
+                    "timestamp": f"2026-05-01T00:00:00Z",
+                    "market_id": f"{domain}-market",
+                    "target": f"{domain} target",
+                    "market_prob": 0.5,
+                    "direction_score": -0.2 if domain == "weather" else 0.2,
+                    "probability_delta": 0.05,
+                    "relevance": 0.4,
+                    "confidence": 0.5,
+                    "top_evidence": json.dumps([{"id": f"{domain}-ev"}]),
+                    "metadata": "{}",
+                }
+            ]
+        ).to_csv(output_dir / "signals.csv", index=False)
+        (output_dir / "evidence.jsonl").write_text("", encoding="utf-8")
+
+    reports = load_acy_news_reports(
+        news_output_dirs=[
+            tmp_path / "outputs_btc_window",
+            tmp_path / "outputs_cs2_window",
+            tmp_path / "outputs_weather_window",
+        ]
+    )
+
+    assert {report.domain for report in reports} == {"btc", "cs2", "weather"}
+    assert {report.evidence_ref for report in reports} == {"btc-ev", "cs2-ev", "weather-ev"}
+    assert all(report.news_score == 0.2 for report in reports)
+
+
 def test_weather_adapter_prefers_unified_signal_rows(tmp_path) -> None:
     signals = tmp_path / "signals.csv"
     trades = tmp_path / "backtest_trades.csv"

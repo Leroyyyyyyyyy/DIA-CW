@@ -38,10 +38,11 @@ def _baseline_report(source: DomainReport, method: str) -> DomainReport:
         data_score = source.data_score if source.domain in {"cs2", "weather"} else 0.0
         news_score = 0.0
     elif method == "news_only":
-        model_prob = clamp01(source.model_prob) if source.domain == "btc" else 0.5
-        action = side if source.domain == "btc" and model_prob > market_prob else "HOLD"
+        has_news_signal = _has_news_signal(source)
+        model_prob = clamp01(source.model_prob) if has_news_signal else 0.5
+        action = side if has_news_signal and model_prob > market_prob else "HOLD"
         data_score = 0.0
-        news_score = source.news_score if source.domain == "btc" else 0.0
+        news_score = source.news_score if has_news_signal else 0.0
     elif method == "data_news":
         model_prob = clamp01(source.model_prob)
         action = side if model_prob > market_prob else "HOLD"
@@ -82,6 +83,10 @@ def _candidate_side(report: DomainReport) -> str:
     if action in {"YES", "NO"}:
         return action
     return "YES"
+
+
+def _has_news_signal(report: DomainReport) -> bool:
+    return str(report.metadata.get("source", "")).strip().lower() == "acy_news" or safe_float(report.news_score) > 0.0
 
 
 def _outcome_for_action(source: DomainReport, action: str) -> str:

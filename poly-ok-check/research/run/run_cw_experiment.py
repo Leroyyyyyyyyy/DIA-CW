@@ -42,8 +42,12 @@ def load_reports(config: dict[str, Any], base_dir: Path, config_dir: Path) -> li
     if acy.get("enabled", False):
         reports.extend(
             load_acy_news_reports(
-                signals_csv=_resolve(acy["signals_csv"], base_dir, config_dir),
+                signals_csv=_resolve_optional(acy.get("signals_csv"), base_dir, config_dir),
                 evidence_jsonl=_resolve_optional(acy.get("evidence_jsonl"), base_dir, config_dir),
+                news_inputs=_resolve_news_inputs(list(acy.get("news_inputs", [])), base_dir, config_dir),
+                news_output_dirs=[
+                    _resolve_output_dir(path, base_dir, config_dir) for path in list(acy.get("news_output_dirs", []))
+                ],
                 domains=list(acy.get("domains", [])) or None,
                 market_prob_default=float(acy.get("market_prob_default", 0.5)),
                 outcome_csv=_resolve_optional(acy.get("outcome_csv"), base_dir, config_dir),
@@ -101,6 +105,35 @@ def _resolve_optional(value: str | Path | None, base_dir: Path, config_dir: Path
     if not value:
         return None
     return _resolve(value, base_dir, config_dir)
+
+
+def _resolve_output_dir(value: str | Path, base_dir: Path, config_dir: Path) -> Path:
+    path = Path(value)
+    if path.is_absolute():
+        return path
+    from_base = base_dir / path
+    if from_base.exists():
+        return from_base
+    from_config = config_dir / path
+    if from_config.exists():
+        return from_config
+    return from_base
+
+
+def _resolve_news_inputs(news_inputs: list[dict[str, Any]], base_dir: Path, config_dir: Path) -> list[dict[str, Any]]:
+    resolved: list[dict[str, Any]] = []
+    for item in news_inputs:
+        copy = dict(item)
+        if copy.get("signals_path"):
+            copy["signals_path"] = _resolve(copy["signals_path"], base_dir, config_dir)
+        if copy.get("signals_csv"):
+            copy["signals_csv"] = _resolve(copy["signals_csv"], base_dir, config_dir)
+        if copy.get("evidence_path"):
+            copy["evidence_path"] = _resolve(copy["evidence_path"], base_dir, config_dir)
+        if copy.get("evidence_jsonl"):
+            copy["evidence_jsonl"] = _resolve(copy["evidence_jsonl"], base_dir, config_dir)
+        resolved.append(copy)
+    return resolved
 
 
 def parse_args() -> argparse.Namespace:

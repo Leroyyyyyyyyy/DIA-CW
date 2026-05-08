@@ -4,10 +4,15 @@
   "inputs": {
     "acy_news": {
       "enabled": true,
+      "news_output_dirs": [
+        "outputs_btc_window",
+        "outputs_cs2_window",
+        "outputs_weather_window"
+      ],
       "signals_csv": "research/data/external/dia_btc/signals.csv",
       "evidence_jsonl": "research/data/external/dia_btc/evidence.jsonl",
       "outcome_csv": "research/data/external/outcomes/btc_5m_outcome.csv",
-      "domains": ["btc"],
+      "domains": ["btc", "cs2", "weather"],
       "market_prob_default": 0.5
     },
     "weather": {

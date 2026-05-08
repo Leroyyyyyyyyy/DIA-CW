@@ -416,6 +416,9 @@ evidence.jsonl
 交付要求：
 - `signals.csv` 至少要能提供 timestamp、market_id、market_prob、model_prob 或 direction、action、evidence_ref。
 - `evidence.jsonl` 里每条 evidence 要能被 `evidence_ref` 找到。
+- DIA-CW 的 `acy_news_adapter.py` 现在支持多域 news 输出；`news_output_dirs` 可同时读取
+  `outputs_btc_window`、`outputs_cs2_window`、`outputs_weather_window`，并把行写成
+  `domain=btc`、`domain=cs2`、`domain=weather` 的统一 `DomainReport`。
 - 最终不要手动给论文 PnL 数字，只提供信号和证据，由 Dld 的统一 evaluation 生成表格。
 
 ### `Weather` 负责人
