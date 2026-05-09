@@ -52,8 +52,78 @@ def test_weather_policy_keeps_only_trades_csv_executions(tmp_path) -> None:
     assert adjusted[0].metadata["policy_reason"] == "weather_execution_in_trades"
     assert {row["reason"] for row in diagnostics} == {
         "weather_execution_in_trades",
-        "weather_execution_not_in_trades",
+        "weather_execution_not_selected",
     }
+
+
+def test_weather_policy_can_backfill_deduped_candidate_executions(tmp_path) -> None:
+    trades = tmp_path / "backtest_trades.csv"
+    trades.write_text(
+        "\n".join(
+            [
+                "timestamp_utc,market_slug,side",
+                "2026-04-24 17:00:04+0000,event-21c,NO",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    reports = [
+        _report(
+            domain="weather",
+            timestamp="2026-04-24 17:00:04+0000",
+            market_id="event-21c",
+            action="NO",
+            edge=0.15,
+            news_score=0.2,
+            metadata={"raw_metadata": {"event_slug": "event"}},
+        ),
+        _report(
+            domain="weather",
+            timestamp="2026-04-25 01:00:04+0000",
+            market_id="event-22c",
+            action="NO",
+            edge=0.14,
+            news_score=0.2,
+            metadata={"raw_metadata": {"event_slug": "event"}},
+        ),
+        _report(
+            domain="weather",
+            timestamp="2026-04-25 02:00:04+0000",
+            market_id="event-22c",
+            action="NO",
+            edge=0.16,
+            news_score=0.2,
+            metadata={"raw_metadata": {"event_slug": "event"}},
+        ),
+    ]
+
+    adjusted, diagnostics = apply_category_policy(
+        reports,
+        policy={
+            "enabled": True,
+            "weather": {
+                "execution_source": "trades_csv",
+                "max_trades_per_event": 2,
+                "max_trades_per_market_side": 1,
+                "candidate_backfill": {
+                    "enabled": True,
+                    "max_total_trades": 2,
+                    "min_edge": 0.12,
+                    "min_news_score": 0.01,
+                },
+            },
+        },
+        inputs={"weather": {"trades_csv": trades}},
+        base_dir=tmp_path,
+        config_dir=tmp_path,
+    )
+
+    assert [(report.market_id, report.timestamp) for report in adjusted] == [
+        ("event-21c", "2026-04-24 17:00:04+0000"),
+        ("event-22c", "2026-04-25 02:00:04+0000"),
+    ]
+    assert adjusted[1].metadata["policy_reason"] == "weather_candidate_backfill"
+    assert [row["reason"] for row in diagnostics].count("weather_candidate_backfill") == 1
 
 
 def test_btc_and_cs2_policy_rules_block_weak_or_repeated_entries() -> None:

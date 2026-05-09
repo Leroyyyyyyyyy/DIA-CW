@@ -70,6 +70,7 @@ def _apply_weather_policy(
 
     trades_path = _resolve_optional(policy.get("trades_csv") or inputs.get("trades_csv"), base_dir, config_dir)
     trade_keys = _load_weather_trade_keys(trades_path) if trades_path else set()
+    accepted_keys, acceptance_reasons = _weather_accepted_keys(current, trade_keys, policy)
     max_per_event = int(policy.get("max_trades_per_event", 0) or 0)
     max_per_market_side = int(policy.get("max_trades_per_market_side", 0) or 0)
     event_counts: Counter[str] = Counter()
@@ -86,9 +87,9 @@ def _apply_weather_policy(
             continue
 
         key = _weather_report_trade_key(report, action)
-        if key not in trade_keys:
+        if key not in accepted_keys:
             current[index] = None
-            diagnostics.append(_diagnostic(report, "DROP", "weather_execution_not_in_trades"))
+            diagnostics.append(_diagnostic(report, "DROP", "weather_execution_not_selected"))
             continue
 
         event_slug = _event_slug(report)
@@ -104,13 +105,90 @@ def _apply_weather_policy(
 
         event_counts[event_slug] += 1
         market_side_counts[market_side] += 1
+        reason = acceptance_reasons.get(key, "weather_execution_in_trades")
         current[index] = _with_policy_metadata(
             report,
             policy_action=action,
-            reason="weather_execution_in_trades",
+            reason=reason,
             blocked=False,
         )
-        diagnostics.append(_diagnostic(report, action, "weather_execution_in_trades"))
+        diagnostics.append(_diagnostic(report, action, reason))
+
+
+def _weather_accepted_keys(
+    current: dict[int, DomainReport | None],
+    trade_keys: set[tuple[str, str, str]],
+    policy: dict[str, Any],
+) -> tuple[set[tuple[str, str, str]], dict[tuple[str, str, str], str]]:
+    accepted: set[tuple[str, str, str]] = set()
+    reasons: dict[tuple[str, str, str], str] = {}
+    event_counts: Counter[str] = Counter()
+    market_side_counts: Counter[tuple[str, str]] = Counter()
+    max_per_event = int(policy.get("max_trades_per_event", 0) or 0)
+    max_per_market_side = int(policy.get("max_trades_per_market_side", 0) or 0)
+
+    reports = [
+        report
+        for report in current.values()
+        if report is not None and report.domain.lower() == "weather" and normalize_action(report.action) in {"YES", "NO"}
+    ]
+    reports.sort(key=lambda report: report.timestamp)
+    for report in reports:
+        action = normalize_action(report.action)
+        key = _weather_report_trade_key(report, action)
+        if key not in trade_keys:
+            continue
+        if _weather_policy_limit_hit(report, action, event_counts, market_side_counts, max_per_event, max_per_market_side):
+            continue
+        accepted.add(key)
+        reasons[key] = "weather_execution_in_trades"
+        event_counts[_event_slug(report)] += 1
+        market_side_counts[(report.market_id, action)] += 1
+
+    backfill = policy.get("candidate_backfill", {})
+    if not backfill or not backfill.get("enabled", False):
+        return accepted, reasons
+
+    max_total = int(backfill.get("max_total_trades", max_per_event) or 0)
+    min_edge = float(backfill.get("min_edge", 0.0) or 0.0)
+    min_news_score = float(backfill.get("min_news_score", 0.0) or 0.0)
+    candidates = sorted(
+        reports,
+        key=lambda report: (safe_float(report.edge), safe_float(report.news_score), report.timestamp),
+        reverse=True,
+    )
+    for report in candidates:
+        if max_total > 0 and len(accepted) >= max_total:
+            break
+        action = normalize_action(report.action)
+        key = _weather_report_trade_key(report, action)
+        if key in accepted or key in trade_keys:
+            continue
+        if safe_float(report.edge) < min_edge or safe_float(report.news_score) < min_news_score:
+            continue
+        if _weather_policy_limit_hit(report, action, event_counts, market_side_counts, max_per_event, max_per_market_side):
+            continue
+        accepted.add(key)
+        reasons[key] = "weather_candidate_backfill"
+        event_counts[_event_slug(report)] += 1
+        market_side_counts[(report.market_id, action)] += 1
+
+    return accepted, reasons
+
+
+def _weather_policy_limit_hit(
+    report: DomainReport,
+    action: str,
+    event_counts: Counter[str],
+    market_side_counts: Counter[tuple[str, str]],
+    max_per_event: int,
+    max_per_market_side: int,
+) -> bool:
+    if max_per_event > 0 and event_counts[_event_slug(report)] >= max_per_event:
+        return True
+    if max_per_market_side > 0 and market_side_counts[(report.market_id, action)] >= max_per_market_side:
+        return True
+    return False
 
 
 def _apply_btc_policy(
