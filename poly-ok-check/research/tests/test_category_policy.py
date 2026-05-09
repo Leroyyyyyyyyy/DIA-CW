@@ -110,6 +110,7 @@ def test_weather_policy_can_backfill_deduped_candidate_executions(tmp_path) -> N
                     "max_total_trades": 2,
                     "min_edge": 0.12,
                     "min_news_score": 0.01,
+                    "min_time_gap_minutes": 60,
                 },
             },
         },
@@ -124,6 +125,85 @@ def test_weather_policy_can_backfill_deduped_candidate_executions(tmp_path) -> N
     ]
     assert adjusted[1].metadata["policy_reason"] == "weather_candidate_backfill"
     assert [row["reason"] for row in diagnostics].count("weather_candidate_backfill") == 1
+
+
+def test_weather_backfill_enforces_time_gap_per_market_side(tmp_path) -> None:
+    trades = tmp_path / "backtest_trades.csv"
+    trades.write_text(
+        "\n".join(
+            [
+                "timestamp_utc,market_slug,side",
+                "2026-04-24 17:00:04+0000,event-21c,NO",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    reports = [
+        _report(
+            domain="weather",
+            timestamp="2026-04-24 17:00:04+0000",
+            market_id="event-21c",
+            action="NO",
+            edge=0.15,
+            news_score=0.2,
+            metadata={"raw_metadata": {"event_slug": "event"}},
+        ),
+        _report(
+            domain="weather",
+            timestamp="2026-04-24 17:30:04+0000",
+            market_id="event-21c",
+            action="NO",
+            edge=0.25,
+            news_score=0.2,
+            metadata={"raw_metadata": {"event_slug": "event"}},
+        ),
+        _report(
+            domain="weather",
+            timestamp="2026-04-24 18:00:04+0000",
+            market_id="event-21c",
+            action="NO",
+            edge=0.2,
+            news_score=0.2,
+            metadata={"raw_metadata": {"event_slug": "event"}},
+        ),
+        _report(
+            domain="weather",
+            timestamp="2026-04-24 19:00:04+0000",
+            market_id="event-21c",
+            action="NO",
+            edge=0.18,
+            news_score=0.2,
+            metadata={"raw_metadata": {"event_slug": "event"}},
+        ),
+    ]
+
+    adjusted, _ = apply_category_policy(
+        reports,
+        policy={
+            "enabled": True,
+            "weather": {
+                "execution_source": "trades_csv",
+                "max_trades_per_event": 4,
+                "max_trades_per_market_side": 4,
+                "candidate_backfill": {
+                    "enabled": True,
+                    "max_total_trades": 4,
+                    "min_edge": 0.12,
+                    "min_news_score": 0.01,
+                    "min_time_gap_minutes": 60,
+                },
+            },
+        },
+        inputs={"weather": {"trades_csv": trades}},
+        base_dir=tmp_path,
+        config_dir=tmp_path,
+    )
+
+    assert [report.timestamp for report in adjusted] == [
+        "2026-04-24 17:00:04+0000",
+        "2026-04-24 18:00:04+0000",
+        "2026-04-24 19:00:04+0000",
+    ]
 
 
 def test_btc_and_cs2_policy_rules_block_weak_or_repeated_entries() -> None:

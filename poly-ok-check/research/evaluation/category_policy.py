@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 from collections import Counter
 from dataclasses import replace
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -124,6 +125,7 @@ def _weather_accepted_keys(
     reasons: dict[tuple[str, str, str], str] = {}
     event_counts: Counter[str] = Counter()
     market_side_counts: Counter[tuple[str, str]] = Counter()
+    market_side_times: dict[tuple[str, str], list[float]] = {}
     max_per_event = int(policy.get("max_trades_per_event", 0) or 0)
     max_per_market_side = int(policy.get("max_trades_per_market_side", 0) or 0)
 
@@ -144,6 +146,7 @@ def _weather_accepted_keys(
         reasons[key] = "weather_execution_in_trades"
         event_counts[_event_slug(report)] += 1
         market_side_counts[(report.market_id, action)] += 1
+        _record_weather_market_side_time(report, action, market_side_times)
 
     backfill = policy.get("candidate_backfill", {})
     if not backfill or not backfill.get("enabled", False):
@@ -152,6 +155,7 @@ def _weather_accepted_keys(
     max_total = int(backfill.get("max_total_trades", max_per_event) or 0)
     min_edge = float(backfill.get("min_edge", 0.0) or 0.0)
     min_news_score = float(backfill.get("min_news_score", 0.0) or 0.0)
+    min_time_gap_minutes = float(backfill.get("min_time_gap_minutes", 0.0) or 0.0)
     candidates = sorted(
         reports,
         key=lambda report: (safe_float(report.edge), safe_float(report.news_score), report.timestamp),
@@ -168,10 +172,13 @@ def _weather_accepted_keys(
             continue
         if _weather_policy_limit_hit(report, action, event_counts, market_side_counts, max_per_event, max_per_market_side):
             continue
+        if not _weather_time_gap_ok(report, action, market_side_times, min_time_gap_minutes):
+            continue
         accepted.add(key)
         reasons[key] = "weather_candidate_backfill"
         event_counts[_event_slug(report)] += 1
         market_side_counts[(report.market_id, action)] += 1
+        _record_weather_market_side_time(report, action, market_side_times)
 
     return accepted, reasons
 
@@ -189,6 +196,34 @@ def _weather_policy_limit_hit(
     if max_per_market_side > 0 and market_side_counts[(report.market_id, action)] >= max_per_market_side:
         return True
     return False
+
+
+def _weather_time_gap_ok(
+    report: DomainReport,
+    action: str,
+    market_side_times: dict[tuple[str, str], list[float]],
+    min_time_gap_minutes: float,
+) -> bool:
+    if min_time_gap_minutes <= 0.0:
+        return True
+    current = _timestamp_seconds(report.timestamp)
+    if current is None:
+        return True
+    min_gap_seconds = min_time_gap_minutes * 60.0
+    return all(
+        abs(current - previous) >= min_gap_seconds
+        for previous in market_side_times.get((report.market_id, action), [])
+    )
+
+
+def _record_weather_market_side_time(
+    report: DomainReport,
+    action: str,
+    market_side_times: dict[tuple[str, str], list[float]],
+) -> None:
+    current = _timestamp_seconds(report.timestamp)
+    if current is not None:
+        market_side_times.setdefault((report.market_id, action), []).append(current)
 
 
 def _apply_btc_policy(
@@ -355,6 +390,21 @@ def _resolve_optional(value: str | Path | None, base_dir: Path, config_dir: Path
     if from_base.exists():
         return from_base
     return config_dir / path
+
+
+def _timestamp_seconds(value: Any) -> float | None:
+    text = _clean_text(value)
+    if not text:
+        return None
+    for pattern in ("%Y-%m-%d %H:%M:%S%z", "%Y-%m-%dT%H:%M:%SZ"):
+        try:
+            return datetime.strptime(text, pattern).timestamp()
+        except ValueError:
+            pass
+    try:
+        return datetime.fromisoformat(text.replace("Z", "+00:00")).timestamp()
+    except ValueError:
+        return None
 
 
 def _clean_text(value: Any) -> str:

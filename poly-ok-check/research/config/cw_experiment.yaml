@@ -17,13 +17,14 @@
     "weather": {
       "market_type": "categorical_weather",
       "execution_source": "trades_csv",
-      "max_trades_per_event": 5,
-      "max_trades_per_market_side": 1,
+      "max_trades_per_event": 15,
+      "max_trades_per_market_side": 4,
       "candidate_backfill": {
         "enabled": true,
-        "max_total_trades": 5,
+        "max_total_trades": 15,
         "min_edge": 0.12,
-        "min_news_score": 0.01
+        "min_news_score": 0.01,
+        "min_time_gap_minutes": 60
       }
     }
   },
