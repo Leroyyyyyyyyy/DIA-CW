@@ -4,29 +4,29 @@ Use the CSV tables in this directory as the source of truth.
 
 ## Overall proposed values
 
-- proposed_selected: 37
+- proposed_selected: 25
 - available_decision_windows: 54
-- proposed_coverage_pct: 68.52
-- proposed_hit_rate_pct: 62.16
-- proposed_brier: 0.179921
-- proposed_p_l: 3.675713
+- proposed_coverage_pct: 46.30
+- proposed_hit_rate_pct: 80.00
+- proposed_brier: 0.14568
+- proposed_p_l: 9.675713
 - domain_switches: 2
 - exits: 9
 - operating_threshold: 0.5
 
 ## Table I overall by method
 
-- method=market_only, signals=44, coverage_pct=81.48, hit_rate_pct=70.45, brier=0.195506, p_l=9.310508
+- method=market_only, signals=32, coverage_pct=59.26, hit_rate_pct=87.50, brier=0.175071, p_l=15.310508
 - method=data_only, signals=18, coverage_pct=33.33, hit_rate_pct=94.44, brier=0.07902, p_l=9.06091
-- method=news_only, signals=24, coverage_pct=44.44, hit_rate_pct=45.83, brier=0.250215, p_l=-2
-- method=data_news, signals=42, coverage_pct=77.78, hit_rate_pct=66.67, brier=0.176846, p_l=7.06091
-- method=proposed_agent, signals=37, coverage_pct=68.52, hit_rate_pct=62.16, brier=0.179921, p_l=3.675713
+- method=news_only, signals=12, coverage_pct=22.22, hit_rate_pct=66.67, brier=0.249173, p_l=4
+- method=data_news, signals=30, coverage_pct=55.56, hit_rate_pct=83.33, brier=0.147081, p_l=13.06091
+- method=proposed_agent, signals=25, coverage_pct=46.30, hit_rate_pct=80.00, brier=0.14568, p_l=9.675713
 
 ## Table II proposed by domain
 
-- domain=cs2, signals=2, coverage_pct=10.53, hit_rate_pct=50.00, brier=0.17245, p_l=0.105263, share_pct=5.41
-- domain=btc, signals=24, coverage_pct=100.00, hit_rate_pct=45.83, brier=0.250215, p_l=-2, share_pct=64.86
-- domain=weather, signals=11, coverage_pct=100.00, hit_rate_pct=100.00, brier=0.027911, p_l=5.57045, share_pct=29.73
+- domain=cs2, signals=2, coverage_pct=10.53, hit_rate_pct=50.00, brier=0.17245, p_l=0.105263, share_pct=8.00
+- domain=btc, signals=12, coverage_pct=50.00, hit_rate_pct=66.67, brier=0.249173, p_l=4, share_pct=48.00
+- domain=weather, signals=11, coverage_pct=100.00, hit_rate_pct=100.00, brier=0.027911, p_l=5.57045, share_pct=44.00
 
 ## Table III threshold sensitivity
 

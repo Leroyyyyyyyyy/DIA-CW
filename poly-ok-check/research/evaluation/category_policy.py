@@ -5,7 +5,7 @@ import math
 import re
 from collections import Counter
 from dataclasses import replace
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -261,6 +261,7 @@ def _apply_btc_policy(
 
     min_edge = float(policy.get("min_edge", 0.0) or 0.0)
     min_news_score = float(policy.get("min_news_score", 0.0) or 0.0)
+    max_signal_age_minutes = float(policy.get("max_signal_age_minutes", 0.0) or 0.0)
     max_per_market = int(policy.get("max_trades_per_market", 0) or 0)
     market_counts: Counter[str] = Counter()
 
@@ -281,6 +282,10 @@ def _apply_btc_policy(
             current[index] = _blocked_report(report, "btc_below_news_threshold")
             diagnostics.append(_diagnostic(report, "HOLD", "btc_below_news_threshold"))
             continue
+        if max_signal_age_minutes > 0.0 and _btc_signal_age_minutes(report) > max_signal_age_minutes:
+            current[index] = _blocked_report(report, "btc_signal_age_exceeded")
+            diagnostics.append(_diagnostic(report, "HOLD", "btc_signal_age_exceeded"))
+            continue
         if max_per_market > 0 and market_counts[report.market_id] >= max_per_market:
             current[index] = _blocked_report(report, "btc_market_trade_limit")
             diagnostics.append(_diagnostic(report, "HOLD", "btc_market_trade_limit"))
@@ -289,6 +294,29 @@ def _apply_btc_policy(
         market_counts[report.market_id] += 1
         current[index] = _with_policy_metadata(report, policy_action=action, reason="btc_policy_pass", blocked=False)
         diagnostics.append(_diagnostic(report, action, "btc_policy_pass"))
+
+
+def _btc_signal_age_minutes(report: DomainReport) -> float:
+    raw_metadata = report.metadata.get("raw_metadata")
+    if not isinstance(raw_metadata, dict):
+        return 0.0
+
+    market_window = raw_metadata.get("market_window")
+    window_start = ""
+    if isinstance(market_window, dict):
+        window_start = _clean_text(market_window.get("as_of"))
+    window_start = window_start or _clean_text(report.timestamp)
+
+    signal_time = (
+        _clean_text(raw_metadata.get("source_signal_generated_at"))
+        or _clean_text(raw_metadata.get("source_signal_as_of"))
+        or window_start
+    )
+    window_seconds = _timestamp_seconds(window_start)
+    signal_seconds = _timestamp_seconds(signal_time)
+    if window_seconds is None or signal_seconds is None:
+        return 0.0
+    return max(0.0, (window_seconds - signal_seconds) / 60.0)
 
 
 def _apply_cs2_policy(
@@ -442,9 +470,17 @@ def _timestamp_seconds(value: Any) -> float | None:
     text = _clean_text(value)
     if not text:
         return None
+    if text.endswith("Z"):
+        try:
+            return datetime.fromisoformat(f"{text[:-1]}+00:00").timestamp()
+        except ValueError:
+            pass
     for pattern in ("%Y-%m-%d %H:%M:%S%z", "%Y-%m-%dT%H:%M:%SZ"):
         try:
-            return datetime.strptime(text, pattern).timestamp()
+            parsed = datetime.strptime(text, pattern)
+            if parsed.tzinfo is None:
+                parsed = parsed.replace(tzinfo=timezone.utc)
+            return parsed.timestamp()
         except ValueError:
             pass
     try:

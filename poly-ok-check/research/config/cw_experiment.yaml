@@ -7,6 +7,7 @@
       "market_type": "rolling_binary",
       "min_edge": 0.002,
       "min_news_score": 0.01,
+      "max_signal_age_minutes": 60,
       "max_trades_per_market": 1
     },
     "cs2": {

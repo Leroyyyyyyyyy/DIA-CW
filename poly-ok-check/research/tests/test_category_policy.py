@@ -305,6 +305,51 @@ def test_btc_and_cs2_policy_rules_block_weak_or_repeated_entries() -> None:
     assert {report.action for report in blocked_btc} == {"HOLD"}
 
 
+def test_btc_policy_blocks_expired_rolling_news_signal() -> None:
+    reports = [
+        _report(
+            domain="btc",
+            timestamp="2026-05-06T18:25:00Z",
+            market_id="btc-fresh",
+            action="NO",
+            edge=0.0025,
+            news_score=0.012,
+            metadata={
+                "raw_metadata": {
+                    "market_window": {"as_of": "2026-05-06T18:25:00Z"},
+                    "source_signal_generated_at": "2026-05-06T18:23:27.168676Z",
+                }
+            },
+        ),
+        _report(
+            domain="btc",
+            timestamp="2026-05-06T19:25:00Z",
+            market_id="btc-expired",
+            action="NO",
+            edge=0.0025,
+            news_score=0.012,
+            metadata={
+                "raw_metadata": {
+                    "market_window": {"as_of": "2026-05-06T19:25:00Z"},
+                    "source_signal_generated_at": "2026-05-06T18:23:27.168676Z",
+                }
+            },
+        ),
+    ]
+
+    adjusted, diagnostics = apply_category_policy(
+        reports,
+        policy={
+            "enabled": True,
+            "btc": {"min_edge": 0.002, "min_news_score": 0.01, "max_signal_age_minutes": 60},
+        },
+    )
+
+    assert [report.action for report in adjusted] == ["NO", "HOLD"]
+    assert adjusted[1].metadata["policy_reason"] == "btc_signal_age_exceeded"
+    assert {row["reason"] for row in diagnostics} == {"btc_policy_pass", "btc_signal_age_exceeded"}
+
+
 def _report(
     domain: str,
     timestamp: str = "2026-05-01T00:00:00Z",
