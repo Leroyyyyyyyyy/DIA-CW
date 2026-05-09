@@ -4,11 +4,28 @@
   "inputs": {
     "acy_news": {
       "enabled": true,
-      "signals_csv": "research/data/external/dia_btc/signals_multi_market.csv",
-      "evidence_jsonl": "research/data/external/dia_btc/evidence.jsonl",
       "outcome_csv": "research/data/external/outcomes/btc_5m_outcome_multi_market.csv",
       "domains": ["btc", "cs2", "weather"],
       "market_prob_default": 0.5,
+      "standalone_domains": ["btc"],
+      "fuse_into_domain_reports": true,
+      "news_inputs": [
+        {
+          "domain": "btc",
+          "signals_csv": "research/data/external/dia_btc/signals_multi_market.csv",
+          "evidence_jsonl": "research/data/external/dia_btc/evidence.jsonl"
+        },
+        {
+          "domain": "cs2",
+          "signals_csv": "research/data/external/dia_cs2/signals.csv",
+          "evidence_jsonl": "research/data/external/dia_cs2/evidence.jsonl"
+        },
+        {
+          "domain": "weather",
+          "signals_csv": "research/data/external/dia_weather/signals.csv",
+          "evidence_jsonl": "research/data/external/dia_weather/evidence.jsonl"
+        }
+      ],
       "btc_market_generation": {
         "source_signals_csv": "research/data/external/dia_btc/signals.csv",
         "rule": "rolling 5-minute BTC up/down windows from one DIA news stance",

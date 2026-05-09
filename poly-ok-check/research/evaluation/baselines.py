@@ -39,8 +39,10 @@ def _baseline_report(source: DomainReport, method: str) -> DomainReport:
         news_score = 0.0
     elif method == "news_only":
         has_news_signal = _has_news_signal(source)
-        model_prob = clamp01(source.model_prob) if has_news_signal else 0.5
-        action = side if has_news_signal and model_prob > market_prob else "HOLD"
+        news_side = _news_candidate_side(source)
+        model_prob = _news_model_prob(source) if has_news_signal else 0.5
+        market_prob = _news_market_prob(source) if has_news_signal else market_prob
+        action = news_side if has_news_signal and model_prob > market_prob else "HOLD"
         data_score = 0.0
         news_score = source.news_score if has_news_signal else 0.0
     elif method == "data_news":
@@ -86,7 +88,28 @@ def _candidate_side(report: DomainReport) -> str:
 
 
 def _has_news_signal(report: DomainReport) -> bool:
+    if report.metadata.get("news_baseline_eligible") is False:
+        return False
     return str(report.metadata.get("source", "")).strip().lower() == "acy_news" or safe_float(report.news_score) > 0.0
+
+
+def _news_candidate_side(report: DomainReport) -> str:
+    side = normalize_action(report.metadata.get("news_candidate_side"))
+    if side in {"YES", "NO"}:
+        return side
+    return _candidate_side(report)
+
+
+def _news_model_prob(report: DomainReport) -> float:
+    if "news_model_prob" in report.metadata:
+        return clamp01(safe_float(report.metadata.get("news_model_prob"), report.model_prob))
+    return clamp01(report.model_prob)
+
+
+def _news_market_prob(report: DomainReport) -> float:
+    if "news_market_prob" in report.metadata:
+        return clamp01(safe_float(report.metadata.get("news_market_prob"), report.market_prob))
+    return clamp01(report.market_prob)
 
 
 def _outcome_for_action(source: DomainReport, action: str) -> str:

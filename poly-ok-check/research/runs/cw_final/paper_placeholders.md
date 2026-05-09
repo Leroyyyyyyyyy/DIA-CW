@@ -31,8 +31,8 @@ Use the CSV tables in this directory as the source of truth.
 ## Table III threshold sensitivity
 
 - threshold=0.25, signals=116, coverage_pct=19.17, hit_rate_pct=38.79, brier=0.329537, p_l=-47.759052
-- threshold=0.5, signals=10, coverage_pct=1.65, hit_rate_pct=80.00, brier=0.168796, p_l=4.287572
-- threshold=0.75, signals=0, coverage_pct=0.00, hit_rate_pct=, brier=, p_l=0
+- threshold=0.5, signals=105, coverage_pct=17.36, hit_rate_pct=32.38, brier=0.36017, p_l=-53.055348
+- threshold=0.75, signals=10, coverage_pct=1.65, hit_rate_pct=80.00, brier=0.168796, p_l=4.287572
 - threshold=1.0, signals=0, coverage_pct=0.00, hit_rate_pct=, brier=, p_l=0
 
 ## Table IV example rows

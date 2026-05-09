@@ -4,6 +4,7 @@ import pandas as pd
 
 from research.evaluation.baselines import expand_with_baselines
 from research.evaluation.cw_tables import write_cw_tables, write_unified_reports
+from research.evaluation.news_fusion import fuse_domain_news
 from research.schemas.domain_report import DomainReport
 
 
@@ -130,3 +131,47 @@ def test_news_only_baseline_accepts_acy_news_for_all_domains(tmp_path) -> None:
 
     news_only = table1[table1["method"] == "news_only"].iloc[0]
     assert news_only["signals"] == 3
+
+
+def test_news_fusion_attaches_acy_news_without_duplicating_domain_rows() -> None:
+    base = [
+        DomainReport(
+            domain="cs2",
+            timestamp="2026-04-03T08:10:00Z",
+            market_id="cs2-match",
+            target="CS2",
+            market_prob=0.55,
+            model_prob=0.7,
+            data_score=0.7,
+            news_score=0.0,
+            edge=0.15,
+            action="YES",
+            outcome="WIN",
+            metadata={"source": "poly-ok-check", "candidate_side": "YES", "yes_outcome": 1.0},
+        )
+    ]
+    news = [
+        DomainReport(
+            domain="cs2",
+            timestamp="2026-05-05T12:11:50Z",
+            market_id="cs2-news",
+            target="Rune Eaters vs Omega",
+            market_prob=0.5,
+            model_prob=0.56,
+            data_score=0.0,
+            news_score=0.23,
+            edge=0.06,
+            action="YES",
+            evidence_ref="ev_cs2_001",
+            metadata={"source": "acy_news", "candidate_side": "YES"},
+        )
+    ]
+
+    fused = fuse_domain_news(base, news, standalone_domains={"btc"})
+
+    assert len(fused) == 1
+    assert fused[0].news_score == 0.23
+    assert fused[0].metadata["news_connected"] is True
+    assert fused[0].metadata["news_source"] == "acy_news"
+    assert fused[0].metadata["news_signal_market_id"] == "cs2-news"
+    assert fused[0].metadata["news_baseline_eligible"] is False

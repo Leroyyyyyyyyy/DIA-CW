@@ -10,6 +10,7 @@ from research.adapters.cs2_adapter import load_cs2_reports
 from research.adapters.weather_adapter import load_weather_reports
 from research.evaluation.baselines import expand_with_baselines
 from research.evaluation.cw_tables import write_cw_tables, write_unified_reports
+from research.evaluation.news_fusion import fuse_domain_news
 from research.schemas.domain_report import DomainReport
 
 
@@ -37,22 +38,23 @@ def main() -> None:
 def load_reports(config: dict[str, Any], base_dir: Path, config_dir: Path) -> list[DomainReport]:
     inputs = config.get("inputs", {})
     reports: list[DomainReport] = []
+    news_reports: list[DomainReport] = []
 
     acy = inputs.get("acy_news", {})
     if acy.get("enabled", False):
-        reports.extend(
-            load_acy_news_reports(
-                signals_csv=_resolve_optional(acy.get("signals_csv"), base_dir, config_dir),
-                evidence_jsonl=_resolve_optional(acy.get("evidence_jsonl"), base_dir, config_dir),
-                news_inputs=_resolve_news_inputs(list(acy.get("news_inputs", [])), base_dir, config_dir),
-                news_output_dirs=[
-                    _resolve_output_dir(path, base_dir, config_dir) for path in list(acy.get("news_output_dirs", []))
-                ],
-                domains=list(acy.get("domains", [])) or None,
-                market_prob_default=float(acy.get("market_prob_default", 0.5)),
-                outcome_csv=_resolve_optional(acy.get("outcome_csv"), base_dir, config_dir),
-            )
+        news_reports = load_acy_news_reports(
+            signals_csv=_resolve_optional(acy.get("signals_csv"), base_dir, config_dir),
+            evidence_jsonl=_resolve_optional(acy.get("evidence_jsonl"), base_dir, config_dir),
+            news_inputs=_resolve_news_inputs(list(acy.get("news_inputs", [])), base_dir, config_dir),
+            news_output_dirs=[
+                _resolve_output_dir(path, base_dir, config_dir) for path in list(acy.get("news_output_dirs", []))
+            ],
+            domains=list(acy.get("domains", [])) or None,
+            market_prob_default=float(acy.get("market_prob_default", 0.5)),
+            outcome_csv=_resolve_optional(acy.get("outcome_csv"), base_dir, config_dir),
         )
+        standalone_domains = {str(domain).lower() for domain in acy.get("standalone_domains", ["btc"])}
+        reports.extend(report for report in news_reports if report.domain.lower() in standalone_domains)
 
     weather = inputs.get("weather", {})
     if weather.get("enabled", False):
@@ -77,6 +79,10 @@ def load_reports(config: dict[str, Any], base_dir: Path, config_dir: Path) -> li
                 market_prob_default=float(cs2.get("market_prob_default", 0.5)),
             )
         )
+
+    if acy.get("enabled", False) and acy.get("fuse_into_domain_reports", True):
+        standalone_domains = {str(domain).lower() for domain in acy.get("standalone_domains", ["btc"])}
+        reports = fuse_domain_news(reports, news_reports, standalone_domains=standalone_domains)
 
     return reports
 
