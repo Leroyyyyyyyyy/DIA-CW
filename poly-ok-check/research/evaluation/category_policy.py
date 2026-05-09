@@ -329,6 +329,7 @@ def _apply_cs2_policy(
 
     max_per_market_side = int(policy.get("max_trades_per_market_side", 0) or 0)
     switch_buffer = float(policy.get("switch_buffer", 0.0) or 0.0)
+    min_edge = float(policy.get("min_edge", 0.0) or 0.0)
     side_counts: Counter[tuple[str, str]] = Counter()
     current_position: dict[str, tuple[str, float]] = {}
 
@@ -346,6 +347,12 @@ def _apply_cs2_policy(
             continue
 
         edge = safe_float(report.edge)
+        block_reason = _cs2_risk_filter_reason(report, action, edge, policy, min_edge)
+        if block_reason:
+            current[index] = _blocked_report(report, block_reason)
+            diagnostics.append(_diagnostic(report, "HOLD", block_reason))
+            continue
+
         market_side = (report.market_id, action)
         if max_per_market_side > 0 and side_counts[market_side] >= max_per_market_side:
             current[index] = _blocked_report(report, "cs2_position_already_open")
@@ -364,6 +371,18 @@ def _apply_cs2_policy(
         current_position[report.market_id] = (action, edge)
         current[index] = _with_policy_metadata(report, policy_action=action, reason="cs2_policy_pass", blocked=False)
         diagnostics.append(_diagnostic(report, action, "cs2_policy_pass"))
+
+
+def _cs2_risk_filter_reason(report: DomainReport, action: str, edge: float, policy: dict[str, Any], min_edge: float) -> str:
+    if min_edge > 0.0 and edge < min_edge:
+        return "cs2_below_edge_threshold"
+
+    if policy.get("require_news_alignment", False):
+        news_side = normalize_action(report.metadata.get("news_candidate_side") or report.metadata.get("news_action"))
+        if news_side in {"YES", "NO"} and action != news_side:
+            return "cs2_news_side_mismatch"
+
+    return ""
 
 
 def _blocked_report(report: DomainReport, reason: str) -> DomainReport:

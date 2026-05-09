@@ -350,6 +350,65 @@ def test_btc_policy_blocks_expired_rolling_news_signal() -> None:
     assert {row["reason"] for row in diagnostics} == {"btc_policy_pass", "btc_signal_age_exceeded"}
 
 
+def test_cs2_policy_requires_news_alignment_and_allows_same_side_entries() -> None:
+    reports = [
+        _report(
+            domain="cs2",
+            timestamp="2026-04-03T08:20:37Z",
+            market_id="cs2",
+            action="NO",
+            edge=0.08,
+            metadata={"news_candidate_side": "YES"},
+        ),
+        _report(
+            domain="cs2",
+            timestamp="2026-04-03T08:30:39Z",
+            market_id="cs2",
+            action="YES",
+            edge=0.06,
+            metadata={"news_candidate_side": "YES"},
+        ),
+        _report(
+            domain="cs2",
+            timestamp="2026-04-03T08:38:37Z",
+            market_id="cs2",
+            action="YES",
+            edge=0.055,
+            metadata={"news_candidate_side": "YES"},
+        ),
+        _report(
+            domain="cs2",
+            timestamp="2026-04-03T09:09:49Z",
+            market_id="cs2",
+            action="YES",
+            edge=0.04,
+            metadata={"news_candidate_side": "YES"},
+        ),
+    ]
+
+    adjusted, diagnostics = apply_category_policy(
+        reports,
+        policy={
+            "enabled": True,
+            "cs2": {
+                "max_trades_per_market_side": 2,
+                "min_edge": 0.05,
+                "require_news_alignment": True,
+                "switch_buffer": 0.03,
+            },
+        },
+    )
+
+    assert [report.action for report in adjusted] == ["HOLD", "YES", "YES", "HOLD"]
+    assert adjusted[0].metadata["policy_reason"] == "cs2_news_side_mismatch"
+    assert adjusted[3].metadata["policy_reason"] == "cs2_below_edge_threshold"
+    assert {row["reason"] for row in diagnostics} == {
+        "cs2_news_side_mismatch",
+        "cs2_policy_pass",
+        "cs2_below_edge_threshold",
+    }
+
+
 def _report(
     domain: str,
     timestamp: str = "2026-05-01T00:00:00Z",

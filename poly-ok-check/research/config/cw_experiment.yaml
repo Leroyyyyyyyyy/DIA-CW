@@ -12,7 +12,9 @@
     },
     "cs2": {
       "market_type": "single_match_binary",
-      "max_trades_per_market_side": 1,
+      "max_trades_per_market_side": 5,
+      "min_edge": 0.05,
+      "require_news_alignment": true,
       "switch_buffer": 0.03
     },
     "weather": {
