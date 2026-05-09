@@ -1,562 +1,562 @@
 domain,timestamp,market_id,target,original_action,policy_action,reason,edge,news_score
-weather,2026-04-24 17:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,NO,weather_execution_in_trades,0.1469634913387674,0.23240000000000002
+weather,2026-04-24 17:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1469634913387674,0.23240000000000002
 weather,2026-04-24 17:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.024433905949791,0.23240000000000002
-weather,2026-04-24 17:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_execution_not_selected,0.0230602880939082,0.23240000000000002
+weather,2026-04-24 17:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_below_min_entry_price,0.0230602880939082,0.23240000000000002
 weather,2026-04-24 17:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 17:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1469634913387674,0.23240000000000002
-weather,2026-04-24 17:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.0927728587453328,0.23240000000000002
-weather,2026-04-24 17:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0898612261029305,0.23240000000000002
+weather,2026-04-24 17:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1469634913387674,0.23240000000000002
+weather,2026-04-24 17:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.0927728587453328,0.23240000000000002
+weather,2026-04-24 17:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0898612261029305,0.23240000000000002
 weather,2026-04-24 17:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0782089762855156,0.23240000000000002
 weather,2026-04-24 17:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 17:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.024433905949791,0.23240000000000002
 weather,2026-04-24 17:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0230602880939082,0.23240000000000002
-weather,2026-04-24 17:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_execution_not_selected,0.007958187045001,0.23240000000000002
+weather,2026-04-24 17:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_below_min_entry_price,0.007958187045001,0.23240000000000002
 weather,2026-04-24 17:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 17:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1469634913387674,0.23240000000000002
+weather,2026-04-24 17:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1469634913387674,0.23240000000000002
 weather,2026-04-24 17:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1323049541630592,0.23240000000000002
-weather,2026-04-24 17:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.0927728587453328,0.23240000000000002
-weather,2026-04-24 17:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0898612261029305,0.23240000000000002
+weather,2026-04-24 17:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.0927728587453328,0.23240000000000002
+weather,2026-04-24 17:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0898612261029305,0.23240000000000002
 weather,2026-04-24 17:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0782089762855156,0.23240000000000002
 weather,2026-04-24 17:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 17:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.024433905949791,0.23240000000000002
 weather,2026-04-24 17:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0230602880939082,0.23240000000000002
-weather,2026-04-24 17:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_execution_not_selected,0.007958187045001,0.23240000000000002
+weather,2026-04-24 17:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_below_min_entry_price,0.007958187045001,0.23240000000000002
 weather,2026-04-24 17:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 17:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1469634913387674,0.23240000000000002
+weather,2026-04-24 17:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1469634913387674,0.23240000000000002
 weather,2026-04-24 17:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1323049541630592,0.23240000000000002
-weather,2026-04-24 17:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.0927728587453328,0.23240000000000002
-weather,2026-04-24 17:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0898612261029305,0.23240000000000002
+weather,2026-04-24 17:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.0927728587453328,0.23240000000000002
+weather,2026-04-24 17:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0898612261029305,0.23240000000000002
 weather,2026-04-24 17:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0782089762855156,0.23240000000000002
 weather,2026-04-24 17:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 17:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0394566204519446,0.23240000000000002
+weather,2026-04-24 17:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0394566204519446,0.23240000000000002
 weather,2026-04-24 17:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.024433905949791,0.23240000000000002
 weather,2026-04-24 17:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0230602880939082,0.23240000000000002
-weather,2026-04-24 17:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_execution_not_selected,0.007958187045001,0.23240000000000002
+weather,2026-04-24 17:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_below_min_entry_price,0.007958187045001,0.23240000000000002
 weather,2026-04-24 17:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1469634913387674,0.23240000000000002
-weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1323049541630592,0.23240000000000002
-weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.0927728587453328,0.23240000000000002
-weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0898612261029305,0.23240000000000002
+weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1469634913387674,0.23240000000000002
+weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,NO,weather_candidate_backfill,0.1323049541630592,0.23240000000000002
+weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.0927728587453328,0.23240000000000002
+weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0898612261029305,0.23240000000000002
 weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0782089762855156,0.23240000000000002
 weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0394566204519446,0.23240000000000002
+weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0394566204519446,0.23240000000000002
 weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.024433905949791,0.23240000000000002
 weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0230602880939082,0.23240000000000002
-weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_execution_not_selected,0.007958187045001,0.23240000000000002
+weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_below_min_entry_price,0.007958187045001,0.23240000000000002
 weather,2026-04-24 17:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 18:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1469634913387674,0.23240000000000002
+weather,2026-04-24 18:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1469634913387674,0.23240000000000002
 weather,2026-04-24 18:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1323049541630592,0.23240000000000002
-weather,2026-04-24 18:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.0927728587453328,0.23240000000000002
-weather,2026-04-24 18:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0898612261029305,0.23240000000000002
+weather,2026-04-24 18:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.0927728587453328,0.23240000000000002
+weather,2026-04-24 18:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0898612261029305,0.23240000000000002
 weather,2026-04-24 18:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0782089762855156,0.23240000000000002
 weather,2026-04-24 18:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 18:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0394566204519446,0.23240000000000002
+weather,2026-04-24 18:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0394566204519446,0.23240000000000002
 weather,2026-04-24 18:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.024433905949791,0.23240000000000002
 weather,2026-04-24 18:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0260602880939082,0.23240000000000002
-weather,2026-04-24 18:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_execution_not_selected,0.007958187045001,0.23240000000000002
+weather,2026-04-24 18:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_below_min_entry_price,0.007958187045001,0.23240000000000002
 weather,2026-04-24 18:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 18:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1469634913387674,0.23240000000000002
-weather,2026-04-24 18:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1323049541630592,0.23240000000000002
+weather,2026-04-24 18:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1469634913387674,0.23240000000000002
+weather,2026-04-24 18:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,NO,weather_candidate_backfill,0.1323049541630592,0.23240000000000002
 weather,2026-04-24 18:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C NO,HOLD,DROP,weather_execution_not_selected,0.0972728587453329,0.23240000000000002
 weather,2026-04-24 18:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C NO,HOLD,DROP,weather_execution_not_selected,0.0898612261029305,0.23240000000000002
 weather,2026-04-24 18:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0782089762855156,0.23240000000000002
 weather,2026-04-24 18:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 18:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0394566204519446,0.23240000000000002
+weather,2026-04-24 18:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0394566204519446,0.23240000000000002
 weather,2026-04-24 18:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0260602880939082,0.23240000000000002
 weather,2026-04-24 18:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.024433905949791,0.23240000000000002
-weather,2026-04-24 18:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_execution_not_selected,0.007958187045001,0.23240000000000002
+weather,2026-04-24 18:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_below_min_entry_price,0.007958187045001,0.23240000000000002
 weather,2026-04-24 18:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 18:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1469634913387674,0.23240000000000002
+weather,2026-04-24 18:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1469634913387674,0.23240000000000002
 weather,2026-04-24 18:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.1323049541630593,0.23240000000000002
 weather,2026-04-24 18:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C NO,HOLD,DROP,weather_execution_not_selected,0.0972728587453329,0.23240000000000002
 weather,2026-04-24 18:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C NO,HOLD,DROP,weather_execution_not_selected,0.0898612261029305,0.23240000000000002
 weather,2026-04-24 18:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0782089762855156,0.23240000000000002
 weather,2026-04-24 18:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 18:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0394566204519446,0.23240000000000002
+weather,2026-04-24 18:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0394566204519446,0.23240000000000002
 weather,2026-04-24 18:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0260602880939082,0.23240000000000002
 weather,2026-04-24 18:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.024433905949791,0.23240000000000002
-weather,2026-04-24 18:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_execution_not_selected,0.007958187045001,0.23240000000000002
+weather,2026-04-24 18:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_below_min_entry_price,0.007958187045001,0.23240000000000002
 weather,2026-04-24 18:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 18:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1469634913387674,0.23240000000000002
+weather,2026-04-24 18:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1469634913387674,0.23240000000000002
 weather,2026-04-24 18:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.1323049541630593,0.23240000000000002
 weather,2026-04-24 18:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C NO,HOLD,DROP,weather_execution_not_selected,0.0972728587453329,0.23240000000000002
 weather,2026-04-24 18:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C NO,HOLD,DROP,weather_execution_not_selected,0.0898612261029305,0.23240000000000002
 weather,2026-04-24 18:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0637089762855157,0.23240000000000002
 weather,2026-04-24 18:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 18:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0394566204519446,0.23240000000000002
+weather,2026-04-24 18:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0394566204519446,0.23240000000000002
 weather,2026-04-24 18:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0260602880939082,0.23240000000000002
 weather,2026-04-24 18:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.024433905949791,0.23240000000000002
-weather,2026-04-24 18:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_execution_not_selected,0.007958187045001,0.23240000000000002
+weather,2026-04-24 18:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_below_min_entry_price,0.007958187045001,0.23240000000000002
 weather,2026-04-24 18:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 18:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 18:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
 weather,2026-04-24 18:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,HOLD,DROP,weather_execution_not_selected,0.1123049541630593,0.23240000000000002
-weather,2026-04-24 18:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.0972728587453329,0.23240000000000002
-weather,2026-04-24 18:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0748612261029305,0.23240000000000002
+weather,2026-04-24 18:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.0972728587453329,0.23240000000000002
+weather,2026-04-24 18:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0748612261029305,0.23240000000000002
 weather,2026-04-24 18:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0637089762855157,0.23240000000000002
 weather,2026-04-24 18:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 18:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0419566204519446,0.23240000000000002
+weather,2026-04-24 18:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0419566204519446,0.23240000000000002
 weather,2026-04-24 18:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0260602880939082,0.23240000000000002
 weather,2026-04-24 18:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.024433905949791,0.23240000000000002
-weather,2026-04-24 18:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_execution_not_selected,0.007958187045001,0.23240000000000002
+weather,2026-04-24 18:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_below_min_entry_price,0.007958187045001,0.23240000000000002
 weather,2026-04-24 18:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 19:00:03+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 19:00:03+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
 weather,2026-04-24 19:00:03+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,HOLD,DROP,weather_execution_not_selected,0.1123049541630593,0.23240000000000002
-weather,2026-04-24 19:00:03+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.0972728587453329,0.23240000000000002
-weather,2026-04-24 19:00:03+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0748612261029305,0.23240000000000002
+weather,2026-04-24 19:00:03+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.0972728587453329,0.23240000000000002
+weather,2026-04-24 19:00:03+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0748612261029305,0.23240000000000002
 weather,2026-04-24 19:00:03+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0637089762855157,0.23240000000000002
 weather,2026-04-24 19:00:03+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 19:00:03+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0419566204519446,0.23240000000000002
+weather,2026-04-24 19:00:03+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0419566204519446,0.23240000000000002
 weather,2026-04-24 19:00:03+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0260602880939082,0.23240000000000002
 weather,2026-04-24 19:00:03+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
-weather,2026-04-24 19:00:03+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_execution_not_selected,0.007958187045001,0.23240000000000002
+weather,2026-04-24 19:00:03+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_below_min_entry_price,0.007958187045001,0.23240000000000002
 weather,2026-04-24 19:00:03+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 19:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 19:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
 weather,2026-04-24 19:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,HOLD,DROP,weather_execution_not_selected,0.1123049541630593,0.23240000000000002
 weather,2026-04-24 19:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C NO,HOLD,DROP,weather_execution_not_selected,0.0997728587453329,0.23240000000000002
 weather,2026-04-24 19:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 19:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C NO,HOLD,DROP,weather_execution_not_selected,0.0748612261029305,0.23240000000000002
-weather,2026-04-24 19:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0419566204519446,0.23240000000000002
+weather,2026-04-24 19:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0419566204519446,0.23240000000000002
 weather,2026-04-24 19:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0260602880939082,0.23240000000000002
 weather,2026-04-24 19:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 19:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0637089762855157,0.23240000000000002
-weather,2026-04-24 19:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_execution_not_selected,0.008458187045001,0.23240000000000002
+weather,2026-04-24 19:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C YES,HOLD,DROP,weather_below_min_entry_price,0.008458187045001,0.23240000000000002
 weather,2026-04-24 19:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 19:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2119634913387674,0.23240000000000002
-weather,2026-04-24 19:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,NO,weather_candidate_backfill,0.1373049541630592,0.23240000000000002
+weather,2026-04-24 19:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 19:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1373049541630592,0.23240000000000002
 weather,2026-04-24 19:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C NO,HOLD,DROP,weather_execution_not_selected,0.0997728587453329,0.23240000000000002
 weather,2026-04-24 19:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 19:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C NO,HOLD,DROP,weather_execution_not_selected,0.0748612261029305,0.23240000000000002
-weather,2026-04-24 19:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0419566204519446,0.23240000000000002
+weather,2026-04-24 19:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0419566204519446,0.23240000000000002
 weather,2026-04-24 19:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0260602880939082,0.23240000000000002
 weather,2026-04-24 19:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 19:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0187089762855156,0.23240000000000002
 weather,2026-04-24 19:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 19:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 19:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2069634913387674,0.23240000000000002
+weather,2026-04-24 19:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2069634913387674,0.23240000000000002
 weather,2026-04-24 19:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1373049541630592,0.23240000000000002
-weather,2026-04-24 19:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.0997728587453329,0.23240000000000002
+weather,2026-04-24 19:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.0997728587453329,0.23240000000000002
 weather,2026-04-24 19:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 19:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C NO,HOLD,DROP,weather_execution_not_selected,0.0748612261029305,0.23240000000000002
-weather,2026-04-24 19:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0429566204519446,0.23240000000000002
+weather,2026-04-24 19:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0429566204519446,0.23240000000000002
 weather,2026-04-24 19:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0260602880939082,0.23240000000000002
 weather,2026-04-24 19:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 19:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0187089762855156,0.23240000000000002
 weather,2026-04-24 19:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 19:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 19:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2069634913387674,0.23240000000000002
-weather,2026-04-24 19:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1373049541630592,0.23240000000000002
-weather,2026-04-24 19:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.0997728587453329,0.23240000000000002
+weather,2026-04-24 19:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2069634913387674,0.23240000000000002
+weather,2026-04-24 19:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,NO,weather_candidate_backfill,0.1373049541630592,0.23240000000000002
+weather,2026-04-24 19:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.0997728587453329,0.23240000000000002
 weather,2026-04-24 19:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 19:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0548612261029304,0.23240000000000002
-weather,2026-04-24 19:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0429566204519446,0.23240000000000002
+weather,2026-04-24 19:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0429566204519446,0.23240000000000002
 weather,2026-04-24 19:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0260602880939082,0.23240000000000002
 weather,2026-04-24 19:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 19:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0187089762855156,0.23240000000000002
 weather,2026-04-24 19:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 19:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 20:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2069634913387674,0.23240000000000002
+weather,2026-04-24 20:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2069634913387674,0.23240000000000002
 weather,2026-04-24 20:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,NO,weather_candidate_backfill,0.1373049541630592,0.23240000000000002
-weather,2026-04-24 20:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.0997728587453329,0.23240000000000002
+weather,2026-04-24 20:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.0997728587453329,0.23240000000000002
 weather,2026-04-24 20:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 20:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0548612261029304,0.23240000000000002
-weather,2026-04-24 20:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0429566204519446,0.23240000000000002
+weather,2026-04-24 20:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0429566204519446,0.23240000000000002
 weather,2026-04-24 20:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0345602880939082,0.23240000000000002
 weather,2026-04-24 20:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 20:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0187089762855156,0.23240000000000002
 weather,2026-04-24 20:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 20:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 20:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2069634913387674,0.23240000000000002
+weather,2026-04-24 20:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2069634913387674,0.23240000000000002
 weather,2026-04-24 20:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1323049541630592,0.23240000000000002
 weather,2026-04-24 20:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C NO,HOLD,DROP,weather_execution_not_selected,0.1012728587453329,0.23240000000000002
 weather,2026-04-24 20:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0598612261029305,0.23240000000000002
 weather,2026-04-24 20:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 20:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0429566204519446,0.23240000000000002
+weather,2026-04-24 20:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0429566204519446,0.23240000000000002
 weather,2026-04-24 20:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0345602880939082,0.23240000000000002
 weather,2026-04-24 20:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 20:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0187089762855156,0.23240000000000002
 weather,2026-04-24 20:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 20:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 20:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2069634913387674,0.23240000000000002
+weather,2026-04-24 20:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2069634913387674,0.23240000000000002
 weather,2026-04-24 20:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1323049541630592,0.23240000000000002
 weather,2026-04-24 20:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C NO,HOLD,DROP,weather_execution_not_selected,0.1012728587453329,0.23240000000000002
 weather,2026-04-24 20:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0598612261029305,0.23240000000000002
 weather,2026-04-24 20:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 20:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0429566204519446,0.23240000000000002
+weather,2026-04-24 20:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0429566204519446,0.23240000000000002
 weather,2026-04-24 20:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0345602880939082,0.23240000000000002
 weather,2026-04-24 20:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 20:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0107089762855157,0.23240000000000002
 weather,2026-04-24 20:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 20:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 20:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 20:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
 weather,2026-04-24 20:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1323049541630592,0.23240000000000002
-weather,2026-04-24 20:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1012728587453329,0.23240000000000002
+weather,2026-04-24 20:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1012728587453329,0.23240000000000002
 weather,2026-04-24 20:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0598612261029305,0.23240000000000002
 weather,2026-04-24 20:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 20:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-24 20:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-24 20:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0345602880939082,0.23240000000000002
 weather,2026-04-24 20:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 20:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0107089762855157,0.23240000000000002
 weather,2026-04-24 20:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 20:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 20:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 20:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
 weather,2026-04-24 20:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1323049541630592,0.23240000000000002
-weather,2026-04-24 20:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1012728587453329,0.23240000000000002
+weather,2026-04-24 20:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1012728587453329,0.23240000000000002
 weather,2026-04-24 20:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0598612261029305,0.23240000000000002
 weather,2026-04-24 20:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 20:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-24 20:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-24 20:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0345602880939082,0.23240000000000002
 weather,2026-04-24 20:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 20:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0107089762855157,0.23240000000000002
 weather,2026-04-24 20:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 20:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 21:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 21:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
 weather,2026-04-24 21:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1323049541630592,0.23240000000000002
-weather,2026-04-24 21:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1012728587453329,0.23240000000000002
+weather,2026-04-24 21:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1012728587453329,0.23240000000000002
 weather,2026-04-24 21:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0598612261029305,0.23240000000000002
 weather,2026-04-24 21:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 21:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-24 21:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-24 21:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0555602880939082,0.23240000000000002
 weather,2026-04-24 21:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 21:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0107089762855157,0.23240000000000002
 weather,2026-04-24 21:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 21:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 21:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 21:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
 weather,2026-04-24 21:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1323049541630592,0.23240000000000002
-weather,2026-04-24 21:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1012728587453329,0.23240000000000002
+weather,2026-04-24 21:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1012728587453329,0.23240000000000002
 weather,2026-04-24 21:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 21:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0555602880939082,0.23240000000000002
-weather,2026-04-24 21:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-24 21:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-24 21:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C NO,HOLD,DROP,weather_execution_not_selected,0.0598612261029305,0.23240000000000002
 weather,2026-04-24 21:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 21:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,HOLD,DROP,weather_execution_not_selected,0.0227089762855156,0.23240000000000002
 weather,2026-04-24 21:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 21:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 21:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 21:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
 weather,2026-04-24 21:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1373049541630592,0.23240000000000002
-weather,2026-04-24 21:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1012728587453329,0.23240000000000002
+weather,2026-04-24 21:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1012728587453329,0.23240000000000002
 weather,2026-04-24 21:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 21:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0555602880939082,0.23240000000000002
-weather,2026-04-24 21:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-24 21:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-24 21:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C NO,HOLD,DROP,weather_execution_not_selected,0.0598612261029305,0.23240000000000002
 weather,2026-04-24 21:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 21:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,HOLD,DROP,weather_execution_not_selected,0.0227089762855156,0.23240000000000002
 weather,2026-04-24 21:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 21:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 21:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 21:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
 weather,2026-04-24 21:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1373049541630592,0.23240000000000002
-weather,2026-04-24 21:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1012728587453329,0.23240000000000002
+weather,2026-04-24 21:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1012728587453329,0.23240000000000002
 weather,2026-04-24 21:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 21:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0555602880939082,0.23240000000000002
-weather,2026-04-24 21:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-24 21:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-24 21:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C NO,HOLD,DROP,weather_execution_not_selected,0.0598612261029305,0.23240000000000002
 weather,2026-04-24 21:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 21:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,HOLD,DROP,weather_execution_not_selected,0.0227089762855156,0.23240000000000002
 weather,2026-04-24 21:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 21:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 21:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 21:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
 weather,2026-04-24 21:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1373049541630592,0.23240000000000002
-weather,2026-04-24 21:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1012728587453329,0.23240000000000002
+weather,2026-04-24 21:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1012728587453329,0.23240000000000002
 weather,2026-04-24 21:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 21:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0555602880939082,0.23240000000000002
-weather,2026-04-24 21:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-24 21:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-24 21:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C NO,HOLD,DROP,weather_execution_not_selected,0.0598612261029305,0.23240000000000002
 weather,2026-04-24 21:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 21:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0232089762855156,0.23240000000000002
 weather,2026-04-24 21:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 21:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 21:00:11+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 21:00:11+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
 weather,2026-04-24 21:00:11+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1373049541630592,0.23240000000000002
-weather,2026-04-24 21:00:11+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.0987728587453329,0.23240000000000002
+weather,2026-04-24 21:00:11+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.0987728587453329,0.23240000000000002
 weather,2026-04-24 21:00:11+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 21:00:11+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0555602880939082,0.23240000000000002
-weather,2026-04-24 21:00:11+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-24 21:00:11+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-24 21:00:11+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C NO,HOLD,DROP,weather_execution_not_selected,0.0598612261029305,0.23240000000000002
 weather,2026-04-24 21:00:11+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 21:00:11+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0232089762855156,0.23240000000000002
 weather,2026-04-24 21:00:11+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 21:00:11+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 21:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2119634913387674,0.23240000000000002
-weather,2026-04-24 21:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,DROP,weather_execution_not_selected,0.1373049541630592,0.23240000000000002
-weather,2026-04-24 21:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.0987728587453329,0.23240000000000002
+weather,2026-04-24 21:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 21:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,NO,weather_candidate_backfill,0.1373049541630592,0.23240000000000002
+weather,2026-04-24 21:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.0987728587453329,0.23240000000000002
 weather,2026-04-24 21:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 21:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0555602880939082,0.23240000000000002
-weather,2026-04-24 21:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-24 21:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-24 21:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0298612261029304,0.23240000000000002
 weather,2026-04-24 21:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 21:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0232089762855156,0.23240000000000002
 weather,2026-04-24 21:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 21:00:12+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 22:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 22:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
 weather,2026-04-24 22:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,NO,NO,weather_candidate_backfill,0.1373049541630592,0.23240000000000002
-weather,2026-04-24 22:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.0987728587453329,0.23240000000000002
+weather,2026-04-24 22:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.0987728587453329,0.23240000000000002
 weather,2026-04-24 22:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 22:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_execution_not_selected,0.0555602880939081,0.23240000000000002
-weather,2026-04-24 22:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-24 22:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_below_min_entry_price,0.0555602880939081,0.23240000000000002
+weather,2026-04-24 22:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-24 22:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0298612261029304,0.23240000000000002
 weather,2026-04-24 22:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 22:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C YES,HOLD,DROP,weather_execution_not_selected,0.0232089762855156,0.23240000000000002
 weather,2026-04-24 22:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 22:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 22:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,NO,weather_candidate_backfill,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 22:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
 weather,2026-04-24 22:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.1373049541630593,0.23240000000000002
 weather,2026-04-24 22:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C NO,HOLD,DROP,weather_execution_not_selected,0.1002728587453329,0.23240000000000002
-weather,2026-04-24 22:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0798612261029304,0.23240000000000002
+weather,2026-04-24 22:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0798612261029304,0.23240000000000002
 weather,2026-04-24 22:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 22:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0470602880939082,0.23240000000000002
 weather,2026-04-24 22:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,HOLD,DROP,weather_execution_not_selected,0.0447089762855156,0.23240000000000002
-weather,2026-04-24 22:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-24 22:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-24 22:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 22:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 22:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 22:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 22:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
 weather,2026-04-24 22:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.1373049541630593,0.23240000000000002
 weather,2026-04-24 22:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C NO,HOLD,DROP,weather_execution_not_selected,0.1002728587453329,0.23240000000000002
-weather,2026-04-24 22:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0798612261029304,0.23240000000000002
+weather,2026-04-24 22:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0798612261029304,0.23240000000000002
 weather,2026-04-24 22:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 22:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0470602880939082,0.23240000000000002
 weather,2026-04-24 22:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,HOLD,DROP,weather_execution_not_selected,0.0447089762855156,0.23240000000000002
-weather,2026-04-24 22:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-24 22:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-24 22:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 22:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 22:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 22:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2119634913387674,0.23240000000000002
+weather,2026-04-24 22:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2119634913387674,0.23240000000000002
 weather,2026-04-24 22:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,HOLD,DROP,weather_execution_not_selected,0.1123049541630593,0.23240000000000002
 weather,2026-04-24 22:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C NO,HOLD,DROP,weather_execution_not_selected,0.1002728587453329,0.23240000000000002
-weather,2026-04-24 22:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0798612261029304,0.23240000000000002
+weather,2026-04-24 22:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0798612261029304,0.23240000000000002
 weather,2026-04-24 22:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 22:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0470602880939082,0.23240000000000002
 weather,2026-04-24 22:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,HOLD,DROP,weather_execution_not_selected,0.0447089762855156,0.23240000000000002
-weather,2026-04-24 22:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-24 22:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-24 22:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 22:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 22:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 22:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2169634913387674,0.23240000000000002
+weather,2026-04-24 22:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2169634913387674,0.23240000000000002
 weather,2026-04-24 22:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,HOLD,DROP,weather_execution_not_selected,0.1123049541630593,0.23240000000000002
-weather,2026-04-24 22:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1002728587453329,0.23240000000000002
-weather,2026-04-24 22:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0798612261029304,0.23240000000000002
+weather,2026-04-24 22:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1002728587453329,0.23240000000000002
+weather,2026-04-24 22:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0798612261029304,0.23240000000000002
 weather,2026-04-24 22:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-24 22:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0470602880939082,0.23240000000000002
 weather,2026-04-24 22:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,HOLD,DROP,weather_execution_not_selected,0.0447089762855156,0.23240000000000002
-weather,2026-04-24 22:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0419566204519446,0.23240000000000002
+weather,2026-04-24 22:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0419566204519446,0.23240000000000002
 weather,2026-04-24 22:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 22:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 22:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 23:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2169634913387674,0.23240000000000002
+weather,2026-04-24 23:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2169634913387674,0.23240000000000002
 weather,2026-04-24 23:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,HOLD,DROP,weather_execution_not_selected,0.1123049541630593,0.23240000000000002
-weather,2026-04-24 23:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1002728587453329,0.23240000000000002
-weather,2026-04-24 23:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0798612261029304,0.23240000000000002
+weather,2026-04-24 23:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1002728587453329,0.23240000000000002
+weather,2026-04-24 23:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0798612261029304,0.23240000000000002
 weather,2026-04-24 23:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 23:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_execution_not_selected,0.0465602880939081,0.23240000000000002
+weather,2026-04-24 23:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_below_min_entry_price,0.0465602880939081,0.23240000000000002
 weather,2026-04-24 23:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,HOLD,DROP,weather_execution_not_selected,0.0447089762855156,0.23240000000000002
-weather,2026-04-24 23:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0419566204519446,0.23240000000000002
+weather,2026-04-24 23:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0419566204519446,0.23240000000000002
 weather,2026-04-24 23:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 23:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 23:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 23:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2169634913387674,0.23240000000000002
+weather,2026-04-24 23:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2169634913387674,0.23240000000000002
 weather,2026-04-24 23:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,DROP,weather_execution_not_selected,0.1522089762855156,0.23240000000000002
 weather,2026-04-24 23:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,HOLD,DROP,weather_execution_not_selected,0.1123049541630593,0.23240000000000002
-weather,2026-04-24 23:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1002728587453329,0.23240000000000002
-weather,2026-04-24 23:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0898612261029305,0.23240000000000002
+weather,2026-04-24 23:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1002728587453329,0.23240000000000002
+weather,2026-04-24 23:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0898612261029305,0.23240000000000002
 weather,2026-04-24 23:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 23:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0419566204519446,0.23240000000000002
+weather,2026-04-24 23:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0419566204519446,0.23240000000000002
 weather,2026-04-24 23:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0325602880939082,0.23240000000000002
 weather,2026-04-24 23:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 23:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 23:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-24 23:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2169634913387674,0.23240000000000002
+weather,2026-04-24 23:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2169634913387674,0.23240000000000002
 weather,2026-04-24 23:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,DROP,weather_execution_not_selected,0.1522089762855156,0.23240000000000002
-weather,2026-04-24 23:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1002728587453329,0.23240000000000002
-weather,2026-04-24 23:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0898612261029305,0.23240000000000002
+weather,2026-04-24 23:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1002728587453329,0.23240000000000002
+weather,2026-04-24 23:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0898612261029305,0.23240000000000002
 weather,2026-04-24 23:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 23:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0419566204519446,0.23240000000000002
+weather,2026-04-24 23:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0419566204519446,0.23240000000000002
 weather,2026-04-24 23:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0325602880939082,0.23240000000000002
 weather,2026-04-24 23:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 23:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 23:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
 weather,2026-04-24 23:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.1123049541630593,0.23240000000000002
-weather,2026-04-24 23:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,NO,weather_candidate_backfill,0.2169634913387674,0.23240000000000002
+weather,2026-04-24 23:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2169634913387674,0.23240000000000002
 weather,2026-04-24 23:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,DROP,weather_execution_not_selected,0.1522089762855156,0.23240000000000002
-weather,2026-04-24 23:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1002728587453329,0.23240000000000002
-weather,2026-04-24 23:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0898612261029305,0.23240000000000002
+weather,2026-04-24 23:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1002728587453329,0.23240000000000002
+weather,2026-04-24 23:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0898612261029305,0.23240000000000002
 weather,2026-04-24 23:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 23:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0419566204519446,0.23240000000000002
+weather,2026-04-24 23:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0419566204519446,0.23240000000000002
 weather,2026-04-24 23:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0325602880939082,0.23240000000000002
 weather,2026-04-24 23:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 23:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 23:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
 weather,2026-04-24 23:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.1123049541630593,0.23240000000000002
-weather,2026-04-24 23:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2069634913387674,0.23240000000000002
+weather,2026-04-24 23:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2069634913387674,0.23240000000000002
 weather,2026-04-24 23:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,DROP,weather_execution_not_selected,0.1522089762855156,0.23240000000000002
-weather,2026-04-24 23:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.0967728587453329,0.23240000000000002
-weather,2026-04-24 23:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0898612261029305,0.23240000000000002
+weather,2026-04-24 23:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.0967728587453329,0.23240000000000002
+weather,2026-04-24 23:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0898612261029305,0.23240000000000002
 weather,2026-04-24 23:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 23:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-24 23:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-24 23:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0325602880939082,0.23240000000000002
 weather,2026-04-24 23:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 23:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 23:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
 weather,2026-04-24 23:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.0023049541630593,0.23240000000000002
-weather,2026-04-24 23:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2069634913387674,0.23240000000000002
+weather,2026-04-24 23:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2069634913387674,0.23240000000000002
 weather,2026-04-24 23:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,NO,weather_candidate_backfill,0.1522089762855156,0.23240000000000002
-weather,2026-04-24 23:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.0967728587453329,0.23240000000000002
-weather,2026-04-24 23:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0898612261029305,0.23240000000000002
+weather,2026-04-24 23:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.0967728587453329,0.23240000000000002
+weather,2026-04-24 23:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0898612261029305,0.23240000000000002
 weather,2026-04-24 23:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-24 23:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-24 23:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-24 23:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0325602880939082,0.23240000000000002
 weather,2026-04-24 23:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-24 23:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-24 23:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
 weather,2026-04-24 23:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.0023049541630593,0.23240000000000002
-weather,2026-04-25 00:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2069634913387674,0.23240000000000002
+weather,2026-04-25 00:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2069634913387674,0.23240000000000002
 weather,2026-04-25 00:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,NO,weather_execution_in_trades,0.1522089762855156,0.23240000000000002
-weather,2026-04-25 00:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.0967728587453329,0.23240000000000002
-weather,2026-04-25 00:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_execution_not_selected,0.0898612261029305,0.23240000000000002
+weather,2026-04-25 00:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.0967728587453329,0.23240000000000002
+weather,2026-04-25 00:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,HOLD,DROP,weather_below_min_entry_price,0.0898612261029305,0.23240000000000002
 weather,2026-04-25 00:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-25 00:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
-weather,2026-04-25 00:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_execution_not_selected,0.0325602880939081,0.23240000000000002
+weather,2026-04-25 00:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
+weather,2026-04-25 00:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_below_min_entry_price,0.0325602880939081,0.23240000000000002
 weather,2026-04-25 00:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-25 00:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-25 00:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
 weather,2026-04-25 00:00:10+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.0023049541630593,0.23240000000000002
-weather,2026-04-25 00:00:13+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2069634913387674,0.23240000000000002
+weather,2026-04-25 00:00:13+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2069634913387674,0.23240000000000002
 weather,2026-04-25 00:00:13+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,DROP,weather_execution_not_selected,0.1752089762855156,0.23240000000000002
-weather,2026-04-25 00:00:13+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_execution_not_selected,0.1348612261029305,0.23240000000000002
+weather,2026-04-25 00:00:13+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_below_min_entry_price,0.1348612261029305,0.23240000000000002
 weather,2026-04-25 00:00:13+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C NO,HOLD,DROP,weather_execution_not_selected,0.1057728587453329,0.23240000000000002
 weather,2026-04-25 00:00:13+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-25 00:00:13+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-25 00:00:13+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-25 00:00:13+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
-weather,2026-04-25 00:00:13+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_execution_not_selected,0.0119397119060918,0.23240000000000002
+weather,2026-04-25 00:00:13+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_below_min_entry_price,0.0119397119060918,0.23240000000000002
 weather,2026-04-25 00:00:13+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-25 00:00:13+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
 weather,2026-04-25 00:00:13+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.0023049541630593,0.23240000000000002
-weather,2026-04-25 00:00:15+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.2069634913387674,0.23240000000000002
+weather,2026-04-25 00:00:15+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.2069634913387674,0.23240000000000002
 weather,2026-04-25 00:00:15+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,DROP,weather_execution_not_selected,0.1752089762855156,0.23240000000000002
-weather,2026-04-25 00:00:15+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_execution_not_selected,0.1348612261029305,0.23240000000000002
+weather,2026-04-25 00:00:15+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_below_min_entry_price,0.1348612261029305,0.23240000000000002
 weather,2026-04-25 00:00:15+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C NO,HOLD,DROP,weather_execution_not_selected,0.1057728587453329,0.23240000000000002
 weather,2026-04-25 00:00:15+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-25 00:00:15+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0434566204519446,0.23240000000000002
+weather,2026-04-25 00:00:15+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0434566204519446,0.23240000000000002
 weather,2026-04-25 00:00:15+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
-weather,2026-04-25 00:00:15+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_execution_not_selected,0.0119397119060918,0.23240000000000002
+weather,2026-04-25 00:00:15+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_below_min_entry_price,0.0119397119060918,0.23240000000000002
 weather,2026-04-25 00:00:15+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-25 00:00:15+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
 weather,2026-04-25 00:00:15+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.0023049541630593,0.23240000000000002
 weather,2026-04-25 00:00:16+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,DROP,weather_execution_not_selected,0.1752089762855156,0.23240000000000002
-weather,2026-04-25 00:00:16+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1469634913387674,0.23240000000000002
-weather,2026-04-25 00:00:16+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_execution_not_selected,0.1348612261029305,0.23240000000000002
-weather,2026-04-25 00:00:16+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1057728587453328,0.23240000000000002
+weather,2026-04-25 00:00:16+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1469634913387674,0.23240000000000002
+weather,2026-04-25 00:00:16+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_below_min_entry_price,0.1348612261029305,0.23240000000000002
+weather,2026-04-25 00:00:16+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1057728587453328,0.23240000000000002
 weather,2026-04-25 00:00:16+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-25 00:00:16+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0314566204519446,0.23240000000000002
+weather,2026-04-25 00:00:16+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0314566204519446,0.23240000000000002
 weather,2026-04-25 00:00:16+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
-weather,2026-04-25 00:00:16+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_execution_not_selected,0.0119397119060918,0.23240000000000002
+weather,2026-04-25 00:00:16+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_below_min_entry_price,0.0119397119060918,0.23240000000000002
 weather,2026-04-25 00:00:16+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-25 00:00:16+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
 weather,2026-04-25 00:00:16+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.0023049541630593,0.23240000000000002
 weather,2026-04-25 01:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,DROP,weather_execution_not_selected,0.2787089762855156,0.23240000000000002
-weather,2026-04-25 01:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1469634913387674,0.23240000000000002
-weather,2026-04-25 01:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,YES,weather_execution_in_trades,0.1348612261029305,0.23240000000000002
-weather,2026-04-25 01:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1057728587453328,0.23240000000000002
+weather,2026-04-25 01:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1469634913387674,0.23240000000000002
+weather,2026-04-25 01:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_below_min_entry_price,0.1348612261029305,0.23240000000000002
+weather,2026-04-25 01:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1057728587453328,0.23240000000000002
 weather,2026-04-25 01:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_execution_not_selected,0.0979397119060918,0.23240000000000002
 weather,2026-04-25 01:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-25 01:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0314566204519446,0.23240000000000002
+weather,2026-04-25 01:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0314566204519446,0.23240000000000002
 weather,2026-04-25 01:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-25 01:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-25 01:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
 weather,2026-04-25 01:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.0023049541630593,0.23240000000000002
-weather,2026-04-25 01:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,DROP,weather_execution_not_selected,0.2787089762855156,0.23240000000000002
-weather,2026-04-25 01:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1569634913387674,0.23240000000000002
-weather,2026-04-25 01:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_execution_not_selected,0.1408612261029305,0.23240000000000002
+weather,2026-04-25 01:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,NO,weather_candidate_backfill,0.2787089762855156,0.23240000000000002
+weather,2026-04-25 01:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1569634913387674,0.23240000000000002
+weather,2026-04-25 01:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_below_min_entry_price,0.1408612261029305,0.23240000000000002
 weather,2026-04-25 01:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,HOLD,DROP,weather_execution_not_selected,0.1276950458369408,0.23240000000000002
-weather,2026-04-25 01:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1112728587453329,0.23240000000000002
+weather,2026-04-25 01:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1112728587453329,0.23240000000000002
 weather,2026-04-25 01:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_execution_not_selected,0.0979397119060918,0.23240000000000002
 weather,2026-04-25 01:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-25 01:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
-weather,2026-04-25 01:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0124566204519446,0.23240000000000002
+weather,2026-04-25 01:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0124566204519446,0.23240000000000002
 weather,2026-04-25 01:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-25 01:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
 weather,2026-04-25 02:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,NO,weather_candidate_backfill,0.2787089762855156,0.23240000000000002
-weather,2026-04-25 02:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1569634913387674,0.23240000000000002
-weather,2026-04-25 02:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_execution_not_selected,0.1408612261029305,0.23240000000000002
+weather,2026-04-25 02:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1569634913387674,0.23240000000000002
+weather,2026-04-25 02:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_below_min_entry_price,0.1408612261029305,0.23240000000000002
 weather,2026-04-25 02:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,HOLD,DROP,weather_execution_not_selected,0.1276950458369408,0.23240000000000002
-weather,2026-04-25 02:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1112728587453329,0.23240000000000002
+weather,2026-04-25 02:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1112728587453329,0.23240000000000002
 weather,2026-04-25 02:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-25 02:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
-weather,2026-04-25 02:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0124566204519446,0.23240000000000002
+weather,2026-04-25 02:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0124566204519446,0.23240000000000002
 weather,2026-04-25 02:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
-weather,2026-04-25 02:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_execution_not_selected,0.0079397119060918,0.23240000000000002
+weather,2026-04-25 02:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_below_min_entry_price,0.0079397119060918,0.23240000000000002
 weather,2026-04-25 02:00:04+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
 weather,2026-04-25 02:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,DROP,weather_execution_not_selected,0.1677089762855156,0.23240000000000002
-weather,2026-04-25 02:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1569634913387674,0.23240000000000002
-weather,2026-04-25 02:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_execution_not_selected,0.1408612261029305,0.23240000000000002
+weather,2026-04-25 02:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1569634913387674,0.23240000000000002
+weather,2026-04-25 02:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_below_min_entry_price,0.1408612261029305,0.23240000000000002
 weather,2026-04-25 02:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,HOLD,DROP,weather_execution_not_selected,0.1276950458369408,0.23240000000000002
-weather,2026-04-25 02:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1112728587453329,0.23240000000000002
+weather,2026-04-25 02:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1112728587453329,0.23240000000000002
 weather,2026-04-25 02:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-25 02:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
-weather,2026-04-25 02:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0124566204519446,0.23240000000000002
+weather,2026-04-25 02:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0124566204519446,0.23240000000000002
 weather,2026-04-25 02:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
-weather,2026-04-25 02:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_execution_not_selected,0.0079397119060918,0.23240000000000002
+weather,2026-04-25 02:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_below_min_entry_price,0.0079397119060918,0.23240000000000002
 weather,2026-04-25 02:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
 weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,DROP,weather_execution_not_selected,0.1677089762855156,0.23240000000000002
-weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_execution_not_selected,0.1588612261029305,0.23240000000000002
-weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1569634913387674,0.23240000000000002
-weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.1276950458369407,0.23240000000000002
-weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1112728587453329,0.23240000000000002
+weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_below_min_entry_price,0.1588612261029305,0.23240000000000002
+weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1569634913387674,0.23240000000000002
+weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_below_min_entry_price,0.1276950458369407,0.23240000000000002
+weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1112728587453329,0.23240000000000002
 weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
-weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0124566204519446,0.23240000000000002
+weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0124566204519446,0.23240000000000002
 weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
-weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_execution_not_selected,0.0079397119060918,0.23240000000000002
+weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_below_min_entry_price,0.0079397119060918,0.23240000000000002
 weather,2026-04-25 02:00:06+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-25 02:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1769634913387674,0.23240000000000002
+weather,2026-04-25 02:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1769634913387674,0.23240000000000002
 weather,2026-04-25 02:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,DROP,weather_execution_not_selected,0.1677089762855156,0.23240000000000002
-weather,2026-04-25 02:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_execution_not_selected,0.1588612261029305,0.23240000000000002
-weather,2026-04-25 02:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1112728587453329,0.23240000000000002
+weather,2026-04-25 02:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_below_min_entry_price,0.1588612261029305,0.23240000000000002
+weather,2026-04-25 02:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1112728587453329,0.23240000000000002
 weather,2026-04-25 02:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-25 02:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.0526950458369406,0.23240000000000002
 weather,2026-04-25 02:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-25 02:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
-weather,2026-04-25 02:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_execution_not_selected,0.0079397119060918,0.23240000000000002
+weather,2026-04-25 02:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_below_min_entry_price,0.0079397119060918,0.23240000000000002
 weather,2026-04-25 02:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
 weather,2026-04-25 02:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher NO,HOLD,DROP,weather_execution_not_selected,0.0124566204519446,0.23240000000000002
-weather,2026-04-25 02:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1769634913387674,0.23240000000000002
+weather,2026-04-25 02:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1769634913387674,0.23240000000000002
 weather,2026-04-25 02:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,DROP,weather_execution_not_selected,0.1677089762855156,0.23240000000000002
-weather,2026-04-25 02:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,YES,weather_candidate_backfill,0.1588612261029305,0.23240000000000002
-weather,2026-04-25 02:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1112728587453329,0.23240000000000002
+weather,2026-04-25 02:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_below_min_entry_price,0.1588612261029305,0.23240000000000002
+weather,2026-04-25 02:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1112728587453329,0.23240000000000002
 weather,2026-04-25 02:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-25 02:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.0526950458369406,0.23240000000000002
 weather,2026-04-25 02:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-25 02:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
-weather,2026-04-25 02:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_execution_not_selected,0.0079397119060918,0.23240000000000002
+weather,2026-04-25 02:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C YES,HOLD,DROP,weather_below_min_entry_price,0.0079397119060918,0.23240000000000002
 weather,2026-04-25 02:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-25 02:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0004566204519445,0.23240000000000002
-weather,2026-04-25 03:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1769634913387674,0.23240000000000002
+weather,2026-04-25 02:00:08+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0004566204519445,0.23240000000000002
+weather,2026-04-25 03:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1769634913387674,0.23240000000000002
 weather,2026-04-25 03:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,DROP,weather_execution_not_selected,0.1677089762855156,0.23240000000000002
-weather,2026-04-25 03:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_execution_not_selected,0.1588612261029305,0.23240000000000002
-weather,2026-04-25 03:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1112728587453329,0.23240000000000002
+weather,2026-04-25 03:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_below_min_entry_price,0.1588612261029305,0.23240000000000002
+weather,2026-04-25 03:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1112728587453329,0.23240000000000002
 weather,2026-04-25 03:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-25 03:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,HOLD,DROP,weather_execution_not_selected,0.0526950458369406,0.23240000000000002
 weather,2026-04-25 03:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0265602880939082,0.23240000000000002
 weather,2026-04-25 03:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-25 03:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-25 03:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-25 03:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0004566204519445,0.23240000000000002
+weather,2026-04-25 03:00:05+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0004566204519445,0.23240000000000002
 weather,2026-04-25 03:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,DROP,weather_execution_not_selected,0.1902089762855155,0.23240000000000002
-weather,2026-04-25 03:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_execution_not_selected,0.1769634913387674,0.23240000000000002
-weather,2026-04-25 03:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_execution_not_selected,0.1643612261029305,0.23240000000000002
-weather,2026-04-25 03:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1112728587453329,0.23240000000000002
+weather,2026-04-25 03:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.1769634913387674,0.23240000000000002
+weather,2026-04-25 03:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_below_min_entry_price,0.1643612261029305,0.23240000000000002
+weather,2026-04-25 03:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1112728587453329,0.23240000000000002
 weather,2026-04-25 03:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
 weather,2026-04-25 03:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C NO,HOLD,DROP,weather_execution_not_selected,0.1376950458369407,0.23240000000000002
 weather,2026-04-25 03:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0265602880939082,0.23240000000000002
 weather,2026-04-25 03:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-25 03:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002
 weather,2026-04-25 03:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-14corbelow,14°C or below NO,HOLD,DROP,weather_execution_not_selected,0.0026823908144104,0.23240000000000002
-weather,2026-04-25 03:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0004566204519445,0.23240000000000002
-weather,2026-04-25 03:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,NO,weather_candidate_backfill,0.3569634913387674,0.23240000000000002
+weather,2026-04-25 03:00:07+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0004566204519445,0.23240000000000002
+weather,2026-04-25 03:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-21c,21°C NO,NO,DROP,weather_no_immediate_above_forecast_bin,0.3569634913387674,0.23240000000000002
 weather,2026-04-25 03:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-22c,22°C NO,NO,NO,weather_candidate_backfill,0.1902089762855155,0.23240000000000002
-weather,2026-04-25 03:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,YES,weather_candidate_backfill,0.1643612261029305,0.23240000000000002
-weather,2026-04-25 03:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,YES,YES,weather_candidate_backfill,0.1376950458369407,0.23240000000000002
-weather,2026-04-25 03:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_execution_not_selected,0.1112728587453329,0.23240000000000002
+weather,2026-04-25 03:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-19c,19°C YES,YES,DROP,weather_below_min_entry_price,0.1643612261029305,0.23240000000000002
+weather,2026-04-25 03:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-20c,20°C YES,YES,DROP,weather_below_min_entry_price,0.1376950458369407,0.23240000000000002
+weather,2026-04-25 03:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-18c,18°C YES,HOLD,DROP,weather_below_min_entry_price,0.1112728587453329,0.23240000000000002
 weather,2026-04-25 03:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-17c,17°C NO,HOLD,DROP,weather_execution_not_selected,0.0597519445840238,0.23240000000000002
-weather,2026-04-25 03:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_execution_not_selected,0.0334566204519446,0.23240000000000002
+weather,2026-04-25 03:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-24corhigher,24°C or higher YES,HOLD,DROP,weather_below_min_entry_price,0.0334566204519446,0.23240000000000002
 weather,2026-04-25 03:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-23c,23°C NO,HOLD,DROP,weather_execution_not_selected,0.0265602880939082,0.23240000000000002
 weather,2026-04-25 03:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-16c,16°C NO,HOLD,DROP,weather_execution_not_selected,0.025433905949791,0.23240000000000002
 weather,2026-04-25 03:00:09+0000,highest-temperature-in-shanghai-on-april-25-2026-15c,15°C NO,HOLD,DROP,weather_execution_not_selected,0.0084581870450012,0.23240000000000002

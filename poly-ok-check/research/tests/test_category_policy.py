@@ -206,6 +206,76 @@ def test_weather_backfill_enforces_time_gap_per_market_side(tmp_path) -> None:
     ]
 
 
+def test_weather_policy_blocks_low_price_and_immediate_above_forecast_no(tmp_path) -> None:
+    trades = tmp_path / "backtest_trades.csv"
+    trades.write_text(
+        "\n".join(
+            [
+                "timestamp_utc,market_slug,side",
+                "2026-04-24 17:00:04+0000,event-21c,NO",
+                "2026-04-24 18:00:04+0000,event-22c,NO",
+                "2026-04-24 19:00:04+0000,event-19c,YES",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    common_metadata = {"raw_metadata": {"event_slug": "event", "forecast_max_temp_c": 20.2}}
+    reports = [
+        _report(
+            domain="weather",
+            timestamp="2026-04-24 17:00:04+0000",
+            market_id="event-21c",
+            action="NO",
+            edge=0.2,
+            news_score=0.2,
+            metadata=common_metadata,
+        ),
+        _report(
+            domain="weather",
+            timestamp="2026-04-24 18:00:04+0000",
+            market_id="event-22c",
+            action="NO",
+            edge=0.2,
+            news_score=0.2,
+            metadata=common_metadata,
+        ),
+        _report(
+            domain="weather",
+            timestamp="2026-04-24 19:00:04+0000",
+            market_id="event-19c",
+            action="YES",
+            edge=0.2,
+            news_score=0.2,
+            metadata=common_metadata,
+            market_prob=0.03,
+        ),
+    ]
+
+    adjusted, diagnostics = apply_category_policy(
+        reports,
+        policy={
+            "enabled": True,
+            "weather": {
+                "execution_source": "trades_csv",
+                "max_trades_per_event": 3,
+                "max_trades_per_market_side": 3,
+                "min_entry_price": 0.1,
+                "skip_no_immediate_above_forecast_bin": True,
+            },
+        },
+        inputs={"weather": {"trades_csv": trades}},
+        base_dir=tmp_path,
+        config_dir=tmp_path,
+    )
+
+    assert [report.market_id for report in adjusted] == ["event-22c"]
+    assert {row["reason"] for row in diagnostics} == {
+        "weather_execution_in_trades",
+        "weather_no_immediate_above_forecast_bin",
+        "weather_below_min_entry_price",
+    }
+
+
 def test_btc_and_cs2_policy_rules_block_weak_or_repeated_entries() -> None:
     reports = [
         _report(domain="btc", market_id="btc-1", action="NO", edge=0.0025, news_score=0.012),
@@ -243,14 +313,15 @@ def _report(
     edge: float = 0.1,
     news_score: float = 0.0,
     metadata: dict | None = None,
+    market_prob: float = 0.5,
 ) -> DomainReport:
     return DomainReport(
         domain=domain,
         timestamp=timestamp,
         market_id=market_id,
         target=market_id,
-        market_prob=0.5,
-        model_prob=0.5 + edge if action == "YES" else 0.5 - edge,
+        market_prob=market_prob,
+        model_prob=market_prob + edge if action == "YES" else market_prob + edge,
         data_score=0.5,
         news_score=news_score,
         edge=edge,

@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import csv
+import math
+import re
 from collections import Counter
 from dataclasses import replace
 from datetime import datetime
@@ -82,6 +84,7 @@ def _apply_weather_policy(
             continue
 
         action = normalize_action(report.action)
+        risk_reason = _weather_risk_filter_reason(report, action, policy)
         if not trade_keys:
             current[index] = None
             diagnostics.append(_diagnostic(report, "DROP", "weather_trades_csv_missing"))
@@ -90,7 +93,7 @@ def _apply_weather_policy(
         key = _weather_report_trade_key(report, action)
         if key not in accepted_keys:
             current[index] = None
-            diagnostics.append(_diagnostic(report, "DROP", "weather_execution_not_selected"))
+            diagnostics.append(_diagnostic(report, "DROP", risk_reason or "weather_execution_not_selected"))
             continue
 
         event_slug = _event_slug(report)
@@ -140,6 +143,8 @@ def _weather_accepted_keys(
         key = _weather_report_trade_key(report, action)
         if key not in trade_keys:
             continue
+        if _weather_risk_filter_reason(report, action, policy):
+            continue
         if _weather_policy_limit_hit(report, action, event_counts, market_side_counts, max_per_event, max_per_market_side):
             continue
         accepted.add(key)
@@ -168,6 +173,8 @@ def _weather_accepted_keys(
         key = _weather_report_trade_key(report, action)
         if key in accepted or key in trade_keys:
             continue
+        if _weather_risk_filter_reason(report, action, policy):
+            continue
         if safe_float(report.edge) < min_edge or safe_float(report.news_score) < min_news_score:
             continue
         if _weather_policy_limit_hit(report, action, event_counts, market_side_counts, max_per_event, max_per_market_side):
@@ -181,6 +188,24 @@ def _weather_accepted_keys(
         _record_weather_market_side_time(report, action, market_side_times)
 
     return accepted, reasons
+
+
+def _weather_risk_filter_reason(report: DomainReport, action: str, policy: dict[str, Any]) -> str:
+    min_entry_price = float(policy.get("min_entry_price", 0.0) or 0.0)
+    if min_entry_price > 0.0 and safe_float(report.market_prob) < min_entry_price:
+        return "weather_below_min_entry_price"
+
+    min_no_model_prob = float(policy.get("min_no_model_prob", 0.0) or 0.0)
+    if action == "NO" and min_no_model_prob > 0.0 and safe_float(report.model_prob) < min_no_model_prob:
+        return "weather_no_below_min_model_prob"
+
+    if action == "NO" and policy.get("skip_no_immediate_above_forecast_bin", False):
+        forecast = _weather_forecast_temp(report)
+        label = _weather_market_label_temp(report)
+        if forecast is not None and label is not None and label == math.floor(forecast) + 1:
+            return "weather_no_immediate_above_forecast_bin"
+
+    return ""
 
 
 def _weather_policy_limit_hit(
@@ -378,6 +403,27 @@ def _event_slug(report: DomainReport) -> str:
     market_id = _clean_text(report.market_id)
     parts = market_id.rsplit("-", 1)
     return parts[0] if len(parts) == 2 else market_id
+
+
+def _weather_forecast_temp(report: DomainReport) -> float | None:
+    raw_metadata = report.metadata.get("raw_metadata")
+    if isinstance(raw_metadata, dict):
+        value = raw_metadata.get("forecast_max_temp_c")
+        if value is not None and str(value).strip() != "":
+            return safe_float(value)
+    value = report.metadata.get("forecast_max_temp_c")
+    if value is not None and str(value).strip() != "":
+        return safe_float(value)
+    return None
+
+
+def _weather_market_label_temp(report: DomainReport) -> int | None:
+    for value in (report.market_id, report.target, report.metadata.get("market_label")):
+        text = _clean_text(value).lower()
+        match = re.search(r"(?<!\d)(\d+)\s*(?:c|°c|｡)", text)
+        if match:
+            return int(match.group(1))
+    return None
 
 
 def _resolve_optional(value: str | Path | None, base_dir: Path, config_dir: Path) -> Path | None:
