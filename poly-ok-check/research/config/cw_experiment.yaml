@@ -4,16 +4,19 @@
   "inputs": {
     "acy_news": {
       "enabled": true,
-      "news_output_dirs": [
-        "outputs_btc_window",
-        "outputs_cs2_window",
-        "outputs_weather_window"
-      ],
-      "signals_csv": "research/data/external/dia_btc/signals.csv",
+      "signals_csv": "research/data/external/dia_btc/signals_multi_market.csv",
       "evidence_jsonl": "research/data/external/dia_btc/evidence.jsonl",
-      "outcome_csv": "research/data/external/outcomes/btc_5m_outcome.csv",
+      "outcome_csv": "research/data/external/outcomes/btc_5m_outcome_multi_market.csv",
       "domains": ["btc", "cs2", "weather"],
-      "market_prob_default": 0.5
+      "market_prob_default": 0.5,
+      "btc_market_generation": {
+        "source_signals_csv": "research/data/external/dia_btc/signals.csv",
+        "rule": "rolling 5-minute BTC up/down windows from one DIA news stance",
+        "start": "2026-05-06T18:25:00Z",
+        "count": 24,
+        "step_minutes": 5,
+        "horizon_minutes": 5
+      }
     },
     "weather": {
       "enabled": true,

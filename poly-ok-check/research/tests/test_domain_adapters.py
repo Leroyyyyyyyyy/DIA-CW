@@ -8,6 +8,7 @@ from research.adapters.acy_news_adapter import load_acy_news_reports
 from research.adapters.cs2_adapter import load_cs2_reports
 from research.adapters.weather_adapter import load_weather_reports
 from research.evaluation.outcomes import load_yes_outcomes_csv
+from research.run.build_btc_multi_market_signals import build_btc_multi_market_signal_rows
 from research.run.fetch_btc_5m_outcomes import build_btc_outcome_rows, write_btc_outcome_csv
 
 
@@ -248,6 +249,88 @@ def test_btc_outcome_fetcher_writes_csv_and_resolver_reads(tmp_path) -> None:
 
     outcomes = load_yes_outcomes_csv(out)
     assert outcomes == {"btc_5m_up_down": 0.0}
+
+
+def test_btc_multi_market_builder_expands_source_signal(tmp_path) -> None:
+    signals = tmp_path / "signals.csv"
+    pd.DataFrame(
+        [
+            {
+                "generated_at": "2026-05-06T18:23:27Z",
+                "domain": "btc",
+                "target": "BTC near-term",
+                "direction_score": -0.1,
+                "probability_delta": 0.02,
+                "relevance": 0.5,
+                "confidence": 0.9,
+                "metadata": json.dumps(
+                    {
+                        "market_id": "btc_5m_up_down",
+                        "market_prob": 0.5,
+                        "time_window": {"as_of": "2026-05-06T18:23:27Z"},
+                    }
+                ),
+                "top_evidence": json.dumps([{"id": "ev_btc_001"}]),
+                "outcome_scores": json.dumps({"long": -0.1, "short": 0.1}),
+            }
+        ]
+    ).to_csv(signals, index=False)
+
+    rows = build_btc_multi_market_signal_rows(
+        signals,
+        decision_times=["2026-05-06T18:25:00Z", "2026-05-06T18:30:00Z"],
+    )
+
+    assert len(rows) == 2
+    assert {row["action"] for row in rows} == {"AUTO"}
+    metadata = [json.loads(row["metadata"]) for row in rows]
+    assert {item["market_id"] for item in metadata} == {
+        "btc_5m_up_down_20260506T182500Z",
+        "btc_5m_up_down_20260506T183000Z",
+    }
+    assert metadata[0]["time_window"]["as_of"] == "2026-05-06T18:25:00Z"
+    assert metadata[0]["market_window"]["end_at"] == "2026-05-06T18:30:00Z"
+    assert metadata[0]["source_signal_market_id"] == "btc_5m_up_down"
+    assert metadata[0]["rolling_window_count"] == 2
+
+
+def test_btc_outcome_fetcher_handles_multiple_markets(tmp_path) -> None:
+    signals = tmp_path / "signals.csv"
+    rows = []
+    for as_of in ["2026-05-06T18:25:00Z", "2026-05-06T18:30:00Z"]:
+        rows.append(
+            {
+                "generated_at": as_of,
+                "domain": "btc",
+                "target": "BTC near-term",
+                "direction_score": 0.1,
+                "probability_delta": 0.02,
+                "relevance": 0.5,
+                "confidence": 0.9,
+                "metadata": json.dumps(
+                    {
+                        "market_id": f"btc_5m_up_down_{as_of[11:16].replace(':', '')}",
+                        "time_window": {"as_of": as_of},
+                    }
+                ),
+                "top_evidence": "[]",
+                "outcome_scores": "{}",
+            }
+        )
+    pd.DataFrame(rows).to_csv(signals, index=False)
+
+    outcome_rows = build_btc_outcome_rows(
+        signals,
+        fetcher=lambda as_of, end_at: {
+            "start_price": 100.0,
+            "end_price": 101.0 if as_of.minute == 25 else 99.0,
+            "source": "test",
+            "source_symbol": "BTC-TEST",
+        },
+    )
+
+    assert [row["winning_side"] for row in outcome_rows] == ["YES", "NO"]
+    assert [row["market_id"] for row in outcome_rows] == ["btc_5m_up_down_1825", "btc_5m_up_down_1830"]
 
 
 def test_cs2_adapter_uses_timeline_decisions(tmp_path) -> None:
