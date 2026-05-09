@@ -1,5 +1,15 @@
 # Polyquant 仓库整合总说明
 
+## 最新状态（2026-05-09）
+
+- `main.pdf` 已完成论文第 6-8 页的 `[P]` 填充；原 123 个占位符已全部替换。
+- 填充数据只来自统一 evaluation 输出：`poly-ok-check\research\runs\cw_final\`。
+- 验证命令 `pdftotext main.pdf - | Select-String "\[P\]"` 结果为 0，说明 PDF 中已无剩余 `[P]`。
+- Table I 当前主要结果：`market_only` P/L = 18.420966，`data_only` P/L = 13.171367，`news_only` P/L = 4.0，`data_news` P/L = 17.171367，`proposed_agent` P/L = 13.786171。
+- Table II 当前 domain 结果：CS2 P/L = 4.215721，BTC P/L = 4.0，Weather P/L = 5.57045；三个 domain 的 proposed-agent P/L 都已为正。
+- Table III/IV 和正文 Discussion 也已从 `table3_threshold.csv`、`table4_examples.csv`、`paper_placeholders.md` 对齐填入 `main.pdf`。
+- Table IV 的 `Market` 列因 PDF 表格宽度有限，PDF 中使用短标签；完整 `market_id` 仍以 `table4_examples.csv` 为准。
+
 ## 1. 当前结论
 
 - 最终主仓库用：`D:\Polyquant\poly-ok-check`
