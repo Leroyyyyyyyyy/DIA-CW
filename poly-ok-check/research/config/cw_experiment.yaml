@@ -1,6 +1,26 @@
 {
   "operating_threshold": 0.5,
   "threshold_grid": [0.25, 0.5, 0.75, 1.0],
+  "policy": {
+    "enabled": true,
+    "btc": {
+      "market_type": "rolling_binary",
+      "min_edge": 0.002,
+      "min_news_score": 0.01,
+      "max_trades_per_market": 1
+    },
+    "cs2": {
+      "market_type": "single_match_binary",
+      "max_trades_per_market_side": 1,
+      "switch_buffer": 0.03
+    },
+    "weather": {
+      "market_type": "categorical_weather",
+      "execution_source": "trades_csv",
+      "max_trades_per_event": 3,
+      "max_trades_per_market_side": 1
+    }
+  },
   "inputs": {
     "acy_news": {
       "enabled": true,

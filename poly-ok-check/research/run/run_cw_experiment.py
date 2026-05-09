@@ -9,6 +9,7 @@ from research.adapters.acy_news_adapter import load_acy_news_reports
 from research.adapters.cs2_adapter import load_cs2_reports
 from research.adapters.weather_adapter import load_weather_reports
 from research.evaluation.baselines import expand_with_baselines
+from research.evaluation.category_policy import apply_category_policy, write_policy_diagnostics
 from research.evaluation.cw_tables import write_cw_tables, write_unified_reports
 from research.evaluation.news_fusion import fuse_domain_news
 from research.schemas.domain_report import DomainReport
@@ -19,8 +20,16 @@ def main() -> None:
     config_path = Path(args.config)
     config = _load_config(config_path)
     proposed_reports = load_reports(config, base_dir=Path.cwd(), config_dir=config_path.parent)
-    reports = expand_with_baselines(proposed_reports)
     out_dir = Path(args.out_dir)
+    proposed_reports, policy_diagnostics = apply_category_policy(
+        proposed_reports,
+        policy=config.get("policy", {}),
+        inputs=config.get("inputs", {}),
+        base_dir=Path.cwd(),
+        config_dir=config_path.parent,
+    )
+    reports = expand_with_baselines(proposed_reports)
+    diagnostics_path = write_policy_diagnostics(policy_diagnostics, out_dir / "policy_diagnostics.csv")
     unified_path = write_unified_reports(reports, out_dir / "unified_domain_reports.csv")
     table_paths = write_cw_tables(
         reports,
@@ -30,6 +39,7 @@ def main() -> None:
     )
 
     print(f"loaded_reports={len(reports)}")
+    print(f"policy_diagnostics={diagnostics_path}")
     print(f"unified_reports={unified_path}")
     for name, path in table_paths.items():
         print(f"{name}={path}")

@@ -24,6 +24,16 @@ def expand_with_baselines(reports: Iterable[DomainReport]) -> list[DomainReport]
 
 
 def _baseline_report(source: DomainReport, method: str) -> DomainReport:
+    if source.metadata.get("policy_blocked") is True:
+        metadata = dict(source.metadata)
+        metadata.update(
+            {
+                "baseline_source_method": source.method,
+                "baseline_rule": method,
+            }
+        )
+        return replace(source, method=method, action="HOLD", outcome="", pnl=None, metadata=metadata)
+
     side = _candidate_side(source)
     market_prob = clamp01(source.market_prob)
 
