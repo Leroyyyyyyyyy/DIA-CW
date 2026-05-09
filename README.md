@@ -9,6 +9,8 @@
 - Table II 当前 domain 结果：CS2 P/L = 4.215721，BTC P/L = 4.0，Weather P/L = 5.57045；三个 domain 的 proposed-agent P/L 都已为正。
 - Table III/IV 和正文 Discussion 也已从 `table3_threshold.csv`、`table4_examples.csv`、`paper_placeholders.md` 对齐填入 `main.pdf`。
 - Table IV 的 `Market` 列因 PDF 表格宽度有限，PDF 中使用短标签；完整 `market_id` 仍以 `table4_examples.csv` 为准。
+- PMXT execution artifact 导入层已接入代码：`poly-ok-check\research\evaluation\pmxt_execution.py`。runner 会在 category policy 之后读取 PMXT fills/trades，并把 PMXT PnL 覆盖到 `DomainReport.pnl`。
+- 本次没有重跑 PMXT、没有重生成 `research\runs\cw_final\`。当前 PDF 和 CSV 仍保持上一轮已经填好的 evaluation 结果；后续只要 PMXT 产出 fills/trades artifact，再运行 `run_cw_experiment.py` 即可刷新表格。
 
 ## 1. 当前结论
 
@@ -65,6 +67,7 @@ PMXT / Nautilus replay layer
 
 poly-ok-check evaluation layer
 -> 负责读取三域 signal/report，计算 baselines、coverage、Brier、hit rate、switch/exit、Table I-IV
+-> 现在也负责读取 PMXT execution artifact，并在存在 PMXT fills/trades 时优先使用 PMXT PnL
 ```
 
 复现不能靠手工拼数字。每个 `[P]` 应来自：
@@ -170,6 +173,42 @@ D:\Polyquant\vendor\prediction-market-backtesting\output\
 ```
 
 `poly-ok-check\research\backtest` 可以保留为轻量研究/汇总辅助，但当前论文里 P/L、fills、HTML report、PMXT replay 这类回测证据，应优先按 `backtestreadme.md` 这条链路产生。
+
+当前代码接入点：
+
+```text
+poly-ok-check\research\evaluation\pmxt_execution.py
+poly-ok-check\research\run\run_cw_experiment.py
+poly-ok-check\research\config\cw_experiment.yaml
+poly-ok-check\research\evaluation\cw_tables.py
+```
+
+执行顺序现在是：
+
+```text
+load_reports
+-> fuse_domain_news
+-> apply_category_policy
+-> apply_pmxt_execution
+-> expand_with_baselines
+-> write_unified_reports / write_cw_tables
+```
+
+`pmxt_execution` 默认读取这些 artifact 路径；缺失时不报错、不改变当前 `cw_final`：
+
+```text
+D:\Polyquant\vendor\prediction-market-backtesting\output\pmxt_fills.csv
+D:\Polyquant\vendor\prediction-market-backtesting\output\pmxt_executions.jsonl
+D:\Polyquant\vendor\prediction-market-backtesting\output\pmxt_trades.json
+```
+
+支持的最小字段是：
+
+```text
+domain,timestamp,market_id,side,pnl,outcome,fill_price,quantity
+```
+
+其中 `market_id` 也可以叫 `market_slug`，`side` 也可以叫 `action`。一旦 artifact 存在，`pmxt_execution.py` 会按 domain、market、side、timestamp 匹配当前 `DomainReport`，把 PMXT 的 `pnl` 写进报告；`cw_tables.py` 会优先使用这个 `pnl`，没有 PMXT PnL 时才回退到固定 stake 估算。
 
 `acy_news(1)` 里的 `backtest` 更像 historical signal collection：按历史 `as_of` 时间重复生成 signals/evidence，但没有完整盘口回放、成交、持仓和 PnL。因此它适合当 news/BTC signal module，不适合当最终主回测。
 

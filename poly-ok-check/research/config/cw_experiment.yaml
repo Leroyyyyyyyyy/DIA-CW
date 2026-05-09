@@ -33,6 +33,31 @@
       }
     }
   },
+  "pmxt_execution": {
+    "enabled": true,
+    "required": false,
+    "replace_action_with_execution": true,
+    "strict_execution_set": false,
+    "artifacts": [
+      {
+        "name": "pmxt_fills_csv",
+        "format": "csv",
+        "path": "../../vendor/prediction-market-backtesting/output/pmxt_fills.csv"
+      },
+      {
+        "name": "pmxt_executions_jsonl",
+        "format": "jsonl",
+        "path": "../../vendor/prediction-market-backtesting/output/pmxt_executions.jsonl"
+      },
+      {
+        "name": "pmxt_trades_json",
+        "format": "json",
+        "path": "../../vendor/prediction-market-backtesting/output/pmxt_trades.json"
+      }
+    ],
+    "replays_json": "../../vendor/prediction-market-backtesting/backtests/private/replays.json",
+    "html_report_glob": "../../vendor/prediction-market-backtesting/output/*.html"
+  },
   "inputs": {
     "acy_news": {
       "enabled": true,

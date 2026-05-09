@@ -12,6 +12,7 @@ from research.evaluation.baselines import expand_with_baselines
 from research.evaluation.category_policy import apply_category_policy, write_policy_diagnostics
 from research.evaluation.cw_tables import write_cw_tables, write_unified_reports
 from research.evaluation.news_fusion import fuse_domain_news
+from research.evaluation.pmxt_execution import apply_pmxt_execution, write_pmxt_execution_diagnostics
 from research.schemas.domain_report import DomainReport
 
 
@@ -28,8 +29,18 @@ def main() -> None:
         base_dir=Path.cwd(),
         config_dir=config_path.parent,
     )
+    proposed_reports, pmxt_diagnostics = apply_pmxt_execution(
+        proposed_reports,
+        pmxt_config=config.get("pmxt_execution", {}),
+        base_dir=Path.cwd(),
+        config_dir=config_path.parent,
+    )
     reports = expand_with_baselines(proposed_reports)
     diagnostics_path = write_policy_diagnostics(policy_diagnostics, out_dir / "policy_diagnostics.csv")
+    pmxt_diagnostics_path = write_pmxt_execution_diagnostics(
+        pmxt_diagnostics,
+        out_dir / "pmxt_execution_diagnostics.csv",
+    )
     unified_path = write_unified_reports(reports, out_dir / "unified_domain_reports.csv")
     table_paths = write_cw_tables(
         reports,
@@ -40,6 +51,7 @@ def main() -> None:
 
     print(f"loaded_reports={len(reports)}")
     print(f"policy_diagnostics={diagnostics_path}")
+    print(f"pmxt_execution_diagnostics={pmxt_diagnostics_path}")
     print(f"unified_reports={unified_path}")
     for name, path in table_paths.items():
         print(f"{name}={path}")

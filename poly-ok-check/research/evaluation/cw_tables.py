@@ -145,6 +145,9 @@ def _brier(row: pd.Series) -> float | None:
 
 
 def _pnl(row: pd.Series) -> float:
+    provided = _optional_float(row.get("pnl"))
+    if provided is not None:
+        return provided
     result = _selected_result(row)
     if result is None:
         return 0.0
