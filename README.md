@@ -89,7 +89,6 @@ From the repository root:
 
 ```powershell
 cd poly-ok-check
-python -m pip install -r requirements.txt
 $env:PYTHONPATH = (Get-Location).Path
 python -m research.run.run_cw_experiment `
   --config research/config/cw_experiment.yaml `
@@ -118,13 +117,6 @@ Do not edit these generated results by hand when using them as evidence. If
 inputs or policy settings change, regenerate the outputs with the command above.
 
 ## Running Tests
-
-Install the Python dependencies first:
-
-```powershell
-cd poly-ok-check
-python -m pip install -r requirements.txt
-```
 
 Python research tests:
 
