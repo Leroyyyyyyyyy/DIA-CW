@@ -69,11 +69,6 @@ dependency and reference implementation. Local generated reports from that tool
 belong in ignored output folders, not in the main evaluation tables unless they
 are explicitly imported by the evaluation config.
 
-`poly-ok-check/docs/archive/top200/` contains exploratory Polymarket
-leaderboard / trader-behaviour analysis. Top200 was archived as exploratory
-Polymarket leaderboard analysis. It is not part of the final CS2/BTC/weather
-evaluation pipeline.
-
 ## Mapping to the Paper
 
 The paper describes a reactive cross-domain agent rather than three unrelated
