@@ -17,4 +17,3 @@ poly-ok-check/orderbook_*.jsonl
 .env
 hub.prod.toml
 .DS_Store
-codex_pytest_tmp_polyquant/

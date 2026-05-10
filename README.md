@@ -76,7 +76,7 @@ are explicitly imported by the evaluation config.
 From the repository root:
 
 ```powershell
-cd poly-ok-check
+cd DIA-CW
 python -m pip install -r requirements.txt
 ```
 
