@@ -34,18 +34,15 @@ DIA-CW/
 │  ├─ src/                        # Rust runtime and market-system code
 │  ├─ tests/                      # Rust tests
 │  ├─ requirements.txt            # Python research/evaluation dependencies
-│  ├─ research/
-│  │  ├─ adapters/                # Convert domain outputs to DomainReport
-│  │  ├─ backtest/                # Lightweight research/backtest support
-│  │  ├─ config/                  # Coursework evaluation configuration
-│  │  ├─ data/                    # Research inputs and evidence snapshots
-│  │  ├─ evaluation/              # Baselines, policies, and table aggregation
-│  │  ├─ run/                     # Reproducible evaluation entrypoints
-│  │  ├─ runs/                    # Generated evaluation outputs
-│  │  └─ schemas/                 # Shared research data contracts
-│  └─ docs/
-│     ├─ backtesting.md           # PMXT replay/backtesting notes
-│     └─ repo_structure.md        # Additional repository notes
+│  └─ research/
+│     ├─ adapters/                # Convert domain outputs to DomainReport
+│     ├─ backtest/                # Lightweight research/backtest support
+│     ├─ config/                  # Coursework evaluation configuration
+│     ├─ data/                    # Research inputs and evidence snapshots
+│     ├─ evaluation/              # Baselines, policies, and table aggregation
+│     ├─ run/                     # Reproducible evaluation entrypoints
+│     ├─ runs/                    # Generated evaluation outputs
+│     └─ schemas/                 # Shared research data contracts
 └─ vendor/
    └─ prediction-market-backtesting/
 ```
