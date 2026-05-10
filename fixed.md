@@ -23,7 +23,7 @@
 - [x] Re-run tests after the preserved-data rerun.
 - [x] Stage only code/docs plus the new run directory.
 - [x] Commit current work to local branch `fixed`.
-- [ ] Push local branch `fixed` to remote without touching `main`.
+- [x] Push local branch `fixed` to remote without touching `main`.
 
 ## Progress
 
@@ -88,7 +88,8 @@
 - Confirmed `origin` points to `https://github.com/Leroyyyyyyyyy/DIA-CW.git`.
 - Confirmed no remote branch named `fixed` currently exists.
 - Created local branch `fixed`.
-- Created local commit `d503658` with message `Fix evaluation evidence outputs`.
+- Created local commit `8f9dfa9` with message `Fix evaluation evidence outputs`.
+- Pushed branch `fixed` to `origin/fixed`; `main` was not pushed.
 
 ## Commands Run
 - `git status --short --branch`
@@ -106,6 +107,8 @@
 - `git ls-remote --heads origin fixed`
 - `git switch -c fixed`
 - `git commit -m "Fix evaluation evidence outputs"`
+- `git commit --amend --no-edit`
+- `git push -u origin fixed`
 
 ## Generated Outputs
 - `poly-ok-check\research\runs\cw_final\table1_overall.csv`
