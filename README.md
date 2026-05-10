@@ -28,8 +28,6 @@ cross-domain selector against simpler baselines using the same reporting format.
 ```text
 DIA-CW/
 ├─ README.md
-├─ paper/
-│  └─ main.pdf
 ├─ poly-ok-check/
 │  ├─ src/                         # Rust runtime and market-system code
 │  ├─ tests/                       # Rust tests
