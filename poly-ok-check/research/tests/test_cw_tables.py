@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 import pandas as pd
 
 from research.evaluation.baselines import expand_with_baselines
@@ -49,6 +51,12 @@ def test_write_cw_tables_outputs_paper_csvs(tmp_path) -> None:
     proposed = table1[table1["method"] == "proposed_agent"].iloc[0]
     assert proposed["signals"] == 2
     assert proposed["coverage"] == 1.0
+    assert "return_per_signal" in table1.columns
+    table4 = pd.read_csv(paths["table4"])
+    assert "score" in table4.columns
+    placeholders = paths["placeholders"].read_text(encoding="utf-8")
+    assert "proposed_return_per_signal" in placeholders
+    assert "domain_switches" in placeholders
 
 
 def test_baseline_expansion_fills_table1_methods(tmp_path) -> None:
@@ -175,3 +183,100 @@ def test_news_fusion_attaches_acy_news_without_duplicating_domain_rows() -> None
     assert fused[0].metadata["news_source"] == "acy_news"
     assert fused[0].metadata["news_signal_market_id"] == "cs2-news"
     assert fused[0].metadata["news_baseline_eligible"] is False
+
+
+def test_write_cw_tables_exports_action_trace_and_counts(tmp_path) -> None:
+    reports = [
+        DomainReport(
+            domain="cs2",
+            timestamp="2026-05-01T00:00:00Z",
+            market_id="cs2-hold",
+            target="CS2 hold",
+            market_prob=0.5,
+            model_prob=0.5,
+            data_score=0.1,
+            news_score=0.0,
+            edge=0.0,
+            action="HOLD",
+            outcome="",
+        ),
+        _scored_report("cs2", "2026-05-01T00:01:00Z", "cs2-enter", 0.5),
+        _scored_report("cs2", "2026-05-01T00:02:00Z", "cs2-maintain", 0.5),
+        _scored_report("btc", "2026-05-01T00:03:00Z", "btc-switch", 0.8),
+        _scored_report("weather", "2026-05-01T00:04:00Z", "weather-exit", 0.0),
+    ]
+
+    paths = write_cw_tables(reports, tmp_path, operating_threshold=2.0)
+
+    trace = pd.read_csv(paths["action_trace"])
+    counts = json.loads(paths["action_counts"].read_text(encoding="utf-8"))
+
+    assert list(trace["action_type"]) == ["hold", "enter", "maintain", "switch", "exit"]
+    assert counts["hold"] == 1
+    assert counts["enter"] == 1
+    assert counts["maintain"] == 1
+    assert counts["switch"] == 1
+    assert counts["exit"] == 1
+    assert set(
+        [
+            "timestamp",
+            "cs2_score",
+            "btc_score",
+            "weather_score",
+            "selected_domain",
+            "previous_domain",
+            "action_type",
+            "reason",
+        ]
+    ).issubset(trace.columns)
+
+    placeholders = paths["placeholders"].read_text(encoding="utf-8")
+    assert "- domain_switches: 1" in placeholders
+    assert "- exits: 1" in placeholders
+
+
+def test_score_calibration_handles_zero_only_components(tmp_path) -> None:
+    reports = [
+        DomainReport(
+            domain="btc",
+            timestamp="2026-05-01T00:00:00Z",
+            market_id="btc-zero",
+            target="BTC zero score",
+            market_prob=0.5,
+            model_prob=0.5,
+            data_score=0.0,
+            news_score=0.0,
+            edge=0.0,
+            action="YES",
+            outcome="WIN",
+            metadata={"candidate_side": "YES", "yes_outcome": 1.0},
+        )
+    ]
+
+    paths = write_cw_tables(reports, tmp_path)
+    diagnostics = pd.read_csv(paths["calibration"])
+    btc_data = diagnostics[(diagnostics["domain"] == "btc") & (diagnostics["component"] == "data_score")].iloc[0]
+    btc_news = diagnostics[(diagnostics["domain"] == "btc") & (diagnostics["component"] == "news_score")].iloc[0]
+    btc_edge = diagnostics[(diagnostics["domain"] == "btc") & (diagnostics["component"] == "edge")].iloc[0]
+
+    assert btc_data["p95_scale"] == 0.0
+    assert btc_news["p95_scale"] == 0.0
+    assert btc_edge["p95_scale"] == 0.0
+    assert btc_data["positive_count"] == 0
+
+
+def _scored_report(domain: str, timestamp: str, market_id: str, value: float) -> DomainReport:
+    return DomainReport(
+        domain=domain,
+        timestamp=timestamp,
+        market_id=market_id,
+        target=market_id,
+        market_prob=0.4,
+        model_prob=0.8,
+        data_score=value,
+        news_score=value,
+        edge=value,
+        action="YES",
+        outcome="WIN",
+        metadata={"candidate_side": "YES", "yes_outcome": 1.0},
+    )

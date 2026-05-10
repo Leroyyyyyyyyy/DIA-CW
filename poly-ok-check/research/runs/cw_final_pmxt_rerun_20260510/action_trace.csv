@@ -1,0 +1,55 @@
+timestamp,cs2_score,btc_score,weather_score,selected_domain,previous_domain,action_type,reason,selected_market_id,selected_action,selected_score
+2026-04-03T08:20:37Z,2.023018,,,,,hold,no_acted_candidate,,,
+2026-04-03T08:27:48Z,2.035486,,,,,hold,no_acted_candidate,,,
+2026-04-03T08:30:39Z,2.469629,,,cs2,,enter,selected_domain_above_threshold,cs2-run2-omega1-2026-04-03,YES,2.469629
+2026-04-03T08:33:39Z,1.903772,,,,cs2,exit,no_acted_candidate,,,
+2026-04-03T08:35:37Z,2.110614,,,,,hold,no_acted_candidate,,,
+2026-04-03T08:36:37Z,2.055627,,,,,hold,no_acted_candidate,,,
+2026-04-03T08:38:37Z,2.338555,,,cs2,,enter,selected_domain_above_threshold,cs2-run2-omega1-2026-04-03,YES,2.338555
+2026-04-03T08:39:37Z,2.22954,,,,cs2,exit,no_acted_candidate,,,
+2026-04-03T08:41:37Z,2.654412,,,,,hold,no_acted_candidate,,,
+2026-04-03T09:03:38Z,2.086957,,,,,hold,no_acted_candidate,,,
+2026-04-03T09:09:49Z,2.434783,,,cs2,,enter,selected_domain_above_threshold,cs2-run2-omega1-2026-04-03,YES,2.434783
+2026-04-03T09:11:48Z,2.043478,,,,cs2,exit,no_acted_candidate,,,
+2026-04-03T09:28:38Z,2.367967,,,cs2,,enter,selected_domain_above_threshold,cs2-run2-omega1-2026-04-03,YES,2.367967
+2026-04-03T10:08:55Z,1.882353,,,,cs2,exit,no_acted_candidate,,,
+2026-04-03T10:10:38Z,2.153453,,,,,hold,no_acted_candidate,,,
+2026-04-03T10:15:38Z,1.881714,,,,,hold,no_acted_candidate,,,
+2026-04-03T10:18:38Z,2.664322,,,cs2,,enter,selected_domain_above_threshold,cs2-run2-omega1-2026-04-03,YES,2.664322
+2026-04-03T10:25:39Z,1.94789,,,,cs2,exit,no_acted_candidate,,,
+2026-04-03T10:27:39Z,1.9789,,,,,hold,no_acted_candidate,,,
+2026-04-24 17:00:08+0000,,,1.949413,weather,,enter,selected_domain_above_threshold,highest-temperature-in-shanghai-on-april-25-2026-20c,NO,1.949413
+2026-04-24 18:00:08+0000,,,1.949413,weather,weather,maintain,selected_domain_remains_best,highest-temperature-in-shanghai-on-april-25-2026-20c,NO,1.949413
+2026-04-24 19:00:07+0000,,,1.985293,weather,weather,maintain,selected_domain_remains_best,highest-temperature-in-shanghai-on-april-25-2026-20c,NO,1.985293
+2026-04-24 20:00:05+0000,,,1.985293,weather,weather,maintain,selected_domain_remains_best,highest-temperature-in-shanghai-on-april-25-2026-20c,NO,1.985293
+2026-04-24 21:00:12+0000,,,1.985293,weather,weather,maintain,selected_domain_remains_best,highest-temperature-in-shanghai-on-april-25-2026-20c,NO,1.985293
+2026-04-24 22:00:06+0000,,,1.985293,weather,weather,maintain,selected_domain_remains_best,highest-temperature-in-shanghai-on-april-25-2026-20c,NO,1.985293
+2026-04-24 23:00:09+0000,,,2.092243,weather,weather,maintain,selected_domain_remains_best,highest-temperature-in-shanghai-on-april-25-2026-22c,NO,2.092243
+2026-04-25 00:00:10+0000,,,2.092243,weather,weather,maintain,selected_domain_remains_best,highest-temperature-in-shanghai-on-april-25-2026-22c,NO,2.092243
+2026-04-25 01:00:05+0000,,,3,weather,weather,maintain,selected_domain_remains_best,highest-temperature-in-shanghai-on-april-25-2026-22c,NO,3
+2026-04-25 02:00:04+0000,,,3,weather,weather,maintain,selected_domain_remains_best,highest-temperature-in-shanghai-on-april-25-2026-22c,NO,3
+2026-04-25 03:00:09+0000,,,2.364929,weather,weather,maintain,selected_domain_remains_best,highest-temperature-in-shanghai-on-april-25-2026-22c,NO,2.364929
+2026-05-06T18:25:00Z,,2,,btc,weather,switch,selected_domain_changed,btc_5m_up_down_20260506T182500Z,NO,2
+2026-05-06T18:30:00Z,,2,,btc,btc,maintain,selected_domain_remains_best,btc_5m_up_down_20260506T183000Z,NO,2
+2026-05-06T18:35:00Z,,2,,btc,btc,maintain,selected_domain_remains_best,btc_5m_up_down_20260506T183500Z,NO,2
+2026-05-06T18:40:00Z,,2,,btc,btc,maintain,selected_domain_remains_best,btc_5m_up_down_20260506T184000Z,NO,2
+2026-05-06T18:45:00Z,,2,,btc,btc,maintain,selected_domain_remains_best,btc_5m_up_down_20260506T184500Z,NO,2
+2026-05-06T18:50:00Z,,2,,btc,btc,maintain,selected_domain_remains_best,btc_5m_up_down_20260506T185000Z,NO,2
+2026-05-06T18:55:00Z,,2,,btc,btc,maintain,selected_domain_remains_best,btc_5m_up_down_20260506T185500Z,NO,2
+2026-05-06T19:00:00Z,,2,,btc,btc,maintain,selected_domain_remains_best,btc_5m_up_down_20260506T190000Z,NO,2
+2026-05-06T19:05:00Z,,2,,btc,btc,maintain,selected_domain_remains_best,btc_5m_up_down_20260506T190500Z,NO,2
+2026-05-06T19:10:00Z,,2,,btc,btc,maintain,selected_domain_remains_best,btc_5m_up_down_20260506T191000Z,NO,2
+2026-05-06T19:15:00Z,,2,,btc,btc,maintain,selected_domain_remains_best,btc_5m_up_down_20260506T191500Z,NO,2
+2026-05-06T19:20:00Z,,2,,btc,btc,maintain,selected_domain_remains_best,btc_5m_up_down_20260506T192000Z,NO,2
+2026-05-06T19:25:00Z,,2,,,btc,exit,no_acted_candidate,,,
+2026-05-06T19:30:00Z,,2,,,,hold,no_acted_candidate,,,
+2026-05-06T19:35:00Z,,2,,,,hold,no_acted_candidate,,,
+2026-05-06T19:40:00Z,,2,,,,hold,no_acted_candidate,,,
+2026-05-06T19:45:00Z,,2,,,,hold,no_acted_candidate,,,
+2026-05-06T19:50:00Z,,2,,,,hold,no_acted_candidate,,,
+2026-05-06T19:55:00Z,,2,,,,hold,no_acted_candidate,,,
+2026-05-06T20:00:00Z,,2,,,,hold,no_acted_candidate,,,
+2026-05-06T20:05:00Z,,2,,,,hold,no_acted_candidate,,,
+2026-05-06T20:10:00Z,,2,,,,hold,no_acted_candidate,,,
+2026-05-06T20:15:00Z,,2,,,,hold,no_acted_candidate,,,
+2026-05-06T20:20:00Z,,2,,,,hold,no_acted_candidate,,,
