@@ -28,20 +28,24 @@ cross-domain selector against simpler baselines using the same reporting format.
 ```text
 DIA-CW/
 ├─ README.md
+├─ paper/
+│  └─ main.pdf                    # Coursework paper
 ├─ poly-ok-check/
-│  ├─ src/                         # Rust runtime and market-system code
-│  ├─ tests/                       # Rust tests
+│  ├─ src/                        # Rust runtime and market-system code
+│  ├─ tests/                      # Rust tests
+│  ├─ requirements.txt            # Python research/evaluation dependencies
 │  ├─ research/
-│  │  ├─ adapters/                 # Convert domain outputs to DomainReport
-│  │  ├─ backtest/                 # Lightweight research/backtest support
-│  │  ├─ config/                   # Coursework evaluation configuration
-│  │  ├─ data/                     # Research inputs and evidence snapshots
-│  │  ├─ evaluation/               # Baselines, policies, and table aggregation
-│  │  ├─ run/                      # Reproducible evaluation entrypoints
-│  │  ├─ runs/                     # Generated evaluation outputs
-│  │  └─ schemas/                  # Shared research data contracts
+│  │  ├─ adapters/                # Convert domain outputs to DomainReport
+│  │  ├─ backtest/                # Lightweight research/backtest support
+│  │  ├─ config/                  # Coursework evaluation configuration
+│  │  ├─ data/                    # Research inputs and evidence snapshots
+│  │  ├─ evaluation/              # Baselines, policies, and table aggregation
+│  │  ├─ run/                     # Reproducible evaluation entrypoints
+│  │  ├─ runs/                    # Generated evaluation outputs
+│  │  └─ schemas/                 # Shared research data contracts
 │  └─ docs/
-│     └─ backtesting.md            # PMXT replay/backtesting notes
+│     ├─ backtesting.md           # PMXT replay/backtesting notes
+│     └─ repo_structure.md        # Additional repository notes
 └─ vendor/
    └─ prediction-market-backtesting/
 ```
@@ -67,12 +71,25 @@ dependency and reference implementation. Local generated reports from that tool
 belong in ignored output folders, not in the main evaluation tables unless they
 are explicitly imported by the evaluation config.
 
+## Installing Python Dependencies
+
+From the repository root:
+
+```powershell
+cd poly-ok-check
+python -m pip install -r requirements.txt
+```
+
+Using a virtual environment is recommended, but not required. If you use one,
+activate it before installing the dependencies.
+
 ## Reproducing the Coursework Evaluation
 
 From the repository root:
 
 ```powershell
 cd poly-ok-check
+python -m pip install -r requirements.txt
 $env:PYTHONPATH = (Get-Location).Path
 python -m research.run.run_cw_experiment `
   --config research/config/cw_experiment.yaml `
@@ -101,6 +118,13 @@ Do not edit these generated results by hand when using them as evidence. If
 inputs or policy settings change, regenerate the outputs with the command above.
 
 ## Running Tests
+
+Install the Python dependencies first:
+
+```powershell
+cd poly-ok-check
+python -m pip install -r requirements.txt
+```
 
 Python research tests:
 
