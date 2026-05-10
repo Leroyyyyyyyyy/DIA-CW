@@ -69,21 +69,6 @@ dependency and reference implementation. Local generated reports from that tool
 belong in ignored output folders, not in the main evaluation tables unless they
 are explicitly imported by the evaluation config.
 
-## Mapping to the Paper
-
-The paper describes a reactive cross-domain agent rather than three unrelated
-prediction scripts.
-
-- System design: Rust runtime components, domain adapters, and the shared
-  `DomainReport` schema.
-- Methodology: baseline expansion and proposed-agent evaluation in
-  `poly-ok-check/research/evaluation/`.
-- Results: generated from `poly-ok-check/research/runs/cw_final/`.
-- Execution-level research support: PMXT replay notes in
-  `poly-ok-check/docs/backtesting.md`.
-
-The paper PDF is stored at `paper/main.pdf`.
-
 ## Reproducing the Coursework Evaluation
 
 From the repository root:
