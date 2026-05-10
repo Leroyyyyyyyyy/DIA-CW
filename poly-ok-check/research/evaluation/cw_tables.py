@@ -1,3 +1,10 @@
+"""Coursework table generation utilities.
+
+This module generates aggregate CSV tables and placeholder values used by the
+coursework paper. It belongs to the research/evaluation pipeline and is not part
+of the live trading runtime.
+"""
+
 from __future__ import annotations
 
 import csv

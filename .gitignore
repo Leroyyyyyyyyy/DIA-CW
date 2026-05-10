@@ -9,6 +9,7 @@ tmp/
 logs/
 output/
 data/pmxt_raws/
+poly-ok-check/orderbook_*.jsonl
 *.pyc
 *.pyo
 *.pdb

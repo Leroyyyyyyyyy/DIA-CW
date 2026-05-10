@@ -1,7 +1,7 @@
 # Polyquant final repository structure
 
 This document defines the target shape for the coursework repository and keeps it
-aligned with `main.pdf`.
+aligned with `paper/main.pdf`.
 
 ## Decision
 
@@ -42,9 +42,13 @@ poly-ok-check/
 │  └─ schemas/                  # Shared Python data contracts
 └─ docs/
    ├─ repo_structure.md
-   ├─ responsibilities.md
-   └─ paper_fill_plan.md
+   ├─ backtesting.md
+   └─ archive/                    # Historical notes and exploratory analysis
 ```
+
+Top200 was archived as exploratory Polymarket leaderboard analysis under
+`docs/archive/top200/`. It is not part of the final CS2/BTC/weather evaluation
+pipeline.
 
 PMXT execution files:
 
@@ -69,8 +73,8 @@ The repository maps to the paper as follows:
   proposed-agent conditions.
 - Section VI Results: `table1_overall.csv`, `table2_by_domain.csv`,
   `table3_threshold.csv`, `table4_examples.csv`.
-- Section VII Discussion: `paper_placeholders.md` supplies highest/lowest/strongest
-  domain statements.
+- Section VII Discussion: the generated `paper_placeholders.md` output supplies
+  highest/lowest/strongest domain statements.
 
 ## Merge rule
 
@@ -78,16 +82,16 @@ Do not make three independent backtest systems compete in the final submission.
 Each domain may keep its own research scripts, but final paper metrics must pass
 through the common `DomainReport` format and the shared evaluation layer.
 
-For execution-level PnL, use the PMXT / Nautilus workflow described in
-`D:\Polyquant\backtestreadme.md`.
+For execution-level PnL, use the PMXT / Nautilus workflow and generated
+artifacts under `vendor/prediction-market-backtesting/`.
 
 ## Main command
 
 The final aggregation entrypoint is:
 
 ```powershell
-cd D:\Polyquant\poly-ok-check
-$env:PYTHONPATH="D:\Polyquant\poly-ok-check"
+cd poly-ok-check
+$env:PYTHONPATH=(Get-Location).Path
 python -m research.run.run_cw_experiment `
   --config research\config\cw_experiment.yaml `
   --out-dir research\runs\cw_final

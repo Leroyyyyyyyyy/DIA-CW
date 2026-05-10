@@ -1,10 +1,8 @@
 # News domain integration point
 
-The source module is currently kept outside this repository at:
-
-```text
-D:\Polyquant\acy_news(1)
-```
+The source module was developed outside this repository. For the final
+submission, this folder documents the integration point and the expected
+signal/evidence outputs.
 
 For the final merge, this domain should provide signal/evidence files and let
 `research.adapters.acy_news_adapter` convert them into `DomainReport` rows.
