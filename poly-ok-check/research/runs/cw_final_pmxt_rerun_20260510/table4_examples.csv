@@ -1,0 +1,5 @@
+case,domain,market_id,market_prob,model_prob,edge,score,action,outcome
+cs2_representative,cs2,cs2-run2-omega1-2026-04-03,0.475,0.57,0.09499999999999997,2.664322250639,YES,WIN
+btc_representative,btc,btc_5m_up_down_20260506T182500Z,0.5,0.5025,0.0024999999999999467,2.0,NO,WIN
+weather_representative,weather,highest-temperature-in-shanghai-on-april-25-2026-22c,0.5915,0.8702089762855156,0.2787089762855156,3.0,NO,WIN
+switch_or_exit_case,btc,btc_5m_up_down_20260506T182500Z,0.5,0.5025,0.0024999999999999467,2.0,NO,WIN

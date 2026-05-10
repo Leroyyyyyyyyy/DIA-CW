@@ -1,0 +1,5 @@
+artifact,status,domain,timestamp,market_id,action,pnl,reason
+../../vendor/prediction-market-backtesting/output/pmxt_fills.csv,missing,,,,HOLD,,pmxt_artifact_missing
+../../vendor/prediction-market-backtesting/output/pmxt_executions.jsonl,missing,,,,HOLD,,pmxt_artifact_missing
+../../vendor/prediction-market-backtesting/output/pmxt_trades.json,missing,,,,HOLD,,pmxt_artifact_missing
+,no_execution_rows,,,,HOLD,,pmxt_optional_noop

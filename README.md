@@ -626,3 +626,13 @@ the experimental results used in the paper tables.
 - 当前 `cw_final` 输出是初版聚合，不是最终论文数值。
 - pytest 在当前 sandbox 遇到 Windows temp 权限问题；手动 smoke 和 `compileall` 已通过，runner 已跑通。
 - 根目录存在一个 `codex_pytest_tmp_polyquant` 权限异常临时目录，是 pytest 创建的，当前 sandbox 无法清理；不影响代码逻辑。
+# 2026-05-10 Evidence Fix Note
+
+The current evidence update is tracked in `fixed.md`.
+
+Key paper-facing correction:
+- Do not claim the proposed agent fully dominates every baseline.
+- Interpret the proposed agent as an auditable calibrated cross-domain opportunity selector.
+- Table IV now requires the generated `score` column from `poly-ok-check/research/runs/cw_final/table4_examples.csv`.
+- Switch and exit counts must come from `poly-ok-check/research/runs/cw_final/action_counts.json`, backed by `action_trace.csv`.
+- Domain scale risk is handled by per-domain positive p95 calibration, documented in `poly-ok-check/docs/paper_evidence_fixes.md`.
