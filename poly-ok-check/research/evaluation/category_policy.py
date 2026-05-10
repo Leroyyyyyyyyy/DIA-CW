@@ -263,7 +263,9 @@ def _apply_btc_policy(
     min_news_score = float(policy.get("min_news_score", 0.0) or 0.0)
     max_signal_age_minutes = float(policy.get("max_signal_age_minutes", 0.0) or 0.0)
     max_per_market = int(policy.get("max_trades_per_market", 0) or 0)
+    max_total_trades = int(policy.get("max_total_trades", 0) or 0)
     market_counts: Counter[str] = Counter()
+    total_trades = 0
 
     for index, report in list(current.items()):
         if report is None or report.domain.lower() != "btc":
@@ -290,8 +292,13 @@ def _apply_btc_policy(
             current[index] = _blocked_report(report, "btc_market_trade_limit")
             diagnostics.append(_diagnostic(report, "HOLD", "btc_market_trade_limit"))
             continue
+        if max_total_trades > 0 and total_trades >= max_total_trades:
+            current[index] = _blocked_report(report, "btc_total_trade_limit")
+            diagnostics.append(_diagnostic(report, "HOLD", "btc_total_trade_limit"))
+            continue
 
         market_counts[report.market_id] += 1
+        total_trades += 1
         current[index] = _with_policy_metadata(report, policy_action=action, reason="btc_policy_pass", blocked=False)
         diagnostics.append(_diagnostic(report, action, "btc_policy_pass"))
 

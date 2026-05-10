@@ -1,6 +1,15 @@
 {
   "operating_threshold": 0.5,
   "threshold_grid": [0.5, 1.0, 1.5, 2.0, 2.5],
+  "agent_state": {
+    "hold_open_domain": true
+  },
+  "baselines": {
+    "data_only": {
+      "min_data_score": 0.01,
+      "min_edge": 0.02
+    }
+  },
   "policy": {
     "enabled": true,
     "btc": {
@@ -8,6 +17,7 @@
       "min_edge": 0.002,
       "min_news_score": 0.01,
       "max_signal_age_minutes": 60,
+      "max_total_trades": 4,
       "max_trades_per_market": 1
     },
     "cs2": {

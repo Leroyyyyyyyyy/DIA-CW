@@ -1,0 +1,4 @@
+domain,hit_rate,brier,p_l,signals,coverage,return_per_signal,share
+cs2,1.0,0.152755,4.215721,5,0.2632,0.843144,0.25
+btc,0.75,0.248756,2.0,4,0.1667,0.5,0.2
+weather,1.0,0.027911,5.57045,11,1.0,0.506405,0.55

@@ -350,6 +350,29 @@ def test_btc_policy_blocks_expired_rolling_news_signal() -> None:
     assert {row["reason"] for row in diagnostics} == {"btc_policy_pass", "btc_signal_age_exceeded"}
 
 
+def test_btc_policy_enforces_total_trade_limit() -> None:
+    reports = [
+        _report(domain="btc", timestamp="2026-05-06T18:25:00Z", market_id="btc-1", action="NO", edge=0.0025, news_score=0.012),
+        _report(domain="btc", timestamp="2026-05-06T18:30:00Z", market_id="btc-2", action="NO", edge=0.0025, news_score=0.012),
+    ]
+
+    adjusted, diagnostics = apply_category_policy(
+        reports,
+        policy={
+            "enabled": True,
+            "btc": {
+                "min_edge": 0.002,
+                "min_news_score": 0.01,
+                "max_total_trades": 1,
+            },
+        },
+    )
+
+    assert [report.action for report in adjusted] == ["NO", "HOLD"]
+    assert adjusted[1].metadata["policy_reason"] == "btc_total_trade_limit"
+    assert {row["reason"] for row in diagnostics} == {"btc_policy_pass", "btc_total_trade_limit"}
+
+
 def test_cs2_policy_requires_news_alignment_and_allows_same_side_entries() -> None:
     reports = [
         _report(

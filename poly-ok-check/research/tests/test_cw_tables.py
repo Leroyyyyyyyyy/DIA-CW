@@ -114,6 +114,100 @@ def test_baseline_expansion_fills_table1_methods(tmp_path) -> None:
     assert not baseline_metrics[["hit_rate", "brier"]].isna().any().any()
 
 
+def test_data_only_baseline_is_independent_and_thresholded(tmp_path) -> None:
+    proposed = [
+        DomainReport(
+            domain="cs2",
+            timestamp="2026-04-03T08:10:00Z",
+            market_id="cs2-proposed",
+            target="CS2",
+            market_prob=0.55,
+            model_prob=0.7,
+            data_score=0.7,
+            news_score=0.2,
+            edge=0.15,
+            action="YES",
+            outcome="WIN",
+            metadata={"candidate_side": "YES", "yes_outcome": 1.0},
+        )
+    ]
+    raw = [
+        DomainReport(
+            domain="cs2",
+            timestamp="2026-04-03T08:10:00Z",
+            market_id="cs2-raw",
+            target="CS2 raw",
+            market_prob=0.55,
+            model_prob=0.54,
+            data_score=0.7,
+            news_score=0.0,
+            edge=0.01,
+            action="YES",
+            outcome="WIN",
+            metadata={"candidate_side": "YES"},
+        ),
+        DomainReport(
+            domain="btc",
+            timestamp="2026-05-06T18:25:00Z",
+            market_id="btc-news-only",
+            target="BTC",
+            market_prob=0.5,
+            model_prob=0.6,
+            data_score=0.0,
+            news_score=0.3,
+            edge=0.1,
+            action="YES",
+            outcome="WIN",
+            metadata={"candidate_side": "YES", "yes_outcome": 1.0},
+        ),
+    ]
+
+    expanded = expand_with_baselines(
+        proposed,
+        baseline_reports=raw,
+        baseline_config={"data_only": {"min_data_score": 0.01, "min_edge": 0.02}},
+    )
+    data_only = [report for report in expanded if report.method == "data_only"]
+
+    assert [report.action for report in data_only] == ["HOLD", "HOLD"]
+    assert [report.outcome for report in data_only] == ["", ""]
+
+
+def test_data_only_uses_yes_probability_space_not_source_side() -> None:
+    reports = [
+        DomainReport(
+            domain="cs2",
+            timestamp="2026-04-03T08:20:37Z",
+            market_id="cs2-side-space",
+            target="CS2 side space",
+            market_prob=0.35,
+            model_prob=0.4,
+            data_score=0.6,
+            news_score=0.0,
+            edge=0.05,
+            action="NO",
+            outcome="WIN",
+            metadata={
+                "candidate_side": "NO",
+                "fair_prob_yes": 0.6,
+                "orderbook_mid_yes": 0.65,
+                "yes_outcome": 1.0,
+            },
+        )
+    ]
+
+    expanded = expand_with_baselines(reports, baseline_config={"data_only": {"min_edge": 0.02}})
+    data_only = [report for report in expanded if report.method == "data_only"][0]
+
+    assert data_only.action == "NO"
+    assert data_only.outcome == "LOSE"
+    assert data_only.market_prob == 0.35
+    assert data_only.model_prob == 0.4
+    assert data_only.metadata["baseline_probability_space"] == "yes"
+    assert data_only.metadata["baseline_market_prob_yes"] == 0.65
+    assert data_only.metadata["baseline_model_prob_yes"] == 0.6
+
+
 def test_news_only_baseline_accepts_acy_news_for_all_domains(tmp_path) -> None:
     reports = [
         DomainReport(
@@ -233,6 +327,35 @@ def test_write_cw_tables_exports_action_trace_and_counts(tmp_path) -> None:
     placeholders = paths["placeholders"].read_text(encoding="utf-8")
     assert "- domain_switches: 1" in placeholders
     assert "- exits: 1" in placeholders
+
+
+def test_action_trace_maintains_open_domain_until_next_domain_switch(tmp_path) -> None:
+    reports = [
+        _scored_report("cs2", "2026-05-01T00:00:00Z", "cs2-enter", 0.8),
+        DomainReport(
+            domain="cs2",
+            timestamp="2026-05-01T00:01:00Z",
+            market_id="cs2-flat",
+            target="CS2 flat",
+            market_prob=0.5,
+            model_prob=0.5,
+            data_score=0.5,
+            news_score=0.0,
+            edge=0.0,
+            action="HOLD",
+            outcome="",
+        ),
+        _scored_report("weather", "2026-05-01T00:02:00Z", "weather-switch", 0.8),
+        _scored_report("btc", "2026-05-01T00:03:00Z", "btc-switch", 0.8),
+    ]
+
+    paths = write_cw_tables(reports, tmp_path, operating_threshold=2.0)
+    trace = pd.read_csv(paths["action_trace"])
+    counts = json.loads(paths["action_counts"].read_text(encoding="utf-8"))
+
+    assert list(trace["action_type"]) == ["enter", "maintain", "switch", "switch"]
+    assert counts["switch"] == 2
+    assert trace.iloc[1]["reason"] == "maintain_open_domain_no_exit_signal"
 
 
 def test_score_calibration_handles_zero_only_components(tmp_path) -> None:

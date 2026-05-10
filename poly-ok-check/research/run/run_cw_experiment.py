@@ -20,7 +20,8 @@ def main() -> None:
     args = parse_args()
     config_path = Path(args.config)
     config = _load_config(config_path)
-    proposed_reports = load_reports(config, base_dir=Path.cwd(), config_dir=config_path.parent)
+    raw_reports = load_reports(config, base_dir=Path.cwd(), config_dir=config_path.parent)
+    proposed_reports = list(raw_reports)
     out_dir = Path(args.out_dir)
     proposed_reports, policy_diagnostics = apply_category_policy(
         proposed_reports,
@@ -35,7 +36,11 @@ def main() -> None:
         base_dir=Path.cwd(),
         config_dir=config_path.parent,
     )
-    reports = expand_with_baselines(proposed_reports)
+    reports = expand_with_baselines(
+        proposed_reports,
+        baseline_reports=raw_reports,
+        baseline_config=config.get("baselines", {}),
+    )
     diagnostics_path = write_policy_diagnostics(policy_diagnostics, out_dir / "policy_diagnostics.csv")
     pmxt_diagnostics_path = write_pmxt_execution_diagnostics(
         pmxt_diagnostics,
@@ -47,6 +52,7 @@ def main() -> None:
         out_dir=out_dir,
         threshold_grid=config.get("threshold_grid", [0.25, 0.5, 0.75, 1.0]),
         operating_threshold=float(config.get("operating_threshold", 0.5)),
+        agent_state=config.get("agent_state", {}),
     )
 
     print(f"loaded_reports={len(reports)}")

@@ -53,6 +53,7 @@ def write_cw_tables(
     out_dir: Path | str,
     threshold_grid: Iterable[float] = (0.25, 0.50, 0.75, 1.00),
     operating_threshold: float = 0.50,
+    agent_state: dict | None = None,
 ) -> dict[str, Path]:
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -60,7 +61,7 @@ def write_cw_tables(
     thresholds = list(threshold_grid)
     calibration, calibration_diagnostics = _score_calibration(raw_frame)
     frame = _with_opportunity_scores(raw_frame, calibration)
-    trace = _action_trace(frame, operating_threshold)
+    trace = _action_trace(frame, operating_threshold, agent_state=agent_state)
     trace_counts = _trace_counts(trace)
 
     paths = {
@@ -82,7 +83,7 @@ def write_cw_tables(
     trace.to_csv(paths["action_trace"], index=False)
     paths["action_counts"].write_text(json.dumps(trace_counts, indent=2, sort_keys=True), encoding="utf-8")
     paths["placeholders"].write_text(
-        _placeholder_markdown(frame, operating_threshold, trace_counts, thresholds),
+        _placeholder_markdown(frame, operating_threshold, trace_counts, thresholds, agent_state=agent_state),
         encoding="utf-8",
     )
     return paths
@@ -286,13 +287,18 @@ def _thresholded_proposed_frame(frame: pd.DataFrame, threshold: float) -> pd.Dat
     return copy
 
 
-def _action_trace(frame: pd.DataFrame, operating_threshold: float) -> pd.DataFrame:
+def _action_trace(frame: pd.DataFrame, operating_threshold: float, agent_state: dict | None = None) -> pd.DataFrame:
     proposed = _method_frame(frame, "proposed_agent")
     if proposed.empty:
         return pd.DataFrame(columns=ACTION_TRACE_FIELDS)
 
+    state_config = agent_state or {}
+    hold_open_domain = bool(state_config.get("hold_open_domain", True))
     rows = []
-    previous_domain = ""
+    active_domain = ""
+    active_market_id = ""
+    active_action = ""
+    active_score: object = ""
     timestamps = sorted(_clean_text(value) for value in proposed.get("timestamp", []) if _clean_text(value))
     for timestamp in dict.fromkeys(timestamps):
         current = proposed[proposed["timestamp"].astype(str) == timestamp].copy()
@@ -305,30 +311,44 @@ def _action_trace(frame: pd.DataFrame, operating_threshold: float) -> pd.DataFra
         if candidate is not None and safe_float(candidate.get("score")) >= operating_threshold:
             selected = candidate
 
-        prior = previous_domain
+        prior = active_domain
         if selected is None:
-            action_type = "exit" if previous_domain else "hold"
-            reason = _no_selection_reason(current, candidate, operating_threshold)
-            selected_domain = ""
-            previous_domain = ""
-            selected_market_id = ""
-            selected_action = ""
-            selected_score = ""
+            if active_domain and hold_open_domain and not _explicit_exit_signal(current, candidate, operating_threshold):
+                action_type = "maintain"
+                reason = "maintain_open_domain_no_exit_signal"
+                selected_domain = active_domain
+                selected_market_id = active_market_id
+                selected_action = active_action
+                selected_score = active_score
+            else:
+                action_type = "exit" if active_domain else "hold"
+                reason = _no_selection_reason(current, candidate, operating_threshold)
+                selected_domain = ""
+                active_domain = ""
+                active_market_id = ""
+                active_action = ""
+                active_score = ""
+                selected_market_id = ""
+                selected_action = ""
+                selected_score = ""
         else:
             selected_domain = str(selected.get("domain", "")).strip().lower()
             selected_market_id = _clean_text(selected.get("market_id"))
             selected_action = _clean_text(selected.get("action")).upper()
             selected_score = safe_float(selected.get("score"))
-            if not previous_domain:
+            if not active_domain:
                 action_type = "enter"
                 reason = "selected_domain_above_threshold"
-            elif previous_domain == selected_domain:
+            elif active_domain == selected_domain:
                 action_type = "maintain"
                 reason = "selected_domain_remains_best"
             else:
                 action_type = "switch"
                 reason = "selected_domain_changed"
-            previous_domain = selected_domain
+            active_domain = selected_domain
+            active_market_id = selected_market_id
+            active_action = selected_action
+            active_score = selected_score
 
         rows.append(
             {
@@ -384,6 +404,12 @@ def _no_selection_reason(current: pd.DataFrame, candidate: pd.Series | None, thr
     return "below_operating_threshold" if safe_float(candidate.get("score")) < threshold else "no_selected_domain"
 
 
+def _explicit_exit_signal(current: pd.DataFrame, candidate: pd.Series | None, threshold: float) -> bool:
+    if current.empty:
+        return False
+    return candidate is not None and safe_float(candidate.get("score")) < threshold
+
+
 def _example_row(case: str, row: pd.Series) -> dict:
     return {
         "case": case,
@@ -420,6 +446,7 @@ def _placeholder_markdown(
     operating_threshold: float,
     trace_counts: dict[str, int],
     threshold_grid: Iterable[float],
+    agent_state: dict | None = None,
 ) -> str:
     proposed = _method_frame(frame, "proposed_agent")
     thresholded = _thresholded_proposed_frame(proposed, operating_threshold)
@@ -427,7 +454,7 @@ def _placeholder_markdown(
     table1 = _table1(frame, operating_threshold)
     table2 = _table2(frame, operating_threshold)
     table3 = _table3(frame, threshold_grid)
-    trace = _action_trace(frame, operating_threshold)
+    trace = _action_trace(frame, operating_threshold, agent_state=agent_state)
     table4 = _table4(frame, operating_threshold, trace)
     lines = [
         "# Paper placeholders",
